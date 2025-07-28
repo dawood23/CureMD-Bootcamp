@@ -12,3 +12,6 @@ C:\Users\6601\source\repos\Test2\Test2\obj\Debug\net8.0\refint\Assignment#1.dll
 C:\Users\6601\source\repos\Test2\Test2\obj\Debug\net8.0\Assignment#1.pdb
 C:\Users\6601\source\repos\Test2\Test2\obj\Debug\net8.0\Assignment#1.genruntimeconfig.cache
 C:\Users\6601\source\repos\Test2\Test2\obj\Debug\net8.0\ref\Assignment#1.dll
+D:\bootcamp\Assignment#1\obj\Debug\net8.0\Assignment#1.dll
+D:\bootcamp\Assignment#1\obj\Debug\net8.0\refint\Assignment#1.dll
+D:\bootcamp\Assignment#1\obj\Debug\net8.0\Assignment#1.pdb
