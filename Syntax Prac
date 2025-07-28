@@ -1,0 +1,89 @@
+Multiplication Table Generator
+Input a number and print its multiplication table up to 10 using loops.
+
+Even or Odd Checker
+Ask the user for a number and tell if it's even or odd.
+
+Maximum of Three Numbers
+Take 3 numbers as input and print the largest.
+
+Sum of First N Numbers
+Take N as input and print sum from 1 to N.
+
+Reverse a Number
+Input a number (e.g. 1234 → 4321) using loops.
+
+Factorial Calculator
+Compute factorial of a given number using a loop.
+
+Leap Year Validator
+Ask the user for a year and check if it’s a leap year.
+
+Fibonacci Series Printer
+Print first N terms of Fibonacci series.
+
+Prime Number Checker
+Determine whether a number is prime.
+
+GCD Finder
+Find the Greatest Common Divisor (GCD) of two numbers.
+
+Simple Calculator
+Input two numbers and perform +, -, *, /, %, based on user choice using switch case.
+
+Digit Counter
+Count how many digits are in a given number.
+
+Palindrome Number
+Check if a number reads the same forward and backward.
+
+Sum of Digits
+Input a number and calculate sum of all its digits.
+
+Armstrong Number Validator
+Check whether a 3-digit number is an Armstrong number.
+
+Find Max & Min in Array
+Input an integer array and find the largest and smallest values.
+
+Linear Search
+Search a number in an array using linear search.
+
+Array Sort (Ascending)
+Sort and print an integer array.
+
+Even/Odd Counter in Array
+Count how many even and odd numbers exist in the array.
+
+Sort List of Names Alphabetically
+Use List<string> and Sort() to sort names.
+
+Frequency Counter (Array)
+Count how many times each number appears using a dictionary.
+
+Matrix Addition
+Input two matrices and print their sum.
+
+Vowel Counter in String
+Count the number of vowels in a user-entered sentence.
+
+String Palindrome
+Check if a string is a palindrome.
+
+Reverse Words in a Sentence
+Reverse only words, not letters. E.g., 'Hello World' → 'World Hello'.
+
+Remove Duplicates from Array
+Return a list of unique values using HashSet.
+
+Student Marks Manager
+Add/search/update marks using Dictionary<string, int>.
+
+Patient Visit Console App
+Add, search, update, and delete patient visits using a list of objects.
+
+Word Frequency Counter
+Input a paragraph and print how many times each word appears.
+
+Random Password Generator
+Input desired length and generate an alphanumeric password.
