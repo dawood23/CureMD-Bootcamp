@@ -217,7 +217,6 @@ namespace PatientVisitManager
         private void AddUndoAction(UndoRedoAction action)
         {
             undoStack.Push(action);
-            redoStack.Clear();
 
             if (undoStack.Count > MAX_UNDO_ACTIONS)
             {
@@ -238,7 +237,24 @@ namespace PatientVisitManager
 
             Console.WriteLine($"*** Action completed: {action.Description} ***");
         }
+        public void AddRedoAction(UndoRedoAction action)
+        {
+            redoStack.Push(action);
+            if(redoStack.Count > MAX_UNDO_ACTIONS) { 
+                   Stack<UndoRedoAction> tempstack= new Stack<UndoRedoAction>();   
+                
+                for(int i=0;i< MAX_UNDO_ACTIONS; i++)
+                {
+                    tempstack.Push(undoStack.Pop());
+                }
+                redoStack.Clear();
+                while(tempstack.Count > 0)
+                {
+                    redoStack.Push(tempstack.Pop());
+                }
 
+            }
+        }
         public void AddVisit(PatientVisit visit)
         {
             visit.Id = nextId++;
@@ -561,8 +577,6 @@ namespace PatientVisitManager
         public static void Main(string[] args)
         {
             Console.WriteLine("=== PATIENT VISIT MANAGER ===");
-            Console.WriteLine("Welcome to my first C# project!");
-            Console.WriteLine("Initializing system...\n");
 
             manager = new PatientVisitManager();
 
