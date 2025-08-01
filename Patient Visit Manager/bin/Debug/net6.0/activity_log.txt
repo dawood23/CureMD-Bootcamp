@@ -1,0 +1,26 @@
+2025-08-01 01:17:10 | Role: Admin | Action: Admin Login Attempt | Status: Failure
+2025-08-01 01:17:18 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 01:25:48 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 01:25:52 | Role: Admin | Action: Admin Logged Out
+2025-08-01 01:26:06 | Role: Receptionist | Action: Reception Login Attempt | Status: Failure
+2025-08-01 01:26:16 | Role: Receptionist | Action: Reception Login | Status: Success
+2025-08-01 01:26:22 | Role: Receptionist | Action: Receptionist Logged Out
+2025-08-01 01:53:53 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 01:58:24 | Role: Admin | Action: Admin Login Attempt | Status: Failure
+2025-08-01 02:15:48 | Role: Admin | Action: Admin Login Attempt | Status: Failure
+2025-08-01 02:15:56 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 02:20:41 | Role: Admin | Action: Admin Logged Out
+2025-08-01 03:22:24 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 03:40:22 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 04:57:38 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 05:01:57 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 05:52:08 | Role: Admin | Action: Admin Login | Status: Success
+Admin | Adding Entry for name at 2025-08-01 05:52:20 | status: Success
+Admin | Updating Entry for jamal. Visit id: 401 at 2025-08-01 05:52:40 | status: Success
+Admin | Sorted Entries by Date at 2025-08-01 05:52:54 | status: Success
+2025-08-01 05:56:28 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 05:56:37 | Admin | Generating Visit Summary for id 1 | status: Success
+2025-08-01 05:56:55 | Admin | Sorted Entries by Date | status: Success
+2025-08-01 06:12:50 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 06:13:05 | Admin | Sorted Entries by Date | status: Success
+2025-08-01 06:14:29 | Role: Admin | Action: Admin Logged Out

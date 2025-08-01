@@ -1,0 +1,14 @@
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\bin\Debug\net6.0\Patient Visit Manager.exe
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\bin\Debug\net6.0\Patient Visit Manager.deps.json
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\bin\Debug\net6.0\Patient Visit Manager.runtimeconfig.json
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\bin\Debug\net6.0\Patient Visit Manager.dll
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\bin\Debug\net6.0\Patient Visit Manager.pdb
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.AssemblyInfoInputs.cache
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.AssemblyInfo.cs
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.csproj.CoreCompileInputs.cache
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.dll
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\refint\Patient Visit Manager.dll
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.pdb
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\Patient Visit Manager.genruntimeconfig.cache
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manager\Patient Visit Manager\obj\Debug\net6.0\ref\Patient Visit Manager.dll

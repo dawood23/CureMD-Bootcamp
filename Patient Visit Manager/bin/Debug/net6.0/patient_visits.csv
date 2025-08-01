@@ -1,0 +1,404 @@
+Id,PatientName,VisitDate,VisitType,Description,DoctorName,VisitDuration,Fee
+1,David Miller,2025-05-15 14:24,Emergency,Blood pressure check,Dr. Wilson,15,15000
+2,James Taylor,2024-12-13 11:18,Emergency,Specialist referral,Dr. Williams,41,41000
+3,Lisa Anderson,2025-01-01 15:02,Emergency,Blood pressure check,Dr. Brown,55,55000
+4,James Taylor,2024-12-26 11:59,Emergency,Vaccination,Dr. Brown,23,23000
+5,James Taylor,2025-06-28 16:29,FollowUp,Blood pressure check,Dr. Brown,21,6300
+6,Emily Davis,2024-09-14 10:37,FollowUp,Vaccination,Dr. Anderson,10,3000
+7,Lisa Anderson,2024-12-21 09:44,Consultation,Follow-up examination,Dr. Wilson,26,13000
+8,James Taylor,2025-04-13 08:52,FollowUp,Routine checkup,Dr. Davis,31,9300
+9,Lisa Anderson,2025-04-13 17:22,Consultation,Prescription renewal,Dr. Smith,40,20000
+10,Jane Doe,2024-10-27 17:45,Emergency,Blood pressure check,Dr. Wilson,44,44000
+11,Maria Garcia,2025-07-21 17:22,Consultation,Physical therapy,Dr. Anderson,45,22500
+12,Maria Garcia,2025-02-21 11:54,FollowUp,Consultation,Dr. Wilson,22,6600
+13,David Miller,2025-04-16 13:02,Consultation,Emergency treatment,Dr. Johnson,22,11000
+14,John Smith,2025-06-19 10:32,Consultation,Follow-up examination,Dr. Anderson,59,29500
+15,Lisa Anderson,2025-03-14 14:36,Consultation,Emergency treatment,Dr. Johnson,49,24500
+16,Jane Doe,2025-01-11 10:25,Consultation,Specialist referral,Dr. Miller,21,10500
+17,Sarah Wilson,2025-02-11 16:39,Consultation,Emergency treatment,Dr. Anderson,27,13500
+18,John Smith,2025-03-12 09:22,FollowUp,Prescription renewal,Dr. Anderson,9,2700
+19,David Miller,2024-09-30 14:25,Consultation,Follow-up examination,Dr. Brown,3,1500
+20,Sarah Wilson,2025-03-24 12:38,Consultation,Vaccination,Dr. Wilson,14,7000
+21,David Miller,2025-02-12 11:50,Consultation,Routine checkup,Dr. Wilson,45,22500
+22,Lisa Anderson,2025-04-11 16:20,Emergency,Vaccination,Dr. Smith,15,15000
+23,Sarah Wilson,2024-10-20 13:29,FollowUp,Routine checkup,Dr. Davis,58,17400
+24,Michael Brown,2024-12-12 13:21,Consultation,Physical therapy,Dr. Miller,58,29000
+25,David Miller,2025-03-14 09:03,Emergency,Lab results review,Dr. Anderson,6,6000
+26,James Taylor,2025-06-08 13:24,Emergency,Consultation,Dr. Williams,26,26000
+27,Sarah Wilson,2024-09-01 13:51,Consultation,Specialist referral,Dr. Smith,40,20000
+28,Sarah Wilson,2024-12-27 17:36,FollowUp,Vaccination,Dr. Williams,13,3900
+29,Lisa Anderson,2024-12-17 11:37,Consultation,Specialist referral,Dr. Anderson,15,7500
+30,Maria Garcia,2024-11-05 08:32,Consultation,Consultation,Dr. Wilson,16,8000
+31,David Miller,2024-09-27 13:05,Emergency,Lab results review,Dr. Wilson,58,58000
+32,Jane Doe,2025-04-20 08:02,Emergency,Consultation,Dr. Wilson,13,13000
+33,James Taylor,2025-04-30 09:54,FollowUp,Vaccination,Dr. Johnson,21,6300
+34,Emily Davis,2024-11-13 15:20,Emergency,Lab results review,Dr. Brown,41,41000
+35,David Miller,2025-03-26 15:18,FollowUp,Blood pressure check,Dr. Miller,44,13200
+36,Michael Brown,2025-02-18 16:27,Consultation,Routine checkup,Dr. Williams,34,17000
+37,Emily Davis,2024-08-18 14:37,Consultation,Physical therapy,Dr. Anderson,23,11500
+38,Jane Doe,2025-06-27 13:46,FollowUp,Routine checkup,Dr. Wilson,4,1200
+39,Lisa Anderson,2025-07-15 14:09,Consultation,Emergency treatment,Dr. Smith,40,20000
+40,Robert Johnson,2025-04-29 09:12,Emergency,Emergency treatment,Dr. Johnson,48,48000
+41,John Smith,2025-03-07 10:38,Emergency,Lab results review,Dr. Anderson,3,3000
+42,Michael Brown,2025-04-07 13:03,Emergency,Follow-up examination,Dr. Johnson,6,6000
+43,Sarah Wilson,2025-03-28 11:40,Consultation,Consultation,Dr. Davis,38,19000
+44,John Smith,2025-01-28 10:31,FollowUp,Routine checkup,Dr. Brown,46,13800
+45,Lisa Anderson,2025-07-16 08:26,Emergency,Specialist referral,Dr. Brown,8,8000
+46,James Taylor,2024-09-08 16:31,Consultation,Vaccination,Dr. Anderson,15,7500
+47,John Smith,2024-11-25 14:25,Consultation,Lab results review,Dr. Anderson,44,22000
+48,David Miller,2025-07-27 10:36,Emergency,Prescription renewal,Dr. Wilson,50,50000
+49,John Smith,2025-04-17 16:13,Consultation,Consultation,Dr. Davis,48,24000
+50,David Miller,2025-06-22 17:58,FollowUp,Prescription renewal,Dr. Miller,16,4800
+51,Maria Garcia,2025-04-24 15:38,FollowUp,Specialist referral,Dr. Smith,24,7200
+52,Sarah Wilson,2025-02-09 17:35,Consultation,Lab results review,Dr. Davis,37,18500
+53,David Miller,2024-09-23 08:18,Consultation,Routine checkup,Dr. Johnson,40,20000
+54,Emily Davis,2025-04-09 11:04,FollowUp,Lab results review,Dr. Davis,11,3300
+55,John Smith,2025-04-23 09:25,Emergency,Prescription renewal,Dr. Brown,32,32000
+56,Emily Davis,2025-06-22 09:23,Emergency,Lab results review,Dr. Williams,48,48000
+57,John Smith,2025-05-03 12:51,Emergency,Specialist referral,Dr. Davis,21,21000
+58,David Miller,2025-01-11 13:59,FollowUp,Consultation,Dr. Davis,31,9300
+59,Robert Johnson,2025-04-16 09:25,FollowUp,Lab results review,Dr. Davis,19,5700
+60,James Taylor,2025-01-27 15:31,Consultation,Blood pressure check,Dr. Anderson,46,23000
+61,Sarah Wilson,2025-07-16 14:25,Emergency,Blood pressure check,Dr. Johnson,38,38000
+62,James Taylor,2024-12-25 16:15,Consultation,Emergency treatment,Dr. Davis,47,23500
+63,James Taylor,2024-11-14 14:28,Consultation,Emergency treatment,Dr. Miller,11,5500
+64,David Miller,2025-02-21 09:27,Emergency,Consultation,Dr. Smith,6,6000
+65,Michael Brown,2025-01-29 16:24,FollowUp,Emergency treatment,Dr. Miller,29,8700
+66,Michael Brown,2025-02-04 15:16,Consultation,Prescription renewal,Dr. Brown,30,15000
+67,David Miller,2025-01-16 16:39,Consultation,Emergency treatment,Dr. Anderson,43,21500
+68,Jane Doe,2024-12-31 15:40,Emergency,Follow-up examination,Dr. Wilson,43,43000
+69,Robert Johnson,2024-10-25 11:06,FollowUp,Vaccination,Dr. Wilson,41,12300
+70,Sarah Wilson,2025-03-02 16:36,Consultation,Follow-up examination,Dr. Davis,7,3500
+71,David Miller,2025-03-22 13:45,FollowUp,Vaccination,Dr. Anderson,25,7500
+72,Sarah Wilson,2025-01-05 15:37,Emergency,Vaccination,Dr. Williams,29,29000
+73,James Taylor,2025-01-21 15:44,Emergency,Blood pressure check,Dr. Anderson,53,53000
+74,Jane Doe,2025-02-13 11:01,Emergency,Specialist referral,Dr. Brown,55,55000
+75,Lisa Anderson,2025-04-27 11:36,FollowUp,Routine checkup,Dr. Davis,23,6900
+76,Robert Johnson,2024-12-19 08:02,Consultation,Follow-up examination,Dr. Davis,11,5500
+77,Lisa Anderson,2025-03-11 16:22,Consultation,Follow-up examination,Dr. Anderson,28,14000
+78,James Taylor,2025-02-19 13:08,Consultation,Blood pressure check,Dr. Miller,4,2000
+79,Maria Garcia,2024-12-05 17:19,FollowUp,Follow-up examination,Dr. Miller,33,9900
+80,Maria Garcia,2024-09-04 10:57,Consultation,Follow-up examination,Dr. Smith,53,26500
+81,Lisa Anderson,2025-02-04 08:54,Consultation,Vaccination,Dr. Smith,10,5000
+82,Robert Johnson,2024-12-11 15:00,Consultation,Vaccination,Dr. Smith,47,23500
+83,Michael Brown,2024-09-15 11:26,FollowUp,Specialist referral,Dr. Anderson,47,14100
+84,David Miller,2025-01-09 17:24,Emergency,Lab results review,Dr. Williams,32,32000
+85,James Taylor,2025-03-02 08:44,Emergency,Vaccination,Dr. Smith,28,28000
+86,Michael Brown,2025-01-22 13:02,FollowUp,Prescription renewal,Dr. Anderson,30,9000
+87,James Taylor,2024-12-14 08:19,Consultation,Physical therapy,Dr. Johnson,48,24000
+88,James Taylor,2024-08-14 10:41,Consultation,Prescription renewal,Dr. Wilson,30,15000
+89,David Miller,2024-12-09 09:25,Emergency,Blood pressure check,Dr. Williams,23,23000
+90,Maria Garcia,2024-08-09 08:10,Consultation,Lab results review,Dr. Brown,12,6000
+91,Emily Davis,2024-08-07 11:40,FollowUp,Consultation,Dr. Smith,16,4800
+92,Sarah Wilson,2025-01-18 13:06,FollowUp,Specialist referral,Dr. Wilson,36,10800
+93,Jane Doe,2024-10-04 08:18,FollowUp,Lab results review,Dr. Anderson,23,6900
+94,David Miller,2024-10-27 10:19,FollowUp,Blood pressure check,Dr. Anderson,53,15900
+95,Michael Brown,2025-03-01 11:47,Consultation,Specialist referral,Dr. Wilson,19,9500
+96,James Taylor,2024-12-29 10:53,Emergency,Prescription renewal,Dr. Williams,23,23000
+97,David Miller,2024-12-30 14:09,FollowUp,Blood pressure check,Dr. Williams,28,8400
+98,David Miller,2025-03-05 11:49,Emergency,Specialist referral,Dr. Johnson,15,15000
+99,John Smith,2024-09-28 14:25,Emergency,Physical therapy,Dr. Anderson,31,31000
+100,Robert Johnson,2025-07-12 15:12,Emergency,Specialist referral,Dr. Johnson,36,36000
+101,Robert Johnson,2025-02-11 09:21,Consultation,Follow-up examination,Dr. Anderson,44,22000
+102,James Taylor,2025-02-05 12:15,Emergency,Routine checkup,Dr. Brown,9,9000
+103,Sarah Wilson,2025-02-21 14:18,Emergency,Follow-up examination,Dr. Johnson,32,32000
+104,Robert Johnson,2025-06-13 13:43,Consultation,Specialist referral,Dr. Williams,59,29500
+105,James Taylor,2025-02-18 14:51,Emergency,Prescription renewal,Dr. Wilson,29,29000
+106,Michael Brown,2024-12-24 10:15,FollowUp,Follow-up examination,Dr. Brown,55,16500
+107,John Smith,2025-05-31 14:47,Emergency,Consultation,Dr. Brown,12,12000
+108,David Miller,2025-01-16 13:00,Emergency,Lab results review,Dr. Anderson,19,19000
+109,Robert Johnson,2025-03-06 10:56,Consultation,Physical therapy,Dr. Anderson,13,6500
+110,Maria Garcia,2024-11-28 11:18,Emergency,Physical therapy,Dr. Davis,56,56000
+111,Emily Davis,2024-12-08 12:20,Consultation,Routine checkup,Dr. Johnson,20,10000
+112,James Taylor,2025-07-19 08:30,Emergency,Follow-up examination,Dr. Miller,1,1000
+113,James Taylor,2024-12-09 09:23,Consultation,Specialist referral,Dr. Johnson,39,19500
+114,Lisa Anderson,2024-08-20 13:07,Consultation,Lab results review,Dr. Smith,24,12000
+115,Sarah Wilson,2025-06-18 15:42,FollowUp,Follow-up examination,Dr. Wilson,3,900
+116,Michael Brown,2025-03-20 14:35,Consultation,Follow-up examination,Dr. Wilson,28,14000
+117,James Taylor,2024-12-20 11:34,Consultation,Lab results review,Dr. Wilson,41,20500
+118,Sarah Wilson,2025-01-25 14:24,Consultation,Emergency treatment,Dr. Smith,10,5000
+119,John Smith,2024-11-01 10:45,Emergency,Follow-up examination,Dr. Johnson,24,24000
+120,James Taylor,2025-06-09 16:08,Consultation,Specialist referral,Dr. Johnson,49,24500
+121,James Taylor,2025-04-30 12:07,FollowUp,Vaccination,Dr. Wilson,6,1800
+122,David Miller,2025-05-12 10:23,Consultation,Vaccination,Dr. Brown,55,27500
+123,James Taylor,2024-11-03 15:12,Emergency,Specialist referral,Dr. Davis,57,57000
+124,Michael Brown,2025-04-14 17:37,Consultation,Lab results review,Dr. Johnson,28,14000
+125,Lisa Anderson,2025-06-17 12:11,FollowUp,Physical therapy,Dr. Smith,8,2400
+126,Sarah Wilson,2025-04-22 09:28,FollowUp,Routine checkup,Dr. Johnson,12,3600
+127,John Smith,2024-08-07 10:03,Consultation,Consultation,Dr. Davis,46,23000
+128,Sarah Wilson,2025-04-25 17:59,FollowUp,Specialist referral,Dr. Davis,14,4200
+129,Emily Davis,2024-10-29 08:18,FollowUp,Emergency treatment,Dr. Brown,29,8700
+130,John Smith,2025-05-22 12:09,FollowUp,Prescription renewal,Dr. Wilson,28,8400
+131,Michael Brown,2025-06-14 09:52,FollowUp,Consultation,Dr. Anderson,16,4800
+132,Emily Davis,2024-10-16 12:54,Emergency,Vaccination,Dr. Davis,15,15000
+133,Sarah Wilson,2024-12-28 10:09,Emergency,Prescription renewal,Dr. Smith,58,58000
+134,Emily Davis,2025-03-02 15:01,Emergency,Consultation,Dr. Smith,8,8000
+135,Robert Johnson,2025-01-04 13:50,Emergency,Specialist referral,Dr. Anderson,34,34000
+136,Jane Doe,2024-12-28 09:56,FollowUp,Vaccination,Dr. Davis,47,14100
+137,Jane Doe,2025-06-05 15:06,Consultation,Consultation,Dr. Miller,2,1000
+138,Robert Johnson,2024-11-02 10:24,Emergency,Consultation,Dr. Davis,41,41000
+139,James Taylor,2024-09-13 10:50,Consultation,Specialist referral,Dr. Miller,24,12000
+140,Jane Doe,2024-08-29 09:08,FollowUp,Prescription renewal,Dr. Williams,50,15000
+141,Emily Davis,2024-11-06 09:15,Consultation,Follow-up examination,Dr. Brown,14,7000
+142,Jane Doe,2025-04-12 11:20,Emergency,Routine checkup,Dr. Johnson,30,30000
+143,Maria Garcia,2025-07-21 16:14,Emergency,Specialist referral,Dr. Williams,34,34000
+144,Maria Garcia,2024-11-08 15:07,FollowUp,Prescription renewal,Dr. Smith,50,15000
+145,Lisa Anderson,2025-03-27 15:09,Emergency,Vaccination,Dr. Wilson,32,32000
+146,Jane Doe,2025-04-04 16:48,Consultation,Emergency treatment,Dr. Miller,8,4000
+147,Maria Garcia,2024-08-10 15:21,Consultation,Emergency treatment,Dr. Miller,9,4500
+148,Lisa Anderson,2025-04-05 12:36,Emergency,Specialist referral,Dr. Anderson,52,52000
+149,David Miller,2024-10-17 16:35,FollowUp,Consultation,Dr. Miller,52,15600
+150,James Taylor,2024-09-08 14:26,Consultation,Lab results review,Dr. Wilson,41,20500
+151,Michael Brown,2025-03-27 13:43,FollowUp,Physical therapy,Dr. Johnson,13,3900
+152,Lisa Anderson,2025-03-12 16:36,FollowUp,Lab results review,Dr. Smith,58,17400
+153,Michael Brown,2025-06-18 17:30,FollowUp,Follow-up examination,Dr. Johnson,8,2400
+154,John Smith,2024-10-29 13:27,Emergency,Follow-up examination,Dr. Anderson,49,49000
+155,Sarah Wilson,2025-05-17 13:08,Emergency,Emergency treatment,Dr. Wilson,31,31000
+156,Maria Garcia,2025-03-22 12:31,Consultation,Specialist referral,Dr. Johnson,29,14500
+157,Lisa Anderson,2024-08-29 08:32,FollowUp,Follow-up examination,Dr. Miller,29,8700
+158,David Miller,2025-04-01 17:25,Consultation,Physical therapy,Dr. Wilson,9,4500
+159,David Miller,2025-01-18 14:07,Emergency,Routine checkup,Dr. Anderson,53,53000
+160,Maria Garcia,2025-01-19 10:08,Consultation,Prescription renewal,Dr. Anderson,8,4000
+161,Lisa Anderson,2025-03-17 10:47,Consultation,Vaccination,Dr. Williams,54,27000
+162,Emily Davis,2025-04-10 12:07,Consultation,Physical therapy,Dr. Wilson,48,24000
+163,James Taylor,2025-06-13 15:44,Emergency,Vaccination,Dr. Williams,29,29000
+164,James Taylor,2024-12-18 11:11,Consultation,Specialist referral,Dr. Davis,38,19000
+165,James Taylor,2024-12-22 11:30,Consultation,Routine checkup,Dr. Miller,20,10000
+166,Lisa Anderson,2025-02-01 11:55,FollowUp,Emergency treatment,Dr. Wilson,39,11700
+167,Michael Brown,2025-01-06 11:53,FollowUp,Emergency treatment,Dr. Brown,47,14100
+168,Michael Brown,2025-05-06 10:42,Emergency,Consultation,Dr. Davis,35,35000
+169,Robert Johnson,2025-03-30 09:31,FollowUp,Follow-up examination,Dr. Davis,20,6000
+170,John Smith,2025-04-02 11:12,Consultation,Blood pressure check,Dr. Davis,27,13500
+171,Michael Brown,2024-09-12 16:35,Emergency,Follow-up examination,Dr. Davis,27,27000
+172,David Miller,2024-11-19 13:09,FollowUp,Physical therapy,Dr. Smith,12,3600
+173,James Taylor,2024-12-27 10:59,FollowUp,Follow-up examination,Dr. Anderson,6,1800
+174,Robert Johnson,2024-08-31 12:01,Emergency,Lab results review,Dr. Wilson,14,14000
+175,David Miller,2025-06-15 12:03,Consultation,Vaccination,Dr. Williams,19,9500
+176,Lisa Anderson,2025-01-01 09:25,FollowUp,Emergency treatment,Dr. Wilson,19,5700
+177,Michael Brown,2024-09-21 13:34,FollowUp,Routine checkup,Dr. Davis,56,16800
+178,Lisa Anderson,2025-01-20 13:03,Consultation,Prescription renewal,Dr. Smith,9,4500
+179,Michael Brown,2024-09-12 11:00,FollowUp,Lab results review,Dr. Anderson,51,15300
+180,Lisa Anderson,2025-06-08 12:04,Consultation,Prescription renewal,Dr. Johnson,16,8000
+181,Emily Davis,2024-09-10 13:18,Consultation,Vaccination,Dr. Williams,10,5000
+182,Robert Johnson,2025-05-19 08:08,FollowUp,Blood pressure check,Dr. Johnson,59,17700
+183,Emily Davis,2025-05-31 10:07,Emergency,Lab results review,Dr. Wilson,35,35000
+184,John Smith,2025-03-07 16:00,FollowUp,Lab results review,Dr. Williams,56,16800
+185,James Taylor,2024-08-24 12:34,FollowUp,Routine checkup,Dr. Miller,35,10500
+186,John Smith,2025-01-28 15:31,FollowUp,Lab results review,Dr. Smith,33,9900
+187,Jane Doe,2025-04-02 15:52,Consultation,Routine checkup,Dr. Smith,39,19500
+188,Robert Johnson,2024-09-21 14:45,FollowUp,Consultation,Dr. Smith,12,3600
+189,Sarah Wilson,2024-08-14 12:27,FollowUp,Lab results review,Dr. Miller,20,6000
+190,Michael Brown,2024-08-18 11:19,Consultation,Follow-up examination,Dr. Johnson,49,24500
+191,Lisa Anderson,2024-12-24 12:55,Consultation,Vaccination,Dr. Williams,19,9500
+192,John Smith,2024-10-21 15:21,Emergency,Vaccination,Dr. Miller,2,2000
+193,David Miller,2025-05-19 16:36,Emergency,Consultation,Dr. Smith,56,56000
+194,James Taylor,2025-03-02 16:32,Consultation,Specialist referral,Dr. Miller,38,19000
+195,Robert Johnson,2025-04-22 14:19,FollowUp,Consultation,Dr. Miller,34,10200
+196,John Smith,2024-11-03 17:20,FollowUp,Blood pressure check,Dr. Anderson,22,6600
+197,Lisa Anderson,2024-12-22 09:30,Emergency,Vaccination,Dr. Smith,3,3000
+198,Robert Johnson,2025-05-03 10:21,Consultation,Specialist referral,Dr. Anderson,8,4000
+199,Sarah Wilson,2025-01-27 16:45,Emergency,Physical therapy,Dr. Miller,4,4000
+200,Sarah Wilson,2025-04-05 11:32,Consultation,Emergency treatment,Dr. Brown,17,8500
+201,David Miller,2024-12-12 17:00,Emergency,Consultation,Dr. Brown,50,50000
+202,Emily Davis,2025-04-09 16:21,Emergency,Blood pressure check,Dr. Wilson,18,18000
+203,Robert Johnson,2024-09-14 11:42,Emergency,Consultation,Dr. Smith,29,29000
+204,James Taylor,2025-06-20 12:12,Emergency,Lab results review,Dr. Williams,43,43000
+205,Jane Doe,2025-05-09 12:18,Emergency,Specialist referral,Dr. Johnson,36,36000
+206,James Taylor,2025-02-13 08:02,Emergency,Emergency treatment,Dr. Brown,5,5000
+207,Maria Garcia,2025-03-17 14:57,Emergency,Physical therapy,Dr. Davis,31,31000
+208,Robert Johnson,2024-10-08 17:18,FollowUp,Specialist referral,Dr. Davis,39,11700
+209,James Taylor,2024-10-08 09:46,Consultation,Consultation,Dr. Davis,39,19500
+210,Sarah Wilson,2025-04-23 14:44,Consultation,Specialist referral,Dr. Miller,3,1500
+211,David Miller,2024-09-09 15:38,Emergency,Blood pressure check,Dr. Smith,57,57000
+212,John Smith,2025-05-21 16:52,Consultation,Specialist referral,Dr. Johnson,56,28000
+213,James Taylor,2024-10-06 08:51,Consultation,Blood pressure check,Dr. Davis,46,23000
+214,Michael Brown,2025-03-19 15:24,Consultation,Routine checkup,Dr. Brown,17,8500
+215,Lisa Anderson,2024-10-09 15:22,Consultation,Follow-up examination,Dr. Johnson,42,21000
+216,James Taylor,2025-07-05 13:41,Consultation,Emergency treatment,Dr. Wilson,18,9000
+217,Lisa Anderson,2025-07-05 08:00,FollowUp,Blood pressure check,Dr. Brown,17,5100
+218,David Miller,2025-02-04 15:23,Emergency,Blood pressure check,Dr. Johnson,44,44000
+219,Michael Brown,2025-03-09 17:46,Emergency,Vaccination,Dr. Johnson,53,53000
+220,Jane Doe,2025-02-16 11:34,Emergency,Consultation,Dr. Anderson,38,38000
+221,Robert Johnson,2025-01-30 14:34,FollowUp,Specialist referral,Dr. Wilson,30,9000
+222,Robert Johnson,2025-04-08 12:17,Emergency,Emergency treatment,Dr. Brown,14,14000
+223,Lisa Anderson,2024-12-16 11:13,FollowUp,Emergency treatment,Dr. Brown,33,9900
+224,Lisa Anderson,2025-05-05 16:13,Consultation,Emergency treatment,Dr. Smith,54,27000
+225,Sarah Wilson,2024-12-21 16:44,Emergency,Emergency treatment,Dr. Miller,13,13000
+226,John Smith,2025-02-03 17:36,FollowUp,Specialist referral,Dr. Miller,57,17100
+227,Michael Brown,2025-05-14 11:44,FollowUp,Emergency treatment,Dr. Wilson,22,6600
+228,Emily Davis,2024-08-03 17:17,Emergency,Follow-up examination,Dr. Johnson,22,22000
+229,David Miller,2025-06-22 16:41,Consultation,Routine checkup,Dr. Davis,16,8000
+230,Maria Garcia,2025-05-18 15:41,FollowUp,Specialist referral,Dr. Smith,25,7500
+231,Sarah Wilson,2025-03-03 14:24,Consultation,Emergency treatment,Dr. Brown,13,6500
+232,David Miller,2025-06-28 16:55,Emergency,Follow-up examination,Dr. Johnson,21,21000
+233,Robert Johnson,2024-12-11 17:15,FollowUp,Prescription renewal,Dr. Johnson,12,3600
+234,John Smith,2024-09-24 16:05,FollowUp,Prescription renewal,Dr. Wilson,40,12000
+235,Robert Johnson,2024-09-18 13:00,Consultation,Follow-up examination,Dr. Williams,52,26000
+236,Michael Brown,2025-01-18 17:09,Emergency,Prescription renewal,Dr. Anderson,20,20000
+237,John Smith,2024-12-02 16:42,FollowUp,Prescription renewal,Dr. Brown,41,12300
+238,Maria Garcia,2024-11-07 15:20,FollowUp,Prescription renewal,Dr. Anderson,2,600
+239,John Smith,2024-12-08 17:36,FollowUp,Blood pressure check,Dr. Brown,58,17400
+240,David Miller,2025-03-20 11:50,FollowUp,Specialist referral,Dr. Davis,34,10200
+241,Robert Johnson,2025-05-14 11:12,FollowUp,Physical therapy,Dr. Anderson,19,5700
+242,Jane Doe,2025-02-01 12:17,Emergency,Physical therapy,Dr. Wilson,58,58000
+243,James Taylor,2024-10-26 15:11,Emergency,Prescription renewal,Dr. Johnson,32,32000
+244,Maria Garcia,2024-08-26 14:50,Consultation,Prescription renewal,Dr. Williams,21,10500
+245,James Taylor,2025-01-30 10:58,Emergency,Lab results review,Dr. Johnson,14,14000
+246,Emily Davis,2024-08-20 08:00,Consultation,Emergency treatment,Dr. Davis,5,2500
+247,Sarah Wilson,2024-09-10 14:40,Consultation,Specialist referral,Dr. Johnson,32,16000
+248,Robert Johnson,2025-07-27 14:25,Consultation,Vaccination,Dr. Anderson,50,25000
+249,Maria Garcia,2024-09-10 16:04,FollowUp,Lab results review,Dr. Smith,20,6000
+250,Jane Doe,2024-08-15 14:19,Consultation,Physical therapy,Dr. Brown,57,28500
+251,David Miller,2024-10-29 15:04,FollowUp,Physical therapy,Dr. Smith,32,9600
+252,Robert Johnson,2025-03-01 17:15,Emergency,Blood pressure check,Dr. Miller,1,1000
+253,Maria Garcia,2024-09-16 09:22,Emergency,Lab results review,Dr. Wilson,37,37000
+254,Sarah Wilson,2024-10-01 14:23,FollowUp,Routine checkup,Dr. Johnson,3,900
+255,Jane Doe,2024-08-12 16:35,Consultation,Specialist referral,Dr. Davis,37,18500
+256,James Taylor,2024-12-09 16:02,Emergency,Routine checkup,Dr. Wilson,20,20000
+257,Emily Davis,2024-10-15 15:20,FollowUp,Emergency treatment,Dr. Davis,6,1800
+258,Maria Garcia,2025-02-20 13:28,Consultation,Consultation,Dr. Smith,28,14000
+259,Robert Johnson,2025-02-21 17:39,Emergency,Consultation,Dr. Johnson,55,55000
+260,John Smith,2024-11-02 14:42,FollowUp,Emergency treatment,Dr. Johnson,50,15000
+261,Maria Garcia,2025-03-27 11:16,Consultation,Physical therapy,Dr. Brown,6,3000
+262,Robert Johnson,2025-07-08 16:11,Consultation,Physical therapy,Dr. Brown,10,5000
+263,Michael Brown,2025-04-02 08:15,Consultation,Vaccination,Dr. Davis,48,24000
+264,Jane Doe,2024-11-25 11:01,Consultation,Specialist referral,Dr. Brown,58,29000
+265,Sarah Wilson,2024-09-24 12:07,Emergency,Consultation,Dr. Davis,53,53000
+266,Sarah Wilson,2025-03-25 17:57,Consultation,Emergency treatment,Dr. Davis,31,15500
+267,Sarah Wilson,2024-08-07 12:43,Emergency,Follow-up examination,Dr. Smith,30,30000
+268,Lisa Anderson,2025-06-06 11:19,Emergency,Lab results review,Dr. Miller,17,17000
+269,James Taylor,2024-08-27 16:39,Emergency,Blood pressure check,Dr. Smith,37,37000
+270,Lisa Anderson,2024-10-01 12:08,Emergency,Blood pressure check,Dr. Miller,21,21000
+271,James Taylor,2025-03-15 12:31,Emergency,Routine checkup,Dr. Anderson,6,6000
+272,James Taylor,2025-01-02 12:12,Emergency,Consultation,Dr. Johnson,33,33000
+273,Robert Johnson,2024-12-15 13:35,Emergency,Consultation,Dr. Williams,8,8000
+274,Emily Davis,2025-03-22 09:27,FollowUp,Lab results review,Dr. Miller,40,12000
+275,Sarah Wilson,2025-06-02 17:26,Consultation,Specialist referral,Dr. Wilson,26,13000
+276,Michael Brown,2025-03-08 13:56,Emergency,Prescription renewal,Dr. Johnson,6,6000
+277,Emily Davis,2025-02-19 10:02,Consultation,Vaccination,Dr. Brown,6,3000
+278,Emily Davis,2025-02-19 13:54,FollowUp,Blood pressure check,Dr. Brown,33,9900
+279,Jane Doe,2025-04-12 09:21,Consultation,Consultation,Dr. Williams,38,19000
+280,John Smith,2025-03-24 15:19,Consultation,Prescription renewal,Dr. Wilson,49,24500
+281,John Smith,2025-06-15 10:34,Emergency,Follow-up examination,Dr. Johnson,54,54000
+282,Robert Johnson,2025-06-29 13:13,FollowUp,Follow-up examination,Dr. Wilson,16,4800
+283,James Taylor,2025-06-13 09:31,Consultation,Physical therapy,Dr. Williams,44,22000
+284,John Smith,2025-01-02 14:22,FollowUp,Follow-up examination,Dr. Brown,19,5700
+285,Lisa Anderson,2025-02-18 08:22,Emergency,Physical therapy,Dr. Anderson,55,55000
+286,Robert Johnson,2025-01-30 12:49,FollowUp,Follow-up examination,Dr. Williams,26,7800
+287,Emily Davis,2025-07-20 10:45,FollowUp,Consultation,Dr. Wilson,6,1800
+288,Lisa Anderson,2024-10-15 09:49,Emergency,Lab results review,Dr. Miller,8,8000
+289,James Taylor,2024-09-06 10:58,FollowUp,Physical therapy,Dr. Wilson,1,300
+290,Sarah Wilson,2025-04-19 14:03,Emergency,Vaccination,Dr. Smith,35,35000
+291,Maria Garcia,2025-03-20 17:13,Consultation,Consultation,Dr. Johnson,48,24000
+292,Jane Doe,2025-01-25 10:42,FollowUp,Routine checkup,Dr. Miller,56,16800
+293,Maria Garcia,2024-10-16 13:49,Emergency,Emergency treatment,Dr. Miller,39,39000
+294,Michael Brown,2025-02-25 16:00,Consultation,Routine checkup,Dr. Brown,26,13000
+295,Jane Doe,2025-06-01 16:58,Consultation,Specialist referral,Dr. Brown,40,20000
+296,David Miller,2025-02-06 10:37,Emergency,Vaccination,Dr. Smith,3,3000
+297,John Smith,2024-11-11 13:22,Consultation,Consultation,Dr. Brown,40,20000
+298,David Miller,2025-04-10 09:20,Emergency,Follow-up examination,Dr. Wilson,56,56000
+299,Emily Davis,2024-12-24 10:35,Consultation,Prescription renewal,Dr. Davis,11,5500
+300,Sarah Wilson,2025-07-11 10:21,FollowUp,Routine checkup,Dr. Brown,9,2700
+301,James Taylor,2024-09-20 15:12,Emergency,Prescription renewal,Dr. Williams,38,38000
+302,Sarah Wilson,2025-06-05 12:45,Emergency,Prescription renewal,Dr. Davis,21,21000
+303,Sarah Wilson,2025-05-02 15:37,Consultation,Specialist referral,Dr. Wilson,35,17500
+304,Emily Davis,2025-06-15 14:38,Consultation,Vaccination,Dr. Brown,13,6500
+305,Jane Doe,2025-06-29 09:11,Emergency,Emergency treatment,Dr. Brown,40,40000
+306,Lisa Anderson,2024-09-30 10:15,FollowUp,Physical therapy,Dr. Wilson,17,5100
+307,Sarah Wilson,2025-02-10 17:06,Emergency,Blood pressure check,Dr. Brown,3,3000
+308,Lisa Anderson,2025-02-04 10:45,Emergency,Lab results review,Dr. Williams,2,2000
+309,Jane Doe,2025-06-29 08:09,Consultation,Vaccination,Dr. Miller,29,14500
+310,Emily Davis,2024-08-31 12:15,Consultation,Consultation,Dr. Brown,49,24500
+311,John Smith,2024-11-19 08:44,FollowUp,Specialist referral,Dr. Davis,50,15000
+312,Robert Johnson,2025-02-22 09:07,Emergency,Consultation,Dr. Smith,18,18000
+313,Sarah Wilson,2024-10-31 15:23,FollowUp,Emergency treatment,Dr. Miller,23,6900
+314,Maria Garcia,2025-07-23 16:10,Emergency,Blood pressure check,Dr. Wilson,7,7000
+315,Emily Davis,2025-06-17 10:09,Emergency,Follow-up examination,Dr. Smith,27,27000
+316,Maria Garcia,2024-11-05 17:29,FollowUp,Vaccination,Dr. Smith,9,2700
+317,David Miller,2025-03-19 16:16,FollowUp,Consultation,Dr. Wilson,18,5400
+318,Emily Davis,2025-01-13 08:41,Emergency,Prescription renewal,Dr. Miller,4,4000
+319,James Taylor,2024-12-22 15:13,Emergency,Lab results review,Dr. Williams,31,31000
+320,David Miller,2024-10-03 17:46,Emergency,Vaccination,Dr. Davis,55,55000
+321,David Miller,2025-06-16 08:46,FollowUp,Lab results review,Dr. Miller,38,11400
+322,Michael Brown,2024-08-21 08:59,Emergency,Blood pressure check,Dr. Anderson,4,4000
+323,Emily Davis,2025-07-30 13:52,Emergency,Vaccination,Dr. Smith,51,51000
+324,Emily Davis,2024-12-05 11:38,Consultation,Prescription renewal,Dr. Williams,9,4500
+325,John Smith,2025-03-16 14:55,Consultation,Prescription renewal,Dr. Anderson,6,3000
+326,Emily Davis,2024-11-14 16:06,Consultation,Vaccination,Dr. Davis,56,28000
+327,Maria Garcia,2024-08-31 15:30,Consultation,Routine checkup,Dr. Anderson,4,2000
+328,Emily Davis,2024-10-16 16:29,Consultation,Blood pressure check,Dr. Williams,36,18000
+329,Maria Garcia,2024-09-01 17:41,Consultation,Blood pressure check,Dr. Smith,12,6000
+330,Maria Garcia,2025-06-16 17:04,FollowUp,Blood pressure check,Dr. Miller,47,14100
+331,David Miller,2025-02-02 16:16,Emergency,Specialist referral,Dr. Davis,24,24000
+332,David Miller,2025-01-06 17:22,Consultation,Prescription renewal,Dr. Anderson,27,13500
+333,John Smith,2024-09-25 13:59,Consultation,Emergency treatment,Dr. Anderson,49,24500
+334,James Taylor,2025-06-22 13:51,Consultation,Blood pressure check,Dr. Brown,22,11000
+335,Robert Johnson,2024-12-26 16:19,Emergency,Follow-up examination,Dr. Davis,39,39000
+336,Lisa Anderson,2024-10-21 08:32,FollowUp,Consultation,Dr. Wilson,19,5700
+337,Maria Garcia,2024-09-11 09:34,FollowUp,Routine checkup,Dr. Smith,40,12000
+338,Maria Garcia,2025-01-05 14:09,Emergency,Follow-up examination,Dr. Brown,12,12000
+339,Robert Johnson,2024-10-14 14:52,Emergency,Vaccination,Dr. Anderson,32,32000
+340,John Smith,2025-02-18 14:55,Emergency,Lab results review,Dr. Smith,33,33000
+341,Robert Johnson,2025-01-15 15:10,Consultation,Prescription renewal,Dr. Smith,59,29500
+342,John Smith,2025-07-05 12:40,Emergency,Prescription renewal,Dr. Wilson,9,9000
+343,Emily Davis,2024-11-03 11:41,FollowUp,Vaccination,Dr. Williams,59,17700
+344,Jane Doe,2024-08-05 15:25,FollowUp,Emergency treatment,Dr. Smith,22,6600
+345,Maria Garcia,2024-11-03 11:37,Emergency,Consultation,Dr. Smith,14,14000
+346,Robert Johnson,2024-09-17 12:35,Consultation,Routine checkup,Dr. Williams,9,4500
+347,John Smith,2024-08-30 16:07,Emergency,Consultation,Dr. Miller,59,59000
+348,Lisa Anderson,2024-11-30 17:08,Emergency,Blood pressure check,Dr. Smith,10,10000
+349,David Miller,2025-07-22 17:32,FollowUp,Routine checkup,Dr. Davis,30,9000
+350,Sarah Wilson,2024-10-14 08:31,Emergency,Specialist referral,Dr. Johnson,26,26000
+351,Emily Davis,2025-07-16 11:20,Consultation,Vaccination,Dr. Brown,24,12000
+352,Michael Brown,2024-11-02 08:34,FollowUp,Vaccination,Dr. Anderson,7,2100
+353,Robert Johnson,2025-06-02 17:03,Consultation,Lab results review,Dr. Davis,8,4000
+354,Jane Doe,2025-07-29 11:29,Emergency,Emergency treatment,Dr. Miller,57,57000
+355,John Smith,2025-02-08 12:30,Emergency,Emergency treatment,Dr. Miller,16,16000
+356,Emily Davis,2024-10-12 14:51,Consultation,Consultation,Dr. Brown,43,21500
+357,Sarah Wilson,2025-05-05 09:24,FollowUp,Follow-up examination,Dr. Wilson,10,3000
+358,Lisa Anderson,2025-03-29 14:22,Consultation,Specialist referral,Dr. Williams,7,3500
+359,Jane Doe,2025-07-17 11:40,Emergency,Vaccination,Dr. Smith,45,45000
+360,Sarah Wilson,2025-06-13 15:56,FollowUp,Physical therapy,Dr. Davis,5,1500
+361,Emily Davis,2025-04-28 14:46,FollowUp,Prescription renewal,Dr. Davis,19,5700
+362,Emily Davis,2025-05-26 09:06,Emergency,Physical therapy,Dr. Smith,35,35000
+363,John Smith,2025-03-16 11:51,FollowUp,Emergency treatment,Dr. Davis,44,13200
+364,Lisa Anderson,2025-07-01 16:23,Emergency,Specialist referral,Dr. Anderson,46,46000
+365,John Smith,2025-02-21 11:13,Emergency,Lab results review,Dr. Miller,55,55000
+366,Emily Davis,2025-06-05 08:53,FollowUp,Consultation,Dr. Wilson,16,4800
+367,Lisa Anderson,2025-04-06 14:50,Emergency,Specialist referral,Dr. Smith,16,16000
+368,Sarah Wilson,2025-06-19 12:24,FollowUp,Routine checkup,Dr. Anderson,19,5700
+369,Sarah Wilson,2024-10-14 08:51,Emergency,Emergency treatment,Dr. Williams,5,5000
+370,Maria Garcia,2024-09-29 15:55,Emergency,Blood pressure check,Dr. Williams,42,42000
+371,Lisa Anderson,2025-06-11 09:57,FollowUp,Vaccination,Dr. Brown,50,15000
+372,Michael Brown,2025-04-05 11:38,Consultation,Blood pressure check,Dr. Miller,12,6000
+373,James Taylor,2025-03-13 14:49,FollowUp,Routine checkup,Dr. Davis,31,9300
+374,David Miller,2025-07-28 12:04,Emergency,Specialist referral,Dr. Anderson,15,15000
+375,Maria Garcia,2025-05-17 16:22,Consultation,Prescription renewal,Dr. Williams,47,23500
+376,John Smith,2025-01-24 17:23,Consultation,Lab results review,Dr. Johnson,21,10500
+377,Lisa Anderson,2024-08-09 11:40,Consultation,Emergency treatment,Dr. Williams,41,20500
+378,Lisa Anderson,2025-05-26 14:57,Emergency,Emergency treatment,Dr. Wilson,59,59000
+379,David Miller,2025-04-02 10:29,Emergency,Consultation,Dr. Brown,41,41000
+380,Lisa Anderson,2025-02-05 12:12,Consultation,Physical therapy,Dr. Smith,3,1500
+381,James Taylor,2025-05-11 12:17,Consultation,Lab results review,Dr. Davis,54,27000
+382,James Taylor,2025-07-21 15:00,Emergency,Specialist referral,Dr. Smith,10,10000
+383,Jane Doe,2024-12-23 09:22,Consultation,Specialist referral,Dr. Williams,55,27500
+384,Lisa Anderson,2025-04-19 11:36,Emergency,Consultation,Dr. Williams,43,43000
+385,Robert Johnson,2024-08-27 11:38,Emergency,Consultation,Dr. Wilson,46,46000
+386,Emily Davis,2024-11-23 08:03,Consultation,Routine checkup,Dr. Miller,52,26000
+387,Maria Garcia,2025-05-30 12:03,Consultation,Emergency treatment,Dr. Miller,33,16500
+388,Lisa Anderson,2024-09-21 10:27,Emergency,Consultation,Dr. Johnson,45,45000
+389,Michael Brown,2025-06-06 08:21,Emergency,Consultation,Dr. Brown,28,28000
+390,Michael Brown,2025-01-14 11:10,FollowUp,Prescription renewal,Dr. Miller,51,15300
+391,Sarah Wilson,2024-11-19 12:35,Emergency,Follow-up examination,Dr. Wilson,40,40000
+392,Michael Brown,2025-01-27 11:13,Emergency,Physical therapy,Dr. Johnson,2,2000
+393,Emily Davis,2024-10-02 17:03,Consultation,Prescription renewal,Dr. Anderson,34,17000
+394,Lisa Anderson,2024-08-22 08:08,FollowUp,Lab results review,Dr. Davis,37,11100
+395,Robert Johnson,2024-09-27 16:54,FollowUp,Physical therapy,Dr. Brown,9,2700
+396,Lisa Anderson,2025-04-01 10:46,FollowUp,Follow-up examination,Dr. Smith,4,1200
+397,Emily Davis,2025-03-19 16:42,Consultation,Specialist referral,Dr. Smith,47,23500
+398,Maria Garcia,2024-12-27 14:32,Emergency,Lab results review,Dr. Miller,16,16000
+399,Emily Davis,2024-10-29 13:20,Consultation,Prescription renewal,Dr. Miller,16,8000
+400,Maria Garcia,2024-08-13 08:21,Consultation,Routine checkup,Dr. Brown,4,2000
+401,jamal,2025-08-01 03:40,FollowUp,none,,11,3300
+402,jamal,2003-02-02 11:30,Consultation,notes,mike,25,12500
+403,name,2025-08-01 05:52,Consultation,no,name,40,20000
