@@ -1,0 +1,14 @@
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\bin\Debug\net7.0\Patient Visit Manger.exe
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\bin\Debug\net7.0\Patient Visit Manger.deps.json
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\bin\Debug\net7.0\Patient Visit Manger.runtimeconfig.json
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\bin\Debug\net7.0\Patient Visit Manger.dll
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\bin\Debug\net7.0\Patient Visit Manger.pdb
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.AssemblyInfoInputs.cache
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.AssemblyInfo.cs
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.csproj.CoreCompileInputs.cache
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.dll
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\refint\Patient Visit Manger.dll
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.pdb
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\Patient Visit Manger.genruntimeconfig.cache
+C:\Users\6601\source\repos\dawood-nadeem-6601\Patient Visit Manger\Patient Visit Manger\obj\Debug\net7.0\ref\Patient Visit Manger.dll

@@ -1,0 +1,8 @@
+2025-08-01 08:12:14 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-01 08:12:30 | Admin | Adding Entry for jamal | status: Success
+2025-08-01 08:12:40 | Admin | Filtered Entries by patient name: andrew | status: Success
+2025-08-01 08:12:55 | Admin | Updating Entry for jamal afridi. Visit id: 401 | status: Success
+2025-08-01 08:13:05 | Role: Admin | Action: Admin Logged Out
+2025-08-01 08:13:15 | Role: Receptionist | Action: Reception Login | Status: Success
+2025-08-01 08:13:22 | Receptionist | Generating Visit Summary for id 1 | status: Success
+2025-08-01 08:13:27 | Receptionist | Generating Weekly summary | status: Success
