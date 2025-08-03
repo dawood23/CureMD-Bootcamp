@@ -1,0 +1,51 @@
+Id,PatientName,VisitDate,VisitType,Description,DoctorName,VisitDuration,Fee
+1,Michael Brown,2025-07-07 16:27,Emergency,Routine checkup,Dr. Anderson,56,56000
+2,Emily Davis,2025-07-29 12:22,Consultation,Emergency treatment,Dr. Anderson,15,7500
+3,Robert Johnson,2025-07-09 12:09,Consultation,Follow-up examination,Dr. Johnson,71,35500
+4,John Smith,2025-07-08 16:06,Emergency,Follow-up examination,Dr. Smith,98,98000
+5,Emily Davis,2025-07-09 09:04,Emergency,Follow-up examination,Dr. Johnson,62,62000
+6,Jane Doe,2025-07-20 11:28,Emergency,Follow-up examination,Dr. Johnson,25,25000
+7,Emily Davis,2025-08-02 11:53,Emergency,Consultation,Dr. Williams,55,55000
+8,Robert Johnson,2025-07-29 16:00,Consultation,Routine checkup,Dr. Smith,104,52000
+9,Robert Johnson,2025-07-05 12:40,Consultation,Emergency treatment,Dr. Williams,89,44500
+10,Michael Brown,2025-07-25 17:33,FollowUp,Follow-up examination,Dr. Williams,18,5400
+11,Jane Doe,2025-07-16 17:04,Consultation,Follow-up examination,Dr. Williams,39,19500
+12,Emily Davis,2025-07-25 08:25,Emergency,Consultation,Dr. Williams,29,29000
+13,Michael Brown,2025-07-06 15:31,FollowUp,Follow-up examination,Dr. Smith,110,33000
+14,Emily Davis,2025-07-24 16:14,Consultation,Routine checkup,Dr. Johnson,79,39500
+15,Emily Davis,2025-07-14 10:26,Emergency,Routine checkup,Dr. Williams,66,66000
+16,Emily Davis,2025-07-13 13:21,FollowUp,Routine checkup,Dr. Smith,85,25500
+17,Michael Brown,2025-07-05 15:19,FollowUp,Routine checkup,Dr. Anderson,93,27900
+18,Michael Brown,2025-07-12 11:54,Emergency,Emergency treatment,Dr. Johnson,31,31000
+19,Robert Johnson,2025-07-22 11:27,Emergency,Emergency treatment,Dr. Johnson,44,44000
+20,John Smith,2025-07-08 11:01,FollowUp,Routine checkup,Dr. Anderson,86,25800
+21,Robert Johnson,2025-07-26 10:13,Emergency,Follow-up examination,Dr. Smith,69,69000
+22,Michael Brown,2025-07-07 09:40,Emergency,Follow-up examination,Dr. Smith,103,103000
+23,Emily Davis,2025-07-23 16:45,Emergency,Routine checkup,Dr. Johnson,56,56000
+24,Jane Doe,2025-07-14 10:54,FollowUp,Consultation,Dr. Williams,15,4500
+25,Robert Johnson,2025-07-25 14:32,Consultation,Routine checkup,Dr. Smith,27,13500
+26,Robert Johnson,2025-07-20 10:19,FollowUp,Consultation,Dr. Williams,22,6600
+27,John Smith,2025-08-02 09:18,FollowUp,Routine checkup,Dr. Johnson,61,18300
+28,Robert Johnson,2025-07-06 12:16,Consultation,Routine checkup,Dr. Anderson,23,11500
+29,Emily Davis,2025-07-19 11:49,Emergency,Consultation,Dr. Williams,72,72000
+30,Jane Doe,2025-07-08 14:01,Emergency,Emergency treatment,Dr. Anderson,74,74000
+31,Robert Johnson,2025-07-20 15:00,FollowUp,Routine checkup,Dr. Johnson,103,30900
+32,John Smith,2025-07-14 11:15,FollowUp,Emergency treatment,Dr. Anderson,25,7500
+33,Jane Doe,2025-07-05 13:27,Emergency,Emergency treatment,Dr. Smith,109,109000
+34,Robert Johnson,2025-07-16 17:32,Emergency,Consultation,Dr. Anderson,64,64000
+35,Emily Davis,2025-07-10 10:24,Emergency,Emergency treatment,Dr. Anderson,97,97000
+36,Jane Doe,2025-07-25 14:22,Emergency,Routine checkup,Dr. Anderson,57,57000
+37,Robert Johnson,2025-07-20 13:58,Emergency,Follow-up examination,Dr. Johnson,119,119000
+38,Michael Brown,2025-07-28 15:11,Consultation,Emergency treatment,Dr. Williams,36,18000
+39,Emily Davis,2025-08-01 14:36,Consultation,Routine checkup,Dr. Anderson,70,35000
+40,John Smith,2025-07-31 13:06,Emergency,Follow-up examination,Dr. Smith,49,49000
+41,John Smith,2025-07-13 14:58,FollowUp,Consultation,Dr. Anderson,112,33600
+42,John Smith,2025-07-24 13:32,Emergency,Consultation,Dr. Smith,40,40000
+43,Michael Brown,2025-07-11 14:53,FollowUp,Emergency treatment,Dr. Anderson,96,28800
+44,Emily Davis,2025-07-05 10:36,FollowUp,Emergency treatment,Dr. Williams,71,21300
+45,Michael Brown,2025-07-30 09:56,Emergency,Consultation,Dr. Smith,64,64000
+46,Jane Doe,2025-07-10 13:24,Emergency,Emergency treatment,Dr. Anderson,58,58000
+47,Robert Johnson,2025-07-12 16:10,Consultation,Routine checkup,Dr. Williams,83,41500
+48,Robert Johnson,2025-07-26 16:56,Consultation,Emergency treatment,Dr. Smith,70,35000
+49,Emily Davis,2025-07-30 16:51,Consultation,Emergency treatment,Dr. Johnson,29,14500
+50,Michael Brown,2025-08-01 08:24,Consultation,Emergency treatment,Dr. Williams,73,36500

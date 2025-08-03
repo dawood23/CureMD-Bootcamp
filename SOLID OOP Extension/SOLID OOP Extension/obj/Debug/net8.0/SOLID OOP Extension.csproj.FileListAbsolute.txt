@@ -1,0 +1,14 @@
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\bin\Debug\net8.0\SOLID OOP Extension.exe
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\bin\Debug\net8.0\SOLID OOP Extension.deps.json
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\bin\Debug\net8.0\SOLID OOP Extension.runtimeconfig.json
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\bin\Debug\net8.0\SOLID OOP Extension.dll
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\bin\Debug\net8.0\SOLID OOP Extension.pdb
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.GeneratedMSBuildEditorConfig.editorconfig
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.AssemblyInfoInputs.cache
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.AssemblyInfo.cs
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.csproj.CoreCompileInputs.cache
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.dll
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\refint\SOLID OOP Extension.dll
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.pdb
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\SOLID OOP Extension.genruntimeconfig.cache
+D:\bootcamp\SOLID OOP Extension\SOLID OOP Extension\obj\Debug\net8.0\ref\SOLID OOP Extension.dll
