@@ -1,0 +1,6 @@
+2025-08-04 03:15:43 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-04 03:15:49 | Admin | Filtered Entries by patient name: name | Status: Success
+2025-08-04 03:18:32 | Admin | Adding Entry for name | Status: Success
+2025-08-04 03:23:02 | Role: Admin | Action: Admin Logged Out
+2025-08-04 05:12:15 | Role: Admin | Action: Admin Login | Status: Success
+2025-08-04 05:12:18 | Role: Admin | Action: Admin Logged Out
