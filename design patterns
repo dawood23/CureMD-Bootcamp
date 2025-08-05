@@ -1,0 +1,11 @@
+Factory Pattern: provides an interface for creating objects but lets subclasses alter the type of object that will be created.
+create interface reference instead of concrete class reference and then let the method of the subclass decide which object will be created.
+Real life example: different types of vehicles.. Their Build method.
+
+Singleton: Has only one instance and a global point of access
+Real life example: Logger, game manager, data base connection
+
+Strategy Pattern: define abstract class- all concretes class inherit the abstract class(have the actual algo/functionality) delegates call to current strategy.
+Real life example:
+
+Repository: hides the details of data access behind a clean easy to use interface. It lets you interact with objects.
