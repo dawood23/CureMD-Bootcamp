@@ -13,15 +13,15 @@ namespace E_commerce_Order_Management_System.Models
         Books,
         HomeGarden
     }
-    public abstract class ProductModel
-    {
-            public int id { get; set; }
-            public string name { get; set; }
-            public float price { get; set; }
-            public ProductCategory Category { get; set; }
 
-            public ProductModel() { }
-  
-            public abstract string GetProductDetails(int id);
+    public abstract class Product
+    {
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Name { get; set; }
+        public decimal Price { get; set; }
+        public ProductCategory Category { get; set; }
+        public int Stock { get; set; }
+
+        public abstract string GetDetails();
     }
 }

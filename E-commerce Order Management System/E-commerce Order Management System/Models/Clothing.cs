@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace E_commerce_Order_Management_System.Models
 {
-    class Clothing : ProductModel
+    public class Clothing : Product
     {
-        public string color;
-        public Clothing() : base() { }
-        public override string GetProductDetails(int id)
+        public string Size { get; set; }
+        public string Color { get; set; }
+
+        public override string GetDetails()
         {
-            return $"[Clothing] Product ID: {id}, Name: {name}, Price: ${price}, Category: {Category}, Color: {color}";
+            return $"{Name} - ${Price} | Size: {Size} | Color: {Color} | Stock: {Stock}";
         }
     }
+
 }

@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace E_commerce_Order_Management_System.Models
 {
-    class HomeGarden:ProductModel
+    public class HomeGarden : Product
     {
-        public string PlantType;
-        public HomeGarden() : base() { }
+        public string PlantType { get; set; }
+        public string Season { get; set; }
 
-        public override string GetProductDetails(int id)
+        public override string GetDetails()
         {
-            return $"[HomeGarden] Product ID: {id}, Name: {name}, Price: ${price}, Category: {Category}, PlantType:{PlantType}";
+            return $"{Name} - ${Price} | Type: {PlantType} | Season: {Season} | Stock: {Stock}";
         }
     }
+
 }

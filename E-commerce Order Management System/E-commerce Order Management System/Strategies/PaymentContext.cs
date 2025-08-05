@@ -6,23 +6,11 @@ using System.Threading.Tasks;
 
 namespace E_commerce_Order_Management_System.Strategies
 {
-    class PaymentContext
+    public class PaymentProcessor
     {
-        private Ipayment _Payment;
+        private IPaymentStrategy _strategy;
 
-        public PaymentContext(Ipayment payment)
-        {
-            _Payment = payment;
-        }
-
-        public void PayAmount(float amount)
-        {
-            if (_Payment == null)
-            {
-                throw new InvalidOperationException("No Payment Method Assigned");
-            }
-            _Payment.Pay(amount);
-        }
-
+        public void SetStrategy(IPaymentStrategy strategy) => _strategy = strategy;
+        public bool ProcessPayment(decimal amount) => _strategy?.ProcessPayment(amount) ?? false;
     }
 }

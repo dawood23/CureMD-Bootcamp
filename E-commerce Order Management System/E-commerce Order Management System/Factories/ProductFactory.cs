@@ -9,7 +9,7 @@ namespace E_commerce_Order_Management_System.Factories
 {
     public class ProductFactory
     {
-                public static ProductModel ChooseProductType(ProductCategory category)
+                public static Product CreateProduct(ProductCategory category)
                 {
                     switch (category) {
 
@@ -18,7 +18,7 @@ namespace E_commerce_Order_Management_System.Factories
                         case ProductCategory.Clothing:
                             return new Clothing { Category = category };    
                         case ProductCategory.Books: 
-                            return new Books { Category = category };
+                            return new Book { Category = category };
                         case ProductCategory.HomeGarden:
                             return new HomeGarden { Category = category };
                         default:

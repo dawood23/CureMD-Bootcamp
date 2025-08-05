@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace E_commerce_Order_Management_System.Strategies
 {
-    public class CreditCardPayment : IPaymentStrategy
+    public class BankTransferPayment : IPaymentStrategy
     {
         public bool ProcessPayment(decimal amount)
         {
-            Console.Write("Enter Card Number (16 digits): ");
-            string cardNumber = Console.ReadLine();
+            Console.Write("Enter Account Number: ");
+            string account = Console.ReadLine();
 
-            if (cardNumber?.Length == 16)
+            if (!string.IsNullOrEmpty(account) && account.Length >= 8)
             {
-                Console.WriteLine($"Credit Card Payment of ${amount} processed!");
+                Console.WriteLine($"Bank Transfer of ${amount} processed!");
                 return true;
             }
 
-            Console.WriteLine("Invalid card number!");
+            Console.WriteLine("Invalid account number!");
             return false;
         }
     }

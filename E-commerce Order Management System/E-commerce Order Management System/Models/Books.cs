@@ -8,14 +8,15 @@ using System.Xml.Linq;
 
 namespace E_commerce_Order_Management_System.Models
 {
-    class Books:ProductModel
+    public class Book : Product
     {
-        public string ISBN;
-        public Books() : base() { }
+        public string Author { get; set; }
+        public string ISBN { get; set; }
 
-        public override string GetProductDetails(int id)
+        public override string GetDetails()
         {
-            return $"[Books] Product ID: {id}, Name: {name}, Price: ${price}, Category: {Category}, ISBN: {ISBN}";
+            return $"{Name} - ${Price} | Author: {Author} | ISBN: {ISBN} | Stock: {Stock}";
         }
     }
+
 }

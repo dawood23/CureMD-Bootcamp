@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace E_commerce_Order_Management_System.Models
 {
-    class Electronics:ProductModel
+    public class Electronics : Product
     {
-        public int warranty { get; set; }
-        public Electronics():base() {}
+        public int WarrantyMonths { get; set; }
+        public string Brand { get; set; }
 
-        public override string GetProductDetails(int id)
+        public override string GetDetails()
         {
-            return $"[Electronics] Product ID: {id}, Name: {name}, Price: ${price}, Category: {Category}, warranty: {warranty}";
+            return $"{Name} - ${Price} | Brand: {Brand} | Warranty: {WarrantyMonths}mo | Stock: {Stock}";
         }
     }
 }

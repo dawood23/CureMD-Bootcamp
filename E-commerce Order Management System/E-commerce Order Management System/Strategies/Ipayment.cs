@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace E_commerce_Order_Management_System.Strategies
 {
-    interface Ipayment
+    public interface IPaymentStrategy
     {
-        void Pay(float amount);
-        bool validate();
+        bool ProcessPayment(decimal amount);
     }
+
 }
