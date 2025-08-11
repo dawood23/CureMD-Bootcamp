@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="new.css">
+ 
+</head>
+<body>
+    <button class="Add-Button">Add</button>
+    <div style="display: none;" class="add-form-container">
+        <h2>Add Item</h2>
+        <form action="">
+            <label for="title">Enter Description</label>
+            <input type="text" name="Title" id="title">
+            
+            <label for="statusCompleted">Completed</label>
+            <input type="radio" id="statusCompleted" name="status" value="completed">
+            <label for="statusIncomplete">Not Completed</label>
+            <input type="radio" id="statusIncomplete" name="status" value="not completed">
+            
+            <button id="confirm-add">Confirm Add</button>
+        </form>
+    </div>
+    <div class="container">
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script src="test.js"></script> 
+</body>
+</html>
