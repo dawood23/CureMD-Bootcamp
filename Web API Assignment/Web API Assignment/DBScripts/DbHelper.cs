@@ -46,12 +46,12 @@ namespace Web_API_Assignment.DBScripts
             {
                 using var connection = GetConnection();
                 connection.Open();
-                Console.WriteLine("✅ Database connection successful.");
+                Console.WriteLine("Database connection successful.");
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"❌ Database connection failed: {ex.Message}");
+                Console.WriteLine($"Database connection failed: {ex.Message}");
                 return false;
             }
         }
