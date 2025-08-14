@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users Management</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="common.js"></script>
+  </head>
+  <body>
+    <h1>Users</h1>
+
+    <table border="1" id="usersTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Role ID</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Add / Edit User</h2>
+    <form id="userForm">
+      <input type="hidden" id="userId" />
+      Username: <input type="text" id="username" /><br />
+      Password: <input type="password" id="password" /><br />
+      First Name: <input type="text" id="firstName" /><br />
+      Last Name: <input type="text" id="lastName" /><br />
+      Role ID: <input type="number" id="roleId" /><br />
+      <button type="submit">Save</button>
+    </form>
+
+    <script>
+      function loadUsers() {
+        $.ajax({
+          url: API_BASE + "/api/users",
+          headers: getAuthHeader(),
+          success: function (data) {
+            let rows = "";
+            data.forEach((u) => {
+              rows += `<tr>
+                    <td>${u.userID}</td>
+                    <td>${u.username}</td>
+                    <td>${u.firstName}</td>
+                    <td>${u.lastName}</td>
+                    <td>${u.roleID}</td>
+                    <td>
+                        <button onclick="editUser(${u.userID})">Edit</button>
+                        <button onclick="deleteUser(${u.userID})">Delete</button>
+                    </td>
+                </tr>`;
+            });
+            $("#usersTable tbody").html(rows);
+          },
+        });
+      }
+
+      function editUser(id) {
+        $.ajax({
+          url: API_BASE + "/api/users/" + id,
+          headers: getAuthHeader(),
+          success: function (u) {
+            $("#userId").val(u.userID);
+            $("#username").val(u.username);
+            $("#password").val("");
+            $("#firstName").val(u.firstName);
+            $("#lastName").val(u.lastName);
+            $("#roleId").val(u.roleID);
+          },
+        });
+      }
+
+      function deleteUser(id) {
+        $.ajax({
+          url: API_BASE + "/api/users/" + id + "/1", // performedByUserId=1 for now
+          method: "DELETE",
+          headers: getAuthHeader(),
+          success: loadUsers,
+        });
+      }
+
+      $("#userForm").submit(function (e) {
+        e.preventDefault();
+        const data = {
+          userID: $("#userId").val(),
+          username: $("#username").val(),
+          passwordHash: $("#password").val(),
+          firstName: $("#firstName").val(),
+          lastName: $("#lastName").val(),
+          roleID: parseInt($("#roleId").val()),
+        };
+        const performedBy = 1;
+
+        if (data.userID) {
+          $.ajax({
+            url: API_BASE + "/api/users/" + performedBy,
+            method: "PUT",
+            headers: getAuthHeader(),
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: loadUsers,
+          });
+        } else {
+          $.ajax({
+            url: API_BASE + "/api/users/" + performedBy,
+            method: "POST",
+            headers: getAuthHeader(),
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: loadUsers,
+          });
+        }
+        this.reset();
+      });
+
+      $(document).ready(loadUsers);
+    </script>
+  </body>
+</html>

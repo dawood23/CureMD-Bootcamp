@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Doctors</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="visittypes.html">Visit Types</a> |
+      <a href="doctors.html"><b>Doctors</b></a> |
+      <a href="patients.html">Patients</a> | <a href="visits.html">Visits</a> |
+      <a href="users.html">Users</a> | <a href="userroles.html">User Roles</a> |
+      <a href="#" onclick="clearToken()">Logout</a>
+    </nav>
+
+    <h2>Doctors</h2>
+    <button id="refreshBtn">Refresh</button>
+    <table id="grid" class="grid">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First</th>
+          <th>Last</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3 id="formTitle">Add / Edit Doctor</h3>
+    <form id="form">
+      <input type="hidden" id="doctorID" />
+      <label>First Name</label>
+      <input id="firstName" required />
+      <label>Last Name</label>
+      <input id="lastName" required />
+      <label>Phone</label>
+      <input id="phoneNumber" />
+      <label>Email</label>
+      <input id="email" type="email" />
+      <div class="row">
+        <button type="submit">Save</button>
+        <button type="button" id="resetBtn" class="ghost">Reset</button>
+      </div>
+    </form>
+
+    <script src="js/common.js"></script>
+    <script>
+      function getUserIdFromToken() {
+        try {
+          const t = localStorage.getItem("jwtToken");
+          if (!t) return 1;
+          const p = JSON.parse(
+            atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+          );
+          return p.userId || p.nameid || p.sub || 1;
+        } catch {
+          return 1;
+        }
+      }
+
+      function load() {
+        $.get(`${API_BASE}/Doctors`, function (list) {
+          const tb = $("#grid tbody").empty();
+          list.forEach((d) => {
+            tb.append(`<tr>
+        <td>${d.doctorID}</td>
+        <td>${d.firstName}</td>
+        <td>${d.lastName}</td>
+        <td>${d.phoneNumber || ""}</td>
+        <td>${d.email || ""}</td>
+        <td>
+          <button onclick='edit(${JSON.stringify(d)})'>Edit</button>
+          <button class="del" onclick='del(${d.doctorID})'>Delete</button>
+        </td>
+      </tr>`);
+          });
+        });
+      }
+
+      function edit(d) {
+        $("#doctorID").val(d.doctorID);
+        $("#firstName").val(d.firstName);
+        $("#lastName").val(d.lastName);
+        $("#phoneNumber").val(d.phoneNumber || "");
+        $("#email").val(d.email || "");
+        $("#formTitle").text("Edit Doctor");
+      }
+
+      function del(id) {
+        if (!confirm("Delete this doctor?")) return;
+        const by = getUserIdFromToken();
+        $.ajax({ url: `${API_BASE}/Doctors/${id}/${by}`, method: "DELETE" })
+          .done(load)
+          .fail(() => alert("Delete failed"));
+      }
+
+      $("#form").on("submit", function (e) {
+        e.preventDefault();
+        const id = +($("#doctorID").val() || 0);
+        const payload = {
+          doctorID: id,
+          firstName: $("#firstName").val().trim(),
+          lastName: $("#lastName").val().trim(),
+          phoneNumber: $("#phoneNumber").val().trim(),
+          email: $("#email").val().trim(),
+        };
+        if (!payload.firstName || !payload.lastName) {
+          alert("First & Last name required");
+          return;
+        }
+        const by = getUserIdFromToken();
+        const method = id ? "PUT" : "POST";
+        $.ajax({
+          url: `${API_BASE}/Doctors/${by}`,
+          method,
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+        })
+          .done(() => {
+            load();
+            $("#resetBtn").click();
+          })
+          .fail(() => alert("Save failed"));
+      });
+
+      $("#resetBtn").on("click", function () {
+        $("#doctorID").val("");
+        $("#firstName,#lastName,#phoneNumber,#email").val("");
+        $("#formTitle").text("Add / Edit Doctor");
+      });
+
+      $("#refreshBtn").on("click", load);
+      $(load);
+    </script>
+  </body>
+</html>

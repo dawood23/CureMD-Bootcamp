@@ -9,5 +9,7 @@ namespace Web_API_Assignment.Services
         Task<int> CreateUser(User user, int performedByUserId);
         Task<bool> UpdateUser(User user, int performedByUserId);
         Task<bool> DeleteUser(int id, int performedByUserId);
+        Task<User?> ValidateUser(string username, string password);
+
     }
 }

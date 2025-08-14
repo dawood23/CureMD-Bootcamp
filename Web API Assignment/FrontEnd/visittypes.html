@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visit Types</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h2>Visit Types</h2>
+    <button onclick="loadVisitTypes()">Refresh</button>
+    <table border="1" id="visitTypesTable">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Base Fee</th>
+        <th>Duration</th>
+        <th>Actions</th>
+      </tr>
+    </table>
+
+    <h3>Add/Edit Visit Type</h3>
+    <form id="visitTypeForm">
+      <input type="hidden" id="visitTypeId" />
+      <input type="text" id="typeName" placeholder="Type Name" required />
+      <input type="number" id="baseFee" placeholder="Base Fee" required />
+      <input type="number" id="duration" placeholder="Duration" required />
+      <button type="submit">Save</button>
+    </form>
+
+    <script src="js/common.js"></script>
+    <script>
+      function loadVisitTypes() {
+        $.get(API_BASE + "/VisitTypes", function (data) {
+          let rows =
+            "<tr><th>ID</th><th>Name</th><th>Base Fee</th><th>Duration</th><th>Actions</th></tr>";
+          data.forEach((v) => {
+            rows += `<tr>
+                        <td>${v.visitTypeID}</td>
+                        <td>${v.typeName}</td>
+                        <td>${v.baseFee}</td>
+                        <td>${v.estimatedDuration}</td>
+                        <td>
+                            <button onclick='editVisitType(${JSON.stringify(
+                              v
+                            )})'>Edit</button>
+                            <button onclick='deleteVisitType(${
+                              v.visitTypeID
+                            })'>Delete</button>
+                        </td>
+                    </tr>`;
+          });
+          $("#visitTypesTable").html(rows);
+        });
+      }
+
+      function editVisitType(v) {
+        $("#visitTypeId").val(v.visitTypeID);
+        $("#typeName").val(v.typeName);
+        $("#baseFee").val(v.baseFee);
+        $("#duration").val(v.estimatedDuration);
+      }
+
+      $("#visitTypeForm").submit(function (e) {
+        e.preventDefault();
+        let id = $("#visitTypeId").val();
+        let method = id ? "PUT" : "POST";
+        let url = API_BASE + "/VisitTypes/1"; // hardcoded performedByUserId=1
+
+        $.ajax({
+          url: url,
+          method: method,
+          contentType: "application/json",
+          data: JSON.stringify({
+            visitTypeID: id ? parseInt(id) : 0,
+            typeName: $("#typeName").val(),
+            baseFee: parseFloat($("#baseFee").val()),
+            estimatedDuration: parseInt($("#duration").val()),
+          }),
+          success: function () {
+            loadVisitTypes();
+            $("#visitTypeForm")[0].reset();
+          },
+        });
+      });
+
+      function deleteVisitType(id) {
+        if (!confirm("Delete this visit type?")) return;
+        $.ajax({
+          url: API_BASE + `/VisitTypes/${id}/1`,
+          method: "DELETE",
+          success: function () {
+            loadVisitTypes();
+          },
+        });
+      }
+
+      $(document).ready(loadVisitTypes);
+    </script>
+  </body>
+</html>

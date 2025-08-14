@@ -72,5 +72,17 @@ namespace Web_API_Assignment.Services
 
             return deleted;
         }
+
+        public async Task<User?> ValidateUser(string username, string password)
+        {
+            var user = await _userRepository.GetByUsername(username);
+            if (user == null) return null;
+
+            if (user.PasswordHash == password)
+                return user;
+
+            return null;
+        }
+
     }
 }

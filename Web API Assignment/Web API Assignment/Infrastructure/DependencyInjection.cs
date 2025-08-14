@@ -21,6 +21,7 @@ namespace Web_API_Assignment.Infrastructure
             services.AddScoped<IActivityLogRepository, ActivityLogRepository>();
 
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+
             services.AddScoped<IVisitTypeService, VisitTypeService>();
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IPatientService, PatientService>();

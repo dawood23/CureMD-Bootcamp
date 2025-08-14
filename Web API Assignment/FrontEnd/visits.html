@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Visits</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="visittypes.html">Visit Types</a> |
+      <a href="doctors.html">Doctors</a> |
+      <a href="patients.html">Patients</a> |
+      <a href="visits.html"><b>Visits</b></a> | <a href="users.html">Users</a> |
+      <a href="userroles.html">User Roles</a> |
+      <a href="#" onclick="clearToken()">Logout</a>
+    </nav>
+
+    <h2>Visits</h2>
+    <div class="row">
+      <button id="refreshBtn">Refresh</button>
+    </div>
+
+    <table class="grid" id="grid">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>PatientID</th>
+          <th>DoctorID</th>
+          <th>VisitTypeID</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+          <th>Fee</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3 id="formTitle">Add / Edit Visit</h3>
+    <form id="form">
+      <input type="hidden" id="visitID" />
+
+      <label>Patient</label>
+      <select id="patientID" required></select>
+
+      <label>Doctor (optional)</label>
+      <select id="doctorID">
+        <option value="">-- none --</option>
+      </select>
+
+      <label>Visit Type</label>
+      <select id="visitTypeID" required></select>
+
+      <label>Visit Date</label>
+      <input type="date" id="visitDate" required />
+
+      <label>Visit Time</label>
+      <input type="time" id="visitTime" required />
+
+      <label>Description</label>
+      <input id="description" />
+
+      <label>Notes</label>
+      <input id="notes" />
+
+      <label>Status</label>
+      <select id="status">
+        <option value="Scheduled">Scheduled</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+
+      <label>Fee</label>
+      <input type="number" step="0.01" id="fee" />
+
+      <div class="row">
+        <button type="submit">Save</button>
+        <button type="button" id="resetBtn" class="ghost">Reset</button>
+      </div>
+    </form>
+
+    <script src="js/common.js"></script>
+    <script>
+      function getUserIdFromToken() {
+        try {
+          const t = localStorage.getItem("jwtToken");
+          if (!t) return 1;
+          const p = JSON.parse(
+            atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+          );
+          return p.userId || p.nameid || p.sub || 1;
+        } catch {
+          return 1;
+        }
+      }
+
+      function loadLookups() {
+        $.get(`${API_BASE}/Patients`, (list) => {
+          const sel = $("#patientID").empty();
+          list.forEach((p) =>
+            sel.append(
+              `<option value="${p.patientID}">${p.patientID} - ${p.firstName} ${p.lastName}</option>`
+            )
+          );
+        });
+        $.get(`${API_BASE}/Doctors`, (list) => {
+          const sel = $("#doctorID")
+            .empty()
+            .append(`<option value="">-- none --</option>`);
+          list.forEach((d) =>
+            sel.append(
+              `<option value="${d.doctorID}">${d.doctorID} - ${d.firstName} ${d.lastName}</option>`
+            )
+          );
+        });
+        $.get(`${API_BASE}/VisitTypes`, (list) => {
+          const sel = $("#visitTypeID").empty();
+          list.forEach((vt) =>
+            sel.append(
+              `<option value="${vt.visitTypeID}">${vt.visitTypeID} - ${vt.typeName}</option>`
+            )
+          );
+        });
+      }
+
+      function load() {
+        $.get(`${API_BASE}/Visits`, (list) => {
+          const tb = $("#grid tbody").empty();
+          list.forEach((v) => {
+            tb.append(`<tr>
+        <td>${v.visitID}</td>
+        <td>${v.patientID}</td>
+        <td>${v.doctorID ?? ""}</td>
+        <td>${v.visitTypeID}</td>
+        <td>${v.visitDate ? v.visitDate.substring(0, 10) : ""}</td>
+        <td>${v.visitTime ? v.visitTime.substring(0, 5) : ""}</td>
+        <td>${v.status || ""}</td>
+        <td>${v.fee ?? ""}</td>
+        <td>
+          <button onclick='edit(${JSON.stringify(v)})'>Edit</button>
+          <button class="del" onclick='del(${v.visitID})'>Delete</button>
+        </td>
+      </tr>`);
+          });
+        });
+      }
+
+      function edit(v) {
+        $("#visitID").val(v.visitID);
+        $("#patientID").val(v.patientID);
+        $("#doctorID").val(v.doctorID || "");
+        $("#visitTypeID").val(v.visitTypeID);
+        $("#visitDate").val(v.visitDate ? v.visitDate.substring(0, 10) : "");
+        $("#visitTime").val(v.visitTime ? v.visitTime.substring(0, 5) : "");
+        $("#description").val(v.description || "");
+        $("#notes").val(v.notes || "");
+        $("#status").val(v.status || "Scheduled");
+        $("#fee").val(v.fee || "");
+        $("#formTitle").text("Edit Visit");
+      }
+
+      function del(id) {
+        if (!confirm("Delete this visit?")) return;
+        const by = getUserIdFromToken();
+        $.ajax({ url: `${API_BASE}/Visits/${id}/${by}`, method: "DELETE" })
+          .done(load)
+          .fail(() => alert("Delete failed"));
+      }
+
+      $("#form").on("submit", function (e) {
+        e.preventDefault();
+        const id = +($("#visitID").val() || 0);
+        const payload = {
+          visitID: id,
+          patientID: +$("#patientID").val(),
+          doctorID: $("#doctorID").val() ? +$("#doctorID").val() : null,
+          visitTypeID: +$("#visitTypeID").val(),
+          visitDate: $("#visitDate").val(),
+          visitTime: $("#visitTime").val(),
+          description: $("#description").val(),
+          notes: $("#notes").val(),
+          status: $("#status").val(),
+          fee: $("#fee").val() ? parseFloat($("#fee").val()) : null,
+        };
+        const by = getUserIdFromToken();
+        const method = id ? "PUT" : "POST";
+        $.ajax({
+          url: `${API_BASE}/Visits/${by}`,
+          method,
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+        })
+          .done(() => {
+            load();
+            $("#resetBtn").click();
+          })
+          .fail((xhr) => alert(xhr.responseText || "Save failed"));
+      });
+
+      $("#resetBtn").on("click", function () {
+        $("#form")[0].reset();
+        $("#visitID").val("");
+        $("#formTitle").text("Add / Edit Visit");
+      });
+
+      $("#refreshBtn").on("click", load);
+      $(function () {
+        loadLookups();
+        load();
+      });
+    </script>
+  </body>
+</html>

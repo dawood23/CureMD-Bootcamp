@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Roles</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="visittypes.html">Visit Types</a> |
+      <a href="doctors.html">Doctors</a> |
+      <a href="patients.html">Patients</a> | <a href="visits.html">Visits</a> |
+      <a href="users.html">Users</a> |
+      <a href="userroles.html"><b>User Roles</b></a> |
+      <a href="#" onclick="clearToken()">Logout</a>
+    </nav>
+
+    <h2>User Roles</h2>
+    <button id="refreshBtn">Refresh</button>
+    <table class="grid" id="grid">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Role Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h3 id="formTitle">Add / Edit Role</h3>
+    <form id="form">
+      <input type="hidden" id="roleID" />
+      <label>Role Name</label>
+      <input id="roleName" required />
+      <label>Description</label>
+      <input id="description" />
+      <div class="row">
+        <button type="submit">Save</button>
+        <button type="button" id="resetBtn" class="ghost">Reset</button>
+      </div>
+    </form>
+
+    <script src="js/common.js"></script>
+    <script>
+      function getUserIdFromToken() {
+        try {
+          const t = localStorage.getItem("jwtToken");
+          if (!t) return 1;
+          const p = JSON.parse(
+            atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
+          );
+          return p.userId || p.nameid || p.sub || 1;
+        } catch {
+          return 1;
+        }
+      }
+
+      function load() {
+        $.get(`${API_BASE}/UserRoles`, (list) => {
+          const tb = $("#grid tbody").empty();
+          list.forEach((r) => {
+            tb.append(`<tr>
+        <td>${r.roleID}</td>
+        <td>${r.roleName}</td>
+        <td>${r.description || ""}</td>
+        <td>
+          <button onclick='edit(${JSON.stringify(r)})'>Edit</button>
+          <button class="del" onclick='del(${r.roleID})'>Delete</button>
+        </td>
+      </tr>`);
+          });
+        });
+      }
+
+      function edit(r) {
+        $("#roleID").val(r.roleID);
+        $("#roleName").val(r.roleName);
+        $("#description").val(r.description || "");
+        $("#formTitle").text("Edit Role");
+      }
+
+      function del(id) {
+        if (!confirm("Delete this role?")) return;
+        const by = getUserIdFromToken();
+        $.ajax({ url: `${API_BASE}/UserRoles/${id}/${by}`, method: "DELETE" })
+          .done(load)
+          .fail(() => alert("Delete failed"));
+      }
+
+      $("#form").on("submit", function (e) {
+        e.preventDefault();
+        const id = +($("#roleID").val() || 0);
+        const payload = {
+          roleID: id,
+          roleName: $("#roleName").val().trim(),
+          description: $("#description").val().trim(),
+        };
+        if (!payload.roleName) {
+          alert("Role Name is required");
+          return;
+        }
+        const by = getUserIdFromToken();
+        const method = id ? "PUT" : "POST";
+        $.ajax({
+          url: `${API_BASE}/UserRoles/${by}`,
+          method,
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+        })
+          .done(() => {
+            load();
+            $("#resetBtn").click();
+          })
+          .fail((xhr) => alert(xhr.responseText || "Save failed"));
+      });
+
+      $("#resetBtn").on("click", function () {
+        $("#roleID").val("");
+        $("#roleName").val("");
+        $("#description").val("");
+        $("#formTitle").text("Add / Edit Role");
+      });
+
+      $("#refreshBtn").on("click", load);
+      $(load);
+    </script>
+  </body>
+</html>
