@@ -1,5 +1,4 @@
-// /js/common.js
-const API_BASE = "https://localhost:5001/api"; // Change if needed
+const API_BASE = "http://localhost:5243/api"; 
 
 function getToken() {
   return localStorage.getItem("jwtToken");
@@ -14,7 +13,17 @@ function clearToken() {
   window.location.href = "index.html";
 }
 
-// Automatically add Authorization header to all AJAX calls
+function getPerformedByUserId() {
+  const token = getToken();
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.userId || payload.userID || payload.UserId || null;
+  } catch (e) {
+    return null;
+  }
+}
+
 $.ajaxSetup({
   beforeSend: function (xhr) {
     let token = getToken();

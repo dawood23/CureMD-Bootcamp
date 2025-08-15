@@ -2,10 +2,21 @@
 <html>
   <head>
     <title>Visit Types</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+
+     <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="visittypes.html">Visit Types</a> |
+      <a href="doctors.html">Doctors</a> |
+      <a href="patients.html">Patients</a> |
+      <a href="visits.html"><b>Visits</b></a> | <a href="users.html">Users</a> |
+      <a href="userroles.html">User Roles</a> |
+      <a href="#" onclick="clearToken()">Logout</a>
+    </nav>
+    
     <h2>Visit Types</h2>
     <button onclick="loadVisitTypes()">Refresh</button>
     <table border="1" id="visitTypesTable">
@@ -27,7 +38,7 @@
       <button type="submit">Save</button>
     </form>
 
-    <script src="js/common.js"></script>
+    <script src="common.js"></script>
     <script>
       function loadVisitTypes() {
         $.get(API_BASE + "/VisitTypes", function (data) {

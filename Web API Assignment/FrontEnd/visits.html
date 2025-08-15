@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Visits</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
@@ -11,7 +11,8 @@
       <a href="visittypes.html">Visit Types</a> |
       <a href="doctors.html">Doctors</a> |
       <a href="patients.html">Patients</a> |
-      <a href="visits.html"><b>Visits</b></a> | <a href="users.html">Users</a> |
+      <a href="visits.html"><b>Visits</b></a> | 
+      <a href="users.html">Users</a> |
       <a href="userroles.html">User Roles</a> |
       <a href="#" onclick="clearToken()">Logout</a>
     </nav>
@@ -81,7 +82,7 @@
       </div>
     </form>
 
-    <script src="js/common.js"></script>
+    <script src="common.js"></script>
     <script>
       function getUserIdFromToken() {
         try {
@@ -130,19 +131,19 @@
           const tb = $("#grid tbody").empty();
           list.forEach((v) => {
             tb.append(`<tr>
-        <td>${v.visitID}</td>
-        <td>${v.patientID}</td>
-        <td>${v.doctorID ?? ""}</td>
-        <td>${v.visitTypeID}</td>
-        <td>${v.visitDate ? v.visitDate.substring(0, 10) : ""}</td>
-        <td>${v.visitTime ? v.visitTime.substring(0, 5) : ""}</td>
-        <td>${v.status || ""}</td>
-        <td>${v.fee ?? ""}</td>
-        <td>
-          <button onclick='edit(${JSON.stringify(v)})'>Edit</button>
-          <button class="del" onclick='del(${v.visitID})'>Delete</button>
-        </td>
-      </tr>`);
+              <td>${v.visitID}</td>
+              <td>${v.patientID}</td>
+              <td>${v.doctorID ?? ""}</td>
+              <td>${v.visitTypeID}</td>
+              <td>${v.visitDate ? v.visitDate.substring(0, 10) : ""}</td>
+              <td>${v.visitTime ? v.visitTime.substring(0, 5) : ""}</td>
+              <td>${v.status || ""}</td>
+              <td>${v.fee ?? ""}</td>
+              <td>
+                <button onclick='edit(${JSON.stringify(v)})'>Edit</button>
+                <button class="del" onclick='del(${v.visitID})'>Delete</button>
+              </td>
+            </tr>`);
           });
         });
       }
@@ -171,21 +172,30 @@
 
       $("#form").on("submit", function (e) {
         e.preventDefault();
+
         const id = +($("#visitID").val() || 0);
+        let visitTimeVal = $("#visitTime").val();
+        if (visitTimeVal && visitTimeVal.length === 5) {
+          visitTimeVal += ":00"; // Ensure TimeSpan-compatible format
+        }
+
         const payload = {
-          visitID: id,
+          visitID: id || 0,
           patientID: +$("#patientID").val(),
           doctorID: $("#doctorID").val() ? +$("#doctorID").val() : null,
           visitTypeID: +$("#visitTypeID").val(),
           visitDate: $("#visitDate").val(),
-          visitTime: $("#visitTime").val(),
-          description: $("#description").val(),
-          notes: $("#notes").val(),
-          status: $("#status").val(),
+          visitTime: visitTimeVal,
+          description: $("#description").val() || null,
+          notes: $("#notes").val() || null,
+          status: $("#status").val() || "Scheduled",
           fee: $("#fee").val() ? parseFloat($("#fee").val()) : null,
+          createdBy: getUserIdFromToken()
         };
+
         const by = getUserIdFromToken();
         const method = id ? "PUT" : "POST";
+
         $.ajax({
           url: `${API_BASE}/Visits/${by}`,
           method,
@@ -196,7 +206,10 @@
             load();
             $("#resetBtn").click();
           })
-          .fail((xhr) => alert(xhr.responseText || "Save failed"));
+          .fail((xhr) => {
+            console.error(xhr.responseText);
+            alert(xhr.responseText || "Save failed");
+          });
       });
 
       $("#resetBtn").on("click", function () {
@@ -206,6 +219,7 @@
       });
 
       $("#refreshBtn").on("click", load);
+
       $(function () {
         loadLookups();
         load();

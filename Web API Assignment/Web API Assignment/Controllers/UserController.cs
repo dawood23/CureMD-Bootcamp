@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Web_API_Assignment.Models;
 using Web_API_Assignment.Services;
 
@@ -6,6 +7,7 @@ namespace Web_API_Assignment.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -37,13 +39,15 @@ namespace Web_API_Assignment.Controllers
             return Ok(newId);
         }
 
-        [HttpPut("{performedByUserId}")]
-        public async Task<ActionResult> Update([FromBody] User user, int performedByUserId)
+        [HttpPut("{id}/{performedByUserId}")]
+        public async Task<ActionResult> Update(int id, int performedByUserId, [FromBody] User user)
         {
+            user.UserID = id;
             var updated = await _userService.UpdateUser(user, performedByUserId);
             if (!updated) return NotFound();
             return NoContent();
         }
+
 
         [HttpDelete("{id}/{performedByUserId}")]
         public async Task<ActionResult> Delete(int id, int performedByUserId)

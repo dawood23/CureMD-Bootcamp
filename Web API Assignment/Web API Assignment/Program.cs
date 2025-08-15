@@ -11,6 +11,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -48,6 +58,7 @@ else
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("AllowAll");
 
 // Authentication & Authorization middleware
 app.UseAuthentication();

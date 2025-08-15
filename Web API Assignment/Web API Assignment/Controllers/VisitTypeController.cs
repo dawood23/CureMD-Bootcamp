@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Web_API_Assignment.Models;
 using Web_API_Assignment.Services;
 
@@ -6,6 +7,7 @@ namespace Web_API_Assignment.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class VisitTypesController : ControllerBase
     {
         private readonly IVisitTypeService _visitTypeService;

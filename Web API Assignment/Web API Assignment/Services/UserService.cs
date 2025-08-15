@@ -76,6 +76,7 @@ namespace Web_API_Assignment.Services
         public async Task<User?> ValidateUser(string username, string password)
         {
             var user = await _userRepository.GetByUsername(username);
+            Console.WriteLine(username);
             if (user == null) return null;
 
             if (user.PasswordHash == password)

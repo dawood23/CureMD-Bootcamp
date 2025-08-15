@@ -1,4 +1,4 @@
-/* ==== Global Styles ==== */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f8;
@@ -7,7 +7,6 @@ body {
     color: #333;
 }
 
-/* ==== Header & Navigation ==== */
 header {
     background-color: #007bff;
     color: white;
@@ -35,7 +34,7 @@ nav a:hover {
     color: #ffdd57;
 }
 
-/* ==== Container ==== */
+
 .container {
     width: 90%;
     max-width: 1100px;
@@ -46,7 +45,6 @@ nav a:hover {
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* ==== Tables ==== */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -68,7 +66,6 @@ table tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* ==== Forms ==== */
 form {
     margin-top: 15px;
 }
@@ -101,7 +98,7 @@ form button:hover {
     background-color: #0056b3;
 }
 
-/* ==== Buttons ==== */
+
 .btn {
     display: inline-block;
     padding: 8px 15px;
@@ -139,7 +136,7 @@ form button:hover {
     background-color: #565e64;
 }
 
-/* ==== Alerts ==== */
+
 .alert {
     padding: 10px;
     margin-top: 15px;
@@ -156,14 +153,38 @@ form button:hover {
     color: #721c24;
 }
 
-/* ==== Footer ==== */
+.LoginForm {
+    padding: 20px;
+    height: auto;
+    width: 50%;
+    background-color: white; 
+    border-radius: 8px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease-in-out; 
+}
+
+
+.LoginForm:hover {
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.fl{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 footer {
     background-color: #0056b3;
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;
+    margin-top: 50px;
 }
+
+

@@ -73,7 +73,7 @@ namespace Web_API_Assignment.Repository
         public async Task<User?> GetByUsername(string username)
         {
             using var connection = _dbhelper.GetConnection();
-            using var command = _dbhelper.CreateCommand(connection, "stp_GetUserById", new Dictionary<string, object> {
+            using var command = _dbhelper.CreateCommand(connection, "stp_GetUserByName", new Dictionary<string, object> {
                 { "@Username", username }
             });
             await connection.OpenAsync();
