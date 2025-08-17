@@ -24,6 +24,43 @@ function getPerformedByUserId() {
   }
 }
 
+function getJwtPayload() {
+  const token = getToken();
+  if (!token) return null;
+  try {
+    return JSON.parse(atob(token.split(".")[1]));
+  } catch {
+    return null;
+  }
+}
+
+function getUserRole() {
+  const payload = getJwtPayload();
+  if (!payload) return null;
+
+  if (payload.role) return payload.role; 
+  switch (payload.roleId || payload.roleID) {
+    case 1: case "1": return "Admin";
+    case 2: case "2": return "Doctor";
+    case 3: case "3": return "Receptionist";
+    default: return null;
+  }
+}
+
+function restrictAccess(allowedRoles) {
+  const role = getUserRole();
+  if (!role) {
+    alert("You must log in first.");
+    window.location.href = "index.html";
+    return;
+  }
+  if (!allowedRoles.includes(role)) {
+    alert("Access denied!");
+    window.location.href = "dashboard.html";
+  }
+}
+
+
 $.ajaxSetup({
   beforeSend: function (xhr) {
     let token = getToken();
