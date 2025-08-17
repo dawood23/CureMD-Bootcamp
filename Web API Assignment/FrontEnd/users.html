@@ -1,81 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Users Management</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="common.js"></script>
-</head>
-<body>
+    <script>
+      restrictAccess(["Admin"]);
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Users Management</h1>
+    </header>
 
-<header>
-    <h1>Users Management</h1>
-</header>
+    <nav>
+      <a href="dashboard.html">Dashboard</a> |
+      <a href="visittypes.html">Visit Types</a> |
+      <a href="doctors.html"><b>Doctors</b></a> |
+      <a href="patients.html">Patients</a> | <a href="visits.html">Visits</a> |
+      <a href="users.html">Users</a> | <a href="userroles.html">User Roles</a> |
+      <a href="#" onclick="clearToken()">Logout</a>
+    </nav>
 
-<nav>
-    <a href="dashboard.html">Dashboard</a> |
-    <a href="visittypes.html">Visit Types</a> |
-    <a href="doctors.html"><b>Doctors</b></a> |
-    <a href="patients.html">Patients</a> | 
-    <a href="visits.html">Visits</a> |
-    <a href="users.html">Users</a> | 
-    <a href="userroles.html">User Roles</a> |
-    <a href="#" onclick="clearToken()">Logout</a>
-</nav>
-
-<div class="container">
-    <h2>All Users</h2>
-    <table id="usersTable">
+    <div class="container">
+      <h2>All Users</h2>
+      <table id="usersTable">
         <thead>
-            <tr>
-                <th>UserID</th>
-                <th>Username</th>
-                <th>RoleID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Password</th>
-                <th>Actions</th>
-            </tr>
+          <tr>
+            <th>UserID</th>
+            <th>Username</th>
+            <th>RoleID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Password</th>
+            <th>Actions</th>
+          </tr>
         </thead>
         <tbody></tbody>
-    </table>
+      </table>
 
-    <h2>Add / Edit User</h2>
-    <form id="userForm">
-        <input type="hidden" id="userId">
-        
+      <h2>Add / Edit User</h2>
+      <form id="userForm">
+        <input type="hidden" id="userId" />
+
         <label>Username:</label>
-        <input type="text" id="username" required>
+        <input type="text" id="username" required />
 
         <label>Password:</label>
-        <input type="password" id="password">
+        <input type="password" id="password" />
 
         <label>RoleID:</label>
-        <input type="number" id="roleId" required>
+        <input type="number" id="roleId" required />
 
         <label>First Name:</label>
-        <input type="text" id="firstName" required>
+        <input type="text" id="firstName" required />
 
         <label>Last Name:</label>
-        <input type="text" id="lastName" required>
+        <input type="text" id="lastName" required />
 
         <button type="submit" class="btn btn-primary">Save User</button>
-        <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
-    </form>
-</div>
+        <button type="button" class="btn btn-secondary" id="cancelEdit">
+          Cancel
+        </button>
+      </form>
+    </div>
 
-<script>
-    const USERS_API = `${API_BASE}/Users`;
+    <script>
+      const USERS_API = `${API_BASE}/Users`;
 
-    $(document).ready(function () {
+      $(document).ready(function () {
         loadUsers();
 
         function loadUsers() {
-            $.get(USERS_API, function (data) {
-                let rows = "";
-                data.forEach(user => {
-                    rows += `
+          $.get(USERS_API, function (data) {
+            let rows = "";
+            data.forEach((user) => {
+              rows += `
                         <tr>
                             <td>${user.userID}</td>
                             <td>${user.username}</td>
@@ -89,109 +91,108 @@
                             </td>
                         </tr>
                     `;
-                });
-                $("#usersTable tbody").html(rows);
-            }).fail(() => {
-                alert("Error loading users.");
             });
+            $("#usersTable tbody").html(rows);
+          }).fail(() => {
+            alert("Error loading users.");
+          });
         }
 
         $("#userForm").on("submit", function (e) {
-            e.preventDefault();
-            const id = $("#userId").val();
-            const performedByUserId = getPerformedByUserId();
-            if (!performedByUserId) {
-                alert("User authentication required.");
-                return;
-            }
+          e.preventDefault();
+          const id = $("#userId").val();
+          const performedByUserId = getPerformedByUserId();
+          if (!performedByUserId) {
+            alert("User authentication required.");
+            return;
+          }
 
-            const userData = {
-                username: $("#username").val(),
-                roleID: parseInt($("#roleId").val()),
-                firstName: $("#firstName").val(),
-                lastName: $("#lastName").val()
-            };
+          const userData = {
+            username: $("#username").val(),
+            roleID: parseInt($("#roleId").val()),
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+          };
 
-            if ($("#password").val()) {
-                userData.passwordHash = $("#password").val();
-            }
+          if ($("#password").val()) {
+            userData.passwordHash = $("#password").val();
+          }
 
-            if (id) {
-                $.ajax({
-                    url: `${USERS_API}/${id}/${performedByUserId}`,
-                    method: "PUT",
-                    contentType: "application/json",
-                    data: JSON.stringify(userData),
-                    success: function () {
-                        loadUsers();
-                        resetForm();
-                    },
-                    error: function (xhr) {
-                        alert("Error updating user: " + xhr.statusText);
-                    }
-                });
-            } else {
-                $.ajax({
-                    url: `${USERS_API}/${performedByUserId}`,
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(userData),
-                    success: function () {
-                        loadUsers();
-                        resetForm();
-                    },
-                    error: function (xhr) {
-                        alert("Error adding user: " + xhr.statusText);
-                    }
-                });
-            }
+          if (id) {
+            $.ajax({
+              url: `${USERS_API}/${id}/${performedByUserId}`,
+              method: "PUT",
+              contentType: "application/json",
+              data: JSON.stringify(userData),
+              success: function () {
+                loadUsers();
+                resetForm();
+              },
+              error: function (xhr) {
+                alert("Error updating user: " + xhr.statusText);
+              },
+            });
+          } else {
+            $.ajax({
+              url: `${USERS_API}/${performedByUserId}`,
+              method: "POST",
+              contentType: "application/json",
+              data: JSON.stringify(userData),
+              success: function () {
+                loadUsers();
+                resetForm();
+              },
+              error: function (xhr) {
+                alert("Error adding user: " + xhr.statusText);
+              },
+            });
+          }
         });
 
         $("#cancelEdit").click(function () {
-            resetForm();
+          resetForm();
         });
 
         function resetForm() {
-            $("#userId").val("");
-            $("#username").val("");
-            $("#password").val("");
-            $("#roleId").val("");
-            $("#firstName").val("");
-            $("#lastName").val("");
-            $("#userForm button[type='submit']").text("Save User");
+          $("#userId").val("");
+          $("#username").val("");
+          $("#password").val("");
+          $("#roleId").val("");
+          $("#firstName").val("");
+          $("#lastName").val("");
+          $("#userForm button[type='submit']").text("Save User");
         }
 
         window.deleteUser = function (id) {
-            const performedByUserId = getPerformedByUserId();
-            if (!performedByUserId) {
-                alert("User authentication required.");
-                return;
-            }
-            if (confirm("Are you sure you want to delete this user?")) {
-                $.ajax({
-                    url: `${USERS_API}/${id}/${performedByUserId}`,
-                    method: "DELETE",
-                    success: function () {
-                        loadUsers();
-                    },
-                    error: function () {
-                        alert("Error deleting user.");
-                    }
-                });
-            }
-        }
+          const performedByUserId = getPerformedByUserId();
+          if (!performedByUserId) {
+            alert("User authentication required.");
+            return;
+          }
+          if (confirm("Are you sure you want to delete this user?")) {
+            $.ajax({
+              url: `${USERS_API}/${id}/${performedByUserId}`,
+              method: "DELETE",
+              success: function () {
+                loadUsers();
+              },
+              error: function () {
+                alert("Error deleting user.");
+              },
+            });
+          }
+        };
 
         window.editUser = function (id, username, roleID, firstName, lastName) {
-            $("#userId").val(id);
-            $("#username").val(username);
-            $("#roleId").val(roleID);
-            $("#firstName").val(firstName);
-            $("#lastName").val(lastName);
-            $("#password").val("");
-            $("#userForm button[type='submit']").text("Update User");
-        }
-    });
-</script>
-
-</body>
+          $("#userId").val(id);
+          $("#username").val(username);
+          $("#roleId").val(roleID);
+          $("#firstName").val(firstName);
+          $("#lastName").val(lastName);
+          $("#password").val("");
+          $("#userForm button[type='submit']").text("Update User");
+        };
+      });
+    </script>
+  </body>
 </html>

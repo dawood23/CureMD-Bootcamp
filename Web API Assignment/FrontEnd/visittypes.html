@@ -4,10 +4,12 @@
     <title>Visit Types</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      restrictAccess(["Admin", "Receptionist"]);
+    </script>
   </head>
   <body>
-
-     <nav>
+    <nav>
       <a href="dashboard.html">Dashboard</a> |
       <a href="visittypes.html">Visit Types</a> |
       <a href="doctors.html">Doctors</a> |
@@ -16,7 +18,7 @@
       <a href="userroles.html">User Roles</a> |
       <a href="#" onclick="clearToken()">Logout</a>
     </nav>
-    
+
     <h2>Visit Types</h2>
     <button onclick="loadVisitTypes()">Refresh</button>
     <table border="1" id="visitTypesTable">

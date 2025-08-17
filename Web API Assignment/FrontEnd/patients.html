@@ -6,6 +6,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+    <script src="common.js"></script>
+    <script>
+      restrictAccess(["Admin", "Doctor", "Receptionist"]);
+    </script>
+
     <nav>
       <a href="dashboard.html">Dashboard</a> |
       <a href="visittypes.html">Visit Types</a> |
@@ -56,36 +61,25 @@
       </div>
     </form>
 
-    <script src="common.js"></script>
     <script>
-      function getUserIdFromToken() {
-        try {
-          const t = localStorage.getItem("jwtToken");
-          if (!t) return 1;
-          const p = JSON.parse(
-            atob(t.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))
-          );
-          return p.userId || p.nameid || p.sub || 1;
-        } catch {
-          return 1;
-        }
-      }
       function load() {
         $.get(`${API_BASE}/Patients`, (list) => {
           const tb = $("#grid tbody").empty();
           list.forEach((p) => {
             tb.append(`<tr>
-        <td>${p.patientID}</td>
-        <td>${p.firstName}</td>
-        <td>${p.lastName}</td>
-        <td>${p.dateOfBirth ? p.dateOfBirth.substring(0, 10) : ""}</td>
-        <td>${p.phoneNumber || ""}</td>
-        <td>${p.email || ""}</td>
-        <td>
-          <button onclick='edit(${JSON.stringify(p)})'>Edit</button>
-          <button class="del" onclick='del(${p.patientID})'>Delete</button>
-        </td>
-      </tr>`);
+              <td>${p.patientID}</td>
+              <td>${p.firstName}</td>
+              <td>${p.lastName}</td>
+              <td>${p.dateOfBirth ? p.dateOfBirth.substring(0, 10) : ""}</td>
+              <td>${p.phoneNumber || ""}</td>
+              <td>${p.email || ""}</td>
+              <td>
+                <button onclick='edit(${JSON.stringify(p)})'>Edit</button>
+                <button class="del" onclick='del(${
+                  p.patientID
+                })'>Delete</button>
+              </td>
+            </tr>`);
           });
         });
       }
@@ -104,7 +98,7 @@
       }
       function del(id) {
         if (!confirm("Delete this patient?")) return;
-        const by = getUserIdFromToken();
+        const by = getPerformedByUserId();
         $.ajax({ url: `${API_BASE}/Patients/${id}/${by}`, method: "DELETE" })
           .done(load)
           .fail(() => alert("Delete failed"));
@@ -126,7 +120,7 @@
           alert("First & Last name required");
           return;
         }
-        const by = getUserIdFromToken();
+        const by = getPerformedByUserId();
         const method = id ? "PUT" : "POST";
         $.ajax({
           url: `${API_BASE}/Patients/${by}`,

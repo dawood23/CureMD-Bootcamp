@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 using Web_API_Assignment.DBScripts;
 using Web_API_Assignment.Infrastructure;
+using Web_API_Assignment.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,19 @@ builder.Services
         };
     });
 
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day));
+
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("RequireDoctorOrAdmin", policy => policy.RequireRole("Doctor", "Admin"));
+    options.AddPolicy("RequireReceptionistOrAdmin", policy => policy.RequireRole("Receptionist", "Admin"));
+});
+
 builder.Services.Dependency_Injection();
 
 var app = builder.Build();
@@ -56,6 +71,8 @@ else
 }
 
 app.UseStaticFiles();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseRouting();
 app.UseCors("AllowAll");

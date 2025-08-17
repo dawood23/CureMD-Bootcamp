@@ -22,10 +22,11 @@ namespace Web_API_Assignment.Services
 
         public string GenerateToken(User user)
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim("userName", user.Username),
                 new Claim("userId", user.UserID.ToString()),
+                new Claim(ClaimTypes.Role, user.RoleID.ToString())
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]));

@@ -4,6 +4,9 @@
     <title>Visits</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      restrictAccess(["Admin", "Doctor", "Receptionist"]);
+    </script>
   </head>
   <body>
     <nav>
@@ -11,8 +14,7 @@
       <a href="visittypes.html">Visit Types</a> |
       <a href="doctors.html">Doctors</a> |
       <a href="patients.html">Patients</a> |
-      <a href="visits.html"><b>Visits</b></a> | 
-      <a href="users.html">Users</a> |
+      <a href="visits.html"><b>Visits</b></a> | <a href="users.html">Users</a> |
       <a href="userroles.html">User Roles</a> |
       <a href="#" onclick="clearToken()">Logout</a>
     </nav>
@@ -190,7 +192,7 @@
           notes: $("#notes").val() || null,
           status: $("#status").val() || "Scheduled",
           fee: $("#fee").val() ? parseFloat($("#fee").val()) : null,
-          createdBy: getUserIdFromToken()
+          createdBy: getUserIdFromToken(),
         };
 
         const by = getUserIdFromToken();
