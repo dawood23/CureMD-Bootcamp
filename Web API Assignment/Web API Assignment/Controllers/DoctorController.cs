@@ -7,7 +7,7 @@ namespace Web_API_Assignment.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "RequireAdmin")]
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _doctorService;

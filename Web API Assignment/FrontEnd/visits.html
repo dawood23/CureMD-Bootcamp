@@ -8,14 +8,25 @@
       restrictAccess(["Admin", "Doctor", "Receptionist"]);
     </script>
   </head>
-  <body>
-    <nav>
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="visittypes.html">Visit Types</a> |
-      <a href="doctors.html">Doctors</a> |
-      <a href="patients.html">Patients</a> |
-      <a href="visits.html"><b>Visits</b></a> | <a href="users.html">Users</a> |
-      <a href="userroles.html">User Roles</a> |
+  <body onload="setupDashboard()">
+     <nav>
+      <div id="adminLinks" style="display: none">
+        <a href="users.html">Users</a> |
+        <a href="userroles.html">User Roles</a> |
+        <a href="visittypes.html">Visit Types</a> |
+        <a href="doctors.html">Doctors</a> |
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a>
+      </div>
+      <div id="doctorLinks" style="display: none">
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a>
+      </div>
+      <div id="receptionLinks" style="display: none">
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a> |
+        <a href="visittypes.html">Visit Types</a>
+      </div>
       <a href="#" onclick="clearToken()">Logout</a>
     </nav>
 
@@ -97,6 +108,15 @@
         } catch {
           return 1;
         }
+      }
+        function setupDashboard() {
+        const role = getUserRole();
+        if (role === "Admin")
+          document.getElementById("adminLinks").style.display = "block";
+        if (role === "Doctor")
+          document.getElementById("doctorLinks").style.display = "block";
+        if (role === "Receptionist")
+          document.getElementById("receptionLinks").style.display = "block";
       }
 
       function loadLookups() {

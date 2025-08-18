@@ -6,16 +6,55 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       restrictAccess(["Admin"]);
+
+      
     </script>
+    
+    <script>
+  function getToken() {
+    return localStorage.getItem("token");
+  }
+
+  function getUserRole() {
+    const token = getToken();
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.role || null; 
+    } catch {
+      return null;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const role = getUserRole();
+    if (!role || (role !== "Admin" && role !== "Receptionist")) {
+      alert("You are not authorized to view this page!");
+      window.location.href = "dashboard.html"; 
+    }
+  });
+</script>
+
   </head>
-  <body>
-    <nav>
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="visittypes.html">Visit Types</a> |
-      <a href="doctors.html">Doctors</a> |
-      <a href="patients.html">Patients</a> | <a href="visits.html">Visits</a> |
-      <a href="users.html">Users</a> |
-      <a href="userroles.html"><b>User Roles</b></a> |
+  <body onload="setupDashboard()">
+     <nav>
+      <div id="adminLinks" style="display: none">
+        <a href="users.html">Users</a> |
+        <a href="userroles.html">User Roles</a> |
+        <a href="visittypes.html">Visit Types</a> |
+        <a href="doctors.html">Doctors</a> |
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a>
+      </div>
+      <div id="doctorLinks" style="display: none">
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a>
+      </div>
+      <div id="receptionLinks" style="display: none">
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a> |
+        <a href="visittypes.html">Visit Types</a>
+      </div>
       <a href="#" onclick="clearToken()">Logout</a>
     </nav>
 
@@ -61,6 +100,15 @@
         }
       }
 
+        function setupDashboard() {
+        const role = getUserRole();
+        if (role === "Admin")
+          document.getElementById("adminLinks").style.display = "block";
+        if (role === "Doctor")
+          document.getElementById("doctorLinks").style.display = "block";
+        if (role === "Receptionist")
+          document.getElementById("receptionLinks").style.display = "block";
+      }
       function load() {
         $.get(`${API_BASE}/UserRoles`, (list) => {
           const tb = $("#grid tbody").empty();

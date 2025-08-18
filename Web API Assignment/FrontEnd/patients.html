@@ -5,19 +5,30 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
-  <body>
+  <body onload="setupDashboard()">
     <script src="common.js"></script>
     <script>
       restrictAccess(["Admin", "Doctor", "Receptionist"]);
     </script>
 
     <nav>
-      <a href="dashboard.html">Dashboard</a> |
-      <a href="visittypes.html">Visit Types</a> |
-      <a href="doctors.html">Doctors</a> |
-      <a href="patients.html"><b>Patients</b></a> |
-      <a href="visits.html">Visits</a> | <a href="users.html">Users</a> |
-      <a href="userroles.html">User Roles</a> |
+      <div id="adminLinks" style="display: none">
+        <a href="users.html">Users</a> |
+        <a href="userroles.html">User Roles</a> |
+        <a href="visittypes.html">Visit Types</a> |
+        <a href="doctors.html">Doctors</a> |
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a>
+      </div>
+      <div id="doctorLinks" style="display: none">
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a>
+      </div>
+      <div id="receptionLinks" style="display: none">
+        <a href="patients.html">Patients</a> |
+        <a href="visits.html">Visits</a> |
+        <a href="visittypes.html">Visit Types</a>
+      </div>
       <a href="#" onclick="clearToken()">Logout</a>
     </nav>
 
@@ -62,6 +73,15 @@
     </form>
 
     <script>
+        function setupDashboard() {
+        const role = getUserRole();
+        if (role === "Admin")
+          document.getElementById("adminLinks").style.display = "block";
+        if (role === "Doctor")
+          document.getElementById("doctorLinks").style.display = "block";
+        if (role === "Receptionist")
+          document.getElementById("receptionLinks").style.display = "block";
+      }
       function load() {
         $.get(`${API_BASE}/Patients`, (list) => {
           const tb = $("#grid tbody").empty();

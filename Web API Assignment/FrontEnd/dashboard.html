@@ -29,6 +29,8 @@
 
     <script src="common.js"></script>
     <script>
+      console.log(JSON.parse(atob(localStorage.getItem("jwtToken").split(".")[1])));
+
       function setupDashboard() {
         const role = getUserRole();
         if (role === "Admin")

@@ -8,7 +8,7 @@ namespace Web_API_Assignment.Controllers
 
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "RequireAdmin")]
     public class UserRolesController : ControllerBase
     {
         private readonly IUserRoleService _userRoleService;

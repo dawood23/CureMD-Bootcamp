@@ -35,17 +35,20 @@ function getJwtPayload() {
 }
 
 function getUserRole() {
-  const payload = getJwtPayload();
-  if (!payload) return null;
-
-  if (payload.role) return payload.role; 
-  switch (payload.roleId || payload.roleID) {
-    case 1: case "1": return "Admin";
-    case 2: case "2": return "Doctor";
-    case 3: case "3": return "Receptionist";
-    default: return null;
+  const token = getToken();
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const roleClaim = payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        if(roleClaim) return roleClaim;
+        else return null
+    }
+    catch {
+    return null;
   }
 }
+
+
 
 function restrictAccess(allowedRoles) {
   const role = getUserRole();

@@ -7,7 +7,7 @@ namespace Web_API_Assignment.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    [Authorize(Policy = "RequireReceptionistOrAdmin")]
     public class VisitTypesController : ControllerBase
     {
         private readonly IVisitTypeService _visitTypeService;
