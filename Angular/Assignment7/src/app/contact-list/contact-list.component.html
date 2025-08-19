@@ -1,0 +1,28 @@
+<div class="filters">
+  <button (click)="noFilter()">All</button>
+  <button (click)="filter('Family')">Family</button>
+  <button (click)="filter('Favourites')">Favourites</button>
+  <button (click)="filter('Friends')">Friends</button>
+  <button (click)="filter('Classmates')">Classmates</button>
+</div>
+
+
+@for(contactinfo of filteredList; track contactinfo) {
+  <div class="contact-card" (click)="onContactCardClick(contactinfo.id)">
+    <h3 class="name">{{ contactinfo.name }}</h3>
+
+    <!-- <div class="detail"><strong>Phone:</strong> {{ contactinfo.phone }}</div>
+    <div class="detail"><strong>Email:</strong> {{ contactinfo.email }}</div>
+    <div class="detail"><strong>Gender:</strong> {{ contactinfo.gender }}</div>
+    <div class="detail"><strong>Address:</strong> {{ contactinfo.address }}</div>
+
+    <div class="groups">
+        <strong>Groups: </strong>
+         <span>
+        {{ contactinfo.groups.join(", ") }}
+      </span>
+    </div> -->
+  </div>
+} @empty {
+  <div class="empty-message">No Contacts</div>
+}

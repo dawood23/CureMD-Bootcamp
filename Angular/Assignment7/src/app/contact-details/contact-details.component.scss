@@ -1,0 +1,54 @@
+.contact-details-div{
+    margin-top: 6%;
+}
+.contact-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  padding: 24px;
+  margin-top: 16px;
+  max-width: 520px;
+
+  h3.name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #2c3e50;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+  }
+
+  .detail {
+    font-size: 1rem;
+    margin: 8px 0;
+    color: #444;
+
+    strong {
+      color: #2c3e50;
+      margin-right: 8px;
+      font-weight: 600;
+    }
+  }
+
+  .groups {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #2c3e50;
+
+    strong {
+      margin-right: 10px;
+    }
+
+    span {
+      display: inline-block;
+      background: #3498db;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: 8px;
+      text-transform: capitalize;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@if(contact.name){
+<div class="contact-details-div">
+<h2>Details</h2>
+<div class="contact-card details">
+  <h3 class="name">{{ contact.name }}</h3>
+
+  <div class="detail"><strong>Phone:</strong> {{ contact.phone }}</div>
+  <div class="detail"><strong>Email:</strong> {{ contact.email }}</div>
+  <div class="detail"><strong>Gender:</strong> {{ contact.gender }}</div>
+  <div class="detail"><strong>Address:</strong> {{ contact.address }}</div>
+
+  <div class="groups">
+    <strong>Groups:</strong>
+    <span>
+      {{ contact.groups.join(", ") }}
+    </span>
+  </div>
+
+  <button (click)="toggle('Favourites')">Toggle Favourite</button>
+  <button (click)="toggle('Family')">Toggle Family</button>
+  <button (click)="toggle('Friends')">Toggle Friends</button>
+  <button (click)="toggle('Classmates')">Toggle Classmates</button>
+</div>
+</div>
+}
