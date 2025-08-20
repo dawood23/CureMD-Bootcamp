@@ -1,1 +1,53 @@
-<p>contact-page works!</p>
+<h2>Add Contact</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+  <label>
+    Name
+    <input type="text" formControlName="name">
+  </label>
+  <div *ngIf="f.name.touched && f.name.invalid">Name is required.</div>
+
+  <label>
+    Phone
+    <input type="text" formControlName="phone" placeholder="0300-0000123">
+  </label>
+  <div *ngIf="f.phone.touched && f.phone.hasError('required')">Phone is required.</div>
+  <div *ngIf="f.phone.touched && f.phone.hasError('pattern')">Invalid phone format.</div>
+
+  <label>
+    Email
+    <input type="email" formControlName="email">
+  </label>
+  <div *ngIf="f.email.touched && f.email.hasError('required')">Email is required.</div>
+  <div *ngIf="f.email.touched && f.email.hasError('email')">Invalid email.</div>
+
+  <label>
+    Gender
+    <select formControlName="gender">
+      <option value="">-- Select --</option>
+      <option value="male">Male</option> 
+      <option value="female">Female</option>
+    </select>
+  </label>
+  <div *ngIf="f.gender.touched && f.gender.hasError('required')">Gender is required.</div>
+
+  <label>
+    Address
+    <input type="text" formControlName="address">
+  </label>
+  <div *ngIf="f.address.touched && f.address.hasError('required')">Address is required.</div>
+
+  <fieldset formArrayName="groups">
+    <legend>Groups</legend>
+    <div *ngFor="let opt of groupOptions; let i = index">
+      <label>
+        <input type="checkbox" [formControlName]="i">
+        {{ opt }}
+      </label>
+    </div>
+  </fieldset>
+
+  <button type="submit" [disabled]="form.invalid">Add</button>
+  <button type="button" (click)="form.reset()">Reset</button>
+</form>
