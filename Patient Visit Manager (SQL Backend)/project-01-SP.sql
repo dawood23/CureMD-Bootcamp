@@ -1,361 +1,452 @@
--- project-01-SP.sql
+-- project-01-SP-safe.sql
 -- 8th August, 2025
--- Author: Dawood Nadeem 6601
--- Description: Stored Procedures for Patient Visit Manager database
+-- Dawood Nadeem 6601
+-- Multi-execution safe stored procedures for Patient Visit Manager
+
+IF OBJECT_ID('stp_AddUserRole', 'P') IS NOT NULL DROP PROCEDURE stp_AddUserRole;
+GO
+CREATE PROCEDURE stp_AddUserRole
+    @RoleName varchar(50),
+    @Description varchar(255) = null
+AS
+BEGIN
+    BEGIN TRY
+        INSERT INTO UserRoles (RoleName, Description)
+        VALUES (@RoleName, @Description);
+        SELECT SCOPE_IDENTITY() AS NewRoleID;
+    END TRY
+    BEGIN CATCH
+        THROW;
+    END CATCH
+END
+GO
+
+IF OBJECT_ID('stp_GetUserRoles', 'P') IS NOT NULL DROP PROCEDURE stp_GetUserRoles;
+GO
+CREATE PROCEDURE stp_GetUserRoles
+AS
+BEGIN
+    SELECT * FROM UserRoles;
+END
+GO
+
+IF OBJECT_ID('stp_UpdateUserRole', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateUserRole;
+GO
+CREATE PROCEDURE stp_UpdateUserRole
+    @RoleID int,
+    @RoleName varchar(50),
+    @Description varchar(255)
+AS
+BEGIN
+    UPDATE UserRoles
+    SET RoleName = @RoleName, Description = @Description
+    WHERE RoleID = @RoleID;
+END
+GO
+
+IF OBJECT_ID('stp_DeleteUserRole', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteUserRole;
+GO
+CREATE PROCEDURE stp_DeleteUserRole
+    @RoleID int
+AS
+BEGIN
+    DELETE FROM UserRoles WHERE RoleID = @RoleID;
+END
+GO
 
 
-create procedure stp_AddUserRole
-    @RoleName varchar(50),
-    @Description varchar(255) = null
-as
-begin
-    set nocount on;
-    begin try
-        insert into UserRoles (RoleName, Description)
-        values (@RoleName, @Description);
-        select SCOPE_IDENTITY() as NewRoleID;
-    end try
-    begin catch
-        throw;
-    end catch
-end
-go
+IF OBJECT_ID('stp_AddVisitType', 'P') IS NOT NULL DROP PROCEDURE stp_AddVisitType;
+GO
+CREATE PROCEDURE stp_AddVisitType
+    @TypeName varchar(50),
+    @BaseFee decimal(10,2),
+    @EstimatedDuration int
+AS
+BEGIN
+    INSERT INTO VisitTypes (TypeName, BaseFee, EstimatedDuration)
+    VALUES (@TypeName, @BaseFee, @EstimatedDuration);
+    SELECT SCOPE_IDENTITY() AS NewVisitTypeID;
+END
+GO
 
-create procedure stp_GetUserRoles
-as
-begin
-    set nocount on;
-    select * from UserRoles;
-end
-go
+IF OBJECT_ID('stp_GetVisitTypes', 'P') IS NOT NULL DROP PROCEDURE stp_GetVisitTypes;
+GO
+CREATE PROCEDURE stp_GetVisitTypes
+AS
+BEGIN
+    SELECT * FROM VisitTypes;
+END
+GO
 
-create procedure stp_UpdateUserRole
-    @RoleID int,
-    @RoleName varchar(50),
-    @Description varchar(255)
-as
-begin
-    set nocount on;
-    update UserRoles
-    set RoleName = @RoleName, Description = @Description
-    where RoleID = @RoleID;
-end
-go
+IF OBJECT_ID('stp_UpdateVisitType', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateVisitType;
+GO
+CREATE PROCEDURE stp_UpdateVisitType
+    @VisitTypeID int,
+    @TypeName varchar(50),
+    @BaseFee decimal(10,2),
+    @EstimatedDuration int
+AS
+BEGIN
+    UPDATE VisitTypes
+    SET TypeName = @TypeName, BaseFee = @BaseFee, EstimatedDuration = @EstimatedDuration
+    WHERE VisitTypeID = @VisitTypeID;
+END
+GO
 
--- delete
-create procedure stp_DeleteUserRole
-    @RoleID int
-as
-begin
-    set nocount on;
-    delete from UserRoles where RoleID = @RoleID;
-end
-go
+IF OBJECT_ID('stp_DeleteVisitType', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteVisitType;
+GO
+CREATE PROCEDURE stp_DeleteVisitType
+    @VisitTypeID int
+AS
+BEGIN
+    DELETE FROM VisitTypes WHERE VisitTypeID = @VisitTypeID;
+END
+GO
 
-
-create procedure stp_AddVisitType
-    @TypeName varchar(50),
-    @BaseFee decimal(10,2),
-    @EstimatedDuration int
-as
-begin
-    set nocount on;
-    insert into VisitTypes (TypeName, BaseFee, EstimatedDuration)
-    values (@TypeName, @BaseFee, @EstimatedDuration);
-    select SCOPE_IDENTITY() as NewVisitTypeID;
-end
-go
-
-create procedure stp_GetVisitTypes
-as
-begin
-    set nocount on;
-    select * from VisitTypes;
-end
-go
-
-create procedure stp_UpdateVisitType
-    @VisitTypeID int,
-    @TypeName varchar(50),
-    @BaseFee decimal(10,2),
-    @EstimatedDuration int
-as
-begin
-    set nocount on;
-    update VisitTypes
-    set TypeName = @TypeName, BaseFee = @BaseFee, EstimatedDuration = @EstimatedDuration
-    where VisitTypeID = @VisitTypeID;
-end
-go
-
-create procedure stp_DeleteVisitType
-    @VisitTypeID int
-as
-begin
-    set nocount on;
-    delete from VisitTypes where VisitTypeID = @VisitTypeID;
-end
-go
+IF OBJECT_ID('stp_GetVisitTypeById', 'P') IS NOT NULL DROP PROCEDURE stp_GetVisitTypeById;
+GO
+CREATE PROCEDURE stp_GetVisitTypeById
+    @VisitTypeID int
+AS
+BEGIN
+    SELECT * FROM VisitTypes WHERE VisitTypeID = @VisitTypeID;
+END
+GO
 
 
-create procedure stp_AddPatient
-    @FirstName varchar(100),
-    @LastName varchar(100),
-    @DateOfBirth date = null,
-    @PhoneNumber varchar(15) = null,
-    @Email varchar(255) = null,
-    @Address varchar(500) = null,
-    @EmergencyContact varchar(255) = null
-as
-begin
-    set nocount on;
-    insert into Patients (FirstName, LastName, DateOfBirth, PhoneNumber, Email, Address, EmergencyContact)
-    values (@FirstName, @LastName, @DateOfBirth, @PhoneNumber, @Email, @Address, @EmergencyContact);
-    select SCOPE_IDENTITY() as NewPatientID;
-end
-go
+IF OBJECT_ID('stp_AddPatient', 'P') IS NOT NULL DROP PROCEDURE stp_AddPatient;
+GO
+CREATE PROCEDURE stp_AddPatient
+    @FirstName varchar(100),
+    @LastName varchar(100),
+    @DateOfBirth date = null,
+    @PhoneNumber varchar(15) = null,
+    @Email varchar(255) = null,
+    @Address varchar(500) = null,
+    @EmergencyContact varchar(255) = null
+AS
+BEGIN
+    INSERT INTO Patients (FirstName, LastName, DateOfBirth, PhoneNumber, Email, Address, EmergencyContact)
+    VALUES (@FirstName, @LastName, @DateOfBirth, @PhoneNumber, @Email, @Address, @EmergencyContact);
+    SELECT SCOPE_IDENTITY() AS NewPatientID;
+END
+GO
 
-create procedure stp_GetPatients
-as
-begin
-    set nocount on;
-    select * from Patients;
-end
-go
+IF OBJECT_ID('stp_GetPatients', 'P') IS NOT NULL DROP PROCEDURE stp_GetPatients;
+GO
+CREATE PROCEDURE stp_GetPatients
+AS
+BEGIN
+    SELECT * FROM Patients;
+END
+GO
 
-create procedure stp_UpdatePatient
-    @PatientID int,
-    @FirstName varchar(100),
-    @LastName varchar(100),
-    @DateOfBirth date = null,
-    @PhoneNumber varchar(15) = null,
-    @Email varchar(255) = null,
-    @Address varchar(500) = null,
-    @EmergencyContact varchar(255) = null
-as
-begin
-    set nocount on;
-    update Patients
-    set FirstName = @FirstName,
-        LastName = @LastName,
-        DateOfBirth = @DateOfBirth,
-        PhoneNumber = @PhoneNumber,
-        Email = @Email,
-        Address = @Address,
-        EmergencyContact = @EmergencyContact
-    where PatientID = @PatientID;
-end
-go
+IF OBJECT_ID('stp_GetPatientById', 'P') IS NOT NULL DROP PROCEDURE stp_GetPatientById;
+GO
+CREATE PROCEDURE stp_GetPatientById
+    @PatientID int
+AS
+BEGIN
+    SELECT * FROM Patients WHERE PatientID = @PatientID;
+END
+GO
 
-create procedure stp_DeletePatient
-    @PatientID int
-as
-begin
-    set nocount on;
-    delete from Patients where PatientID = @PatientID;
-end
-go
+IF OBJECT_ID('stp_UpdatePatient', 'P') IS NOT NULL DROP PROCEDURE stp_UpdatePatient;
+GO
+CREATE PROCEDURE stp_UpdatePatient
+    @PatientID int,
+    @FirstName varchar(100),
+    @LastName varchar(100),
+    @DateOfBirth date = null,
+    @PhoneNumber varchar(15) = null,
+    @Email varchar(255) = null,
+    @Address varchar(500) = null,
+    @EmergencyContact varchar(255) = null
+AS
+BEGIN
+    UPDATE Patients
+    SET FirstName = @FirstName,
+        LastName = @LastName,
+        DateOfBirth = @DateOfBirth,
+        PhoneNumber = @PhoneNumber,
+        Email = @Email,
+        Address = @Address,
+        EmergencyContact = @EmergencyContact
+    WHERE PatientID = @PatientID;
+END
+GO
 
-
-create procedure stp_AddDoctor
-    @FirstName varchar(100),
-    @LastName varchar(100),
-    @PhoneNumber varchar(15) = null,
-    @Email varchar(255) = null
-as
-begin
-    set nocount on;
-    insert into Doctors (FirstName, LastName, PhoneNumber, Email)
-    values (@FirstName, @LastName, @PhoneNumber, @Email);
-    select SCOPE_IDENTITY() as NewDoctorID;
-end
-go
-
-create procedure stp_GetDoctors
-as
-begin
-    set nocount on;
-    select * from Doctors;
-end
-go
-
-create procedure stp_UpdateDoctor
-    @DoctorID int,
-    @FirstName varchar(100),
-    @LastName varchar(100),
-    @PhoneNumber varchar(15) = null,
-    @Email varchar(255) = null
-as
-begin
-    set nocount on;
-    update Doctors
-    set FirstName = @FirstName,
-        LastName = @LastName,
-        PhoneNumber = @PhoneNumber,
-        Email = @Email
-    where DoctorID = @DoctorID;
-end
-go
-
-create procedure stp_DeleteDoctor
-    @DoctorID int
-as
-begin
-    set nocount on;
-    delete from Doctors where DoctorID = @DoctorID;
-end
-go
+IF OBJECT_ID('stp_DeletePatient', 'P') IS NOT NULL DROP PROCEDURE stp_DeletePatient;
+GO
+CREATE PROCEDURE stp_DeletePatient
+    @PatientID int
+AS
+BEGIN
+    DELETE FROM Patients WHERE PatientID = @PatientID;
+END
+GO
 
 
-create procedure stp_AddUser
-    @Username varchar(50),
-    @PasswordHash varchar(255),
-    @RoleID int,
-    @FirstName varchar(100),
-    @LastName varchar(100)
-as
-begin
-    set nocount on;
-    insert into Users (Username, PasswordHash, RoleID, FirstName, LastName)
-    values (@Username, @PasswordHash, @RoleID, @FirstName, @LastName);
-    select SCOPE_IDENTITY() as NewUserID;
-end
-go
+IF OBJECT_ID('stp_AddDoctor', 'P') IS NOT NULL DROP PROCEDURE stp_AddDoctor;
+GO
+CREATE PROCEDURE stp_AddDoctor
+    @FirstName varchar(100),
+    @LastName varchar(100),
+    @PhoneNumber varchar(15) = null,
+    @Email varchar(255) = null
+AS
+BEGIN
+    INSERT INTO Doctors (FirstName, LastName, PhoneNumber, Email)
+    VALUES (@FirstName, @LastName, @PhoneNumber, @Email);
+    SELECT SCOPE_IDENTITY() AS NewDoctorID;
+END
+GO
 
-create procedure stp_GetUsers
-as
-begin
-    set nocount on;
-    select * from Users;
-end
-go
+IF OBJECT_ID('stp_GetDoctors', 'P') IS NOT NULL DROP PROCEDURE stp_GetDoctors;
+GO
+CREATE PROCEDURE stp_GetDoctors
+AS
+BEGIN
+    SELECT * FROM Doctors;
+END
+GO
 
-create procedure stp_UpdateUser
-    @UserID int,
-    @Username varchar(50),
-    @PasswordHash varchar(255),
-    @RoleID int,
-    @FirstName varchar(100),
-    @LastName varchar(100)
-as
-begin
-    set nocount on;
-    update Users
-    set Username = @Username,
-        PasswordHash = @PasswordHash,
-        RoleID = @RoleID,
-        FirstName = @FirstName,
-        LastName = @LastName
-    where UserID = @UserID;
-end
-go
+IF OBJECT_ID('stp_UpdateDoctor', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateDoctor;
+GO
+CREATE PROCEDURE stp_UpdateDoctor
+    @DoctorID int,
+    @FirstName varchar(100),
+    @LastName varchar(100),
+    @PhoneNumber varchar(15) = null,
+    @Email varchar(255) = null
+AS
+BEGIN
+    UPDATE Doctors
+    SET FirstName = @FirstName,
+        LastName = @LastName,
+        PhoneNumber = @PhoneNumber,
+        Email = @Email
+    WHERE DoctorID = @DoctorID;
+END
+GO
 
-create procedure stp_DeleteUser
-    @UserID int
-as
-begin
-    set nocount on;
-    delete from Users where UserID = @UserID;
-end
-go
+IF OBJECT_ID('stp_DeleteDoctor', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteDoctor;
+GO
+CREATE PROCEDURE stp_DeleteDoctor
+    @DoctorID int
+AS
+BEGIN
+    DELETE FROM Doctors WHERE DoctorID = @DoctorID;
+END
+GO
 
-
-create procedure stp_AddVisit
-    @PatientID int,
-    @DoctorID int = null,
-    @VisitTypeID int,
-    @VisitDate date,
-    @VisitTime time,
-    @Description varchar(1000) = null,
-    @Notes varchar(1000) = null,
-    @Status varchar(20) = 'Scheduled',
-    @Fee decimal(10,2) = null,
-    @CreatedBy int
-as
-begin
-    set nocount on;
-    insert into Visits (PatientID, DoctorID, VisitTypeID, VisitDate, VisitTime, Description, Notes, Status, Fee, CreatedBy)
-    values (@PatientID, @DoctorID, @VisitTypeID, @VisitDate, @VisitTime, @Description, @Notes, @Status, @Fee, @CreatedBy);
-    select SCOPE_IDENTITY() as NewVisitID;
-end
-go
-
-create procedure stp_GetVisits
-as
-begin
-    set nocount on;
-    select * from Visits;
-end
-go
-
-create procedure stp_UpdateVisit
-    @VisitID int,
-    @PatientID int,
-    @DoctorID int = null,
-    @VisitTypeID int,
-    @VisitDate date,
-    @VisitTime time,
-    @Description varchar(1000) = null,
-    @Notes varchar(1000) = null,
-    @Status varchar(20) = 'Scheduled',
-    @Fee decimal(10,2) = null,
-    @CreatedBy int
-as
-begin
-    set nocount on;
-    update Visits
-    set PatientID = @PatientID,
-        DoctorID = @DoctorID,
-        VisitTypeID = @VisitTypeID,
-        VisitDate = @VisitDate,
-        VisitTime = @VisitTime,
-        Description = @Description,
-        Notes = @Notes,
-        Status = @Status,
-        Fee = @Fee,
-        CreatedBy = @CreatedBy
-    where VisitID = @VisitID;
-end
-go
-
-create procedure stp_DeleteVisit
-    @VisitID int
-as
-begin
-    set nocount on;
-    delete from Visits where VisitID = @VisitID;
-end
-go
+IF OBJECT_ID('stp_GetDoctorById', 'P') IS NOT NULL DROP PROCEDURE stp_GetDoctorById;
+GO
+CREATE PROCEDURE stp_GetDoctorById
+    @DoctorID int
+AS
+BEGIN
+    SELECT * FROM Doctors WHERE DoctorID = @DoctorID;
+END
+GO
 
 
-create procedure stp_AddActivityLog
-    @UserID int,
-    @Action varchar(50),
-    @TableAffected varchar(50),
-    @RecordID int,
-    @Status varchar(20)
-as
-begin
-    set nocount on;
-    insert into ActivityLog (UserID, Action, TableAffected, RecordID, Status)
-    values (@UserID, @Action, @TableAffected, @RecordID, @Status);
-    select SCOPE_IDENTITY() as NewLogID;
-end
-go
+IF OBJECT_ID('stp_AddUser', 'P') IS NOT NULL DROP PROCEDURE stp_AddUser;
+GO
+CREATE PROCEDURE stp_AddUser
+    @Username varchar(50),
+    @PasswordHash varchar(255),
+    @RoleID int,
+    @FirstName varchar(100),
+    @LastName varchar(100)
+AS
+BEGIN
+    INSERT INTO Users (Username, PasswordHash, RoleID, FirstName, LastName)
+    VALUES (@Username, @PasswordHash, @RoleID, @FirstName, @LastName);
+    SELECT SCOPE_IDENTITY() AS NewUserID;
+END
+GO
 
-create procedure stp_GetActivityLogs
-as
-begin
-    set nocount on;
-    select * from ActivityLog;
-end
-go
+IF OBJECT_ID('stp_GetUsers', 'P') IS NOT NULL DROP PROCEDURE stp_GetUsers;
+GO
+CREATE PROCEDURE stp_GetUsers
+AS
+BEGIN
+    SELECT * FROM Users;
+END
+GO
 
-create procedure stp_DeleteActivityLog
-    @LogID int
-as
-begin
-    set nocount on;
-    delete from ActivityLog where LogID = @LogID;
-end
-go
+IF OBJECT_ID('stp_UpdateUser', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateUser;
+GO
+CREATE PROCEDURE stp_UpdateUser
+    @UserID int,
+    @Username varchar(50),
+    @PasswordHash varchar(255),
+    @RoleID int,
+    @FirstName varchar(100),
+    @LastName varchar(100)
+AS
+BEGIN
+    UPDATE Users
+    SET Username = @Username,
+        PasswordHash = @PasswordHash,
+        RoleID = @RoleID,
+        FirstName = @FirstName,
+        LastName = @LastName
+    WHERE UserID = @UserID;
+END
+GO
+
+IF OBJECT_ID('stp_DeleteUser', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteUser;
+GO
+CREATE PROCEDURE stp_DeleteUser
+    @UserID int
+AS
+BEGIN
+    DELETE FROM Users WHERE UserID = @UserID;
+END
+GO
+
+IF OBJECT_ID('stp_GetUserById', 'P') IS NOT NULL DROP PROCEDURE stp_GetUserById;
+GO
+CREATE PROCEDURE stp_GetUserById
+    @UserID int
+AS
+BEGIN
+    SELECT * FROM Users WHERE UserID = @UserID;
+END
+GO
+
+
+IF OBJECT_ID('stp_GetUserByName', 'P') IS NOT NULL DROP PROCEDURE stp_GetUserByName;
+GO
+CREATE PROCEDURE stp_GetUserByName
+    @Username varchar(50)
+AS
+BEGIN
+    SELECT * FROM Users WHERE Username = @Username;
+END
+GO
+
+
+IF OBJECT_ID('stp_AddVisit', 'P') IS NOT NULL DROP PROCEDURE stp_AddVisit;
+GO
+CREATE PROCEDURE stp_AddVisit
+    @PatientID int,
+    @DoctorID int = null,
+    @VisitTypeID int,
+    @VisitDate date,
+    @VisitTime time,
+    @Description varchar(1000) = null,
+    @Notes varchar(1000) = null,
+    @Status varchar(20) = 'Scheduled',
+    @Fee decimal(10,2) = null,
+    @CreatedBy int
+AS
+BEGIN
+    INSERT INTO Visits (PatientID, DoctorID, VisitTypeID, VisitDate, VisitTime, Description, Notes, Status, Fee, CreatedBy)
+    VALUES (@PatientID, @DoctorID, @VisitTypeID, @VisitDate, @VisitTime, @Description, @Notes, @Status, @Fee, @CreatedBy);
+    SELECT SCOPE_IDENTITY() AS NewVisitID;
+END
+GO
+
+IF OBJECT_ID('stp_GetVisits', 'P') IS NOT NULL DROP PROCEDURE stp_GetVisits;
+GO
+CREATE PROCEDURE stp_GetVisits
+AS
+BEGIN
+    SELECT * FROM Visits;
+END
+GO
+
+IF OBJECT_ID('stp_UpdateVisit', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateVisit;
+GO
+CREATE PROCEDURE stp_UpdateVisit
+    @VisitID int,
+    @PatientID int,
+    @DoctorID int = null,
+    @VisitTypeID int,
+    @VisitDate date,
+    @VisitTime time,
+    @Description varchar(1000) = null,
+    @Notes varchar(1000) = null,
+    @Status varchar(20) = 'Scheduled',
+    @Fee decimal(10,2) = null,
+    @CreatedBy int
+AS
+BEGIN
+    UPDATE Visits
+    SET PatientID = @PatientID,
+        DoctorID = @DoctorID,
+        VisitTypeID = @VisitTypeID,
+        VisitDate = @VisitDate,
+        VisitTime = @VisitTime,
+        Description = @Description,
+        Notes = @Notes,
+        Status = @Status,
+        Fee = @Fee,
+        CreatedBy = @CreatedBy
+    WHERE VisitID = @VisitID;
+END
+GO
+
+IF OBJECT_ID('stp_DeleteVisit', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteVisit;
+GO
+CREATE PROCEDURE stp_DeleteVisit
+    @VisitID int
+AS
+BEGIN
+    DELETE FROM Visits WHERE VisitID = @VisitID;
+END
+GO
+
+
+IF OBJECT_ID('stp_AddActivityLog', 'P') IS NOT NULL DROP PROCEDURE stp_AddActivityLog;
+GO
+CREATE PROCEDURE stp_AddActivityLog
+    @UserID int,
+    @Action varchar(50),
+    @TableAffected varchar(50),
+    @RecordID int,
+    @Status varchar(20)
+AS
+BEGIN
+    INSERT INTO ActivityLog (UserID, Action, TableAffected, RecordID, Status)
+    VALUES (@UserID, @Action, @TableAffected, @RecordID, @Status);
+    SELECT SCOPE_IDENTITY() AS NewLogID;
+END
+GO
+
+IF OBJECT_ID('stp_GetActivityLogs', 'P') IS NOT NULL DROP PROCEDURE stp_GetActivityLogs;
+GO
+CREATE PROCEDURE stp_GetActivityLogs
+AS
+BEGIN
+    SELECT * FROM ActivityLog;
+END
+GO
+
+IF OBJECT_ID('stp_DeleteActivityLog', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteActivityLog;
+GO
+CREATE PROCEDURE stp_DeleteActivityLog
+    @LogID int
+AS
+BEGIN
+    DELETE FROM ActivityLog WHERE LogID = @LogID;
+END
+GO
+
+
+select * from patients
+select * from ActivityLog
+
+
+select * from users
+
+select * from userroles
+
+select * from visits
+
+select * from doctors
+
+update doctors set firstName = 'dawood' where doctorId = 1

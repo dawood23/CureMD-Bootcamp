@@ -2,10 +2,13 @@
 -- 8th August, 2025
 -- Dawood Nadeem 6601
 -- description: data manipulation language script for patient visit manager database
+USE dawood_6601
 
 Insert into UserRoles (RoleName, Description) values
 ('Admin', 'Full system access with all privileges'),
 ('Receptionist', 'Limited access for patient registration and basic operations');
+
+Insert into UserRoles (RoleName, Description) values('Doctor', 'Access for patient registration and basic operations');
 
 insert into VisitTypes (TypeName, BaseFee, EstimatedDuration) values
 ('Consultation', 500.00, 30),
@@ -71,3 +74,20 @@ insert into ActivityLog (UserID, Action, TableAffected, RecordID, Status) values
 (2, 'Add', 'Patients', 20, 'Success'),
 (3, 'Search', 'Patients', null, 'Success'),
 (1, 'Add', 'Users', 3, 'Success');
+
+
+INSERT INTO Visits (PatientID, DoctorID, VisitTypeID, VisitDate, VisitTime, Description, Notes, Status, Fee, CreatedBy)
+VALUES
+(1, 1, 1, '2025-08-10', '09:00', 'General Checkup', 'Patient complaining of mild fever', 'Completed', 1500.00, 1),
+(2, 2, 2, '2025-08-11', '11:00', 'Dental Cleaning', 'Regular cleaning session', 'Completed', 2500.00, 1),
+(3, 3, 3, '2025-08-12', '14:30', 'Eye Examination', 'Blurred vision reported', 'Scheduled', 2000.00, 1),
+(4, 1, 1, '2025-08-13', '16:00', 'Follow-up Checkup', 'Review of blood test results', 'Scheduled', 1500.00, 1),
+(5, 2, 4, '2025-08-14', '10:00', 'Root Canal', 'Pain in upper molar', 'Cancelled', 8000.00, 1),
+(6, 3, 5, '2025-08-15', '13:00', 'Lasik Surgery Consultation', 'Patient is considering surgery', 'Scheduled', 5000.00, 1),
+(1, 2, 2, '2025-08-16', '09:30', 'Tooth Filling', 'Minor cavity detected', 'Completed', 3000.00, 1),
+(2, 1, 1, '2025-08-17', '15:00', 'General Checkup', 'High blood pressure follow-up', 'Completed', 1500.00, 1),
+(3, 3, 3, '2025-08-18', '12:00', 'Eye Checkup', 'New glasses prescription', 'Completed', 1800.00, 1),
+(4, 2, 4, '2025-08-19', '11:15', 'Tooth Extraction', 'Wisdom tooth removal', 'Scheduled', 6000.00, 1);
+
+
+select * from visits

@@ -11,9 +11,16 @@
 
   <div class="groups">
     <strong>Groups:</strong>
+    @if(contact.groups.length>0){
     <span>
       {{ contact.groups.join(", ") }}
     </span>
+  }
+  @else{
+    <span>
+      No groups added
+    </span>
+  }
   </div>
 
   <button (click)="toggle('Favourites')">Toggle Favourite</button>

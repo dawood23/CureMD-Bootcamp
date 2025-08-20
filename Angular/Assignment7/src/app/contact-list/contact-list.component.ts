@@ -1,4 +1,4 @@
-import { Component,EventEmitter,Input,OnInit,Output } from '@angular/core';
+import { Component,EventEmitter,Input,OnChanges,OnInit,Output } from '@angular/core';
 import { Contact } from '../contact';
 @Component({
   selector: 'app-contact-list',
@@ -7,24 +7,24 @@ import { Contact } from '../contact';
   styleUrl: './contact-list.component.scss',
   standalone:true
 })
-export class ContactListComponent implements OnInit{
+export class ContactListComponent{
   @Input() contactList:Contact[]=[]
   @Output() id:EventEmitter<number>=new EventEmitter();
-  filteredList:Contact[]=[]
+   CurrentFilter:string="All"
 
   onContactCardClick(contactid:number){
       this.id.emit(contactid);
   }
 
-  ngOnInit(): void {
-    this.filteredList=this.contactList
-  }
   filter(filterby:string){
-    this.filteredList=this.contactList.filter(contact=>(contact.groups.includes(filterby)))
-  }
-  noFilter(){
-    this.filteredList=this.contactList
+    this.CurrentFilter=filterby
   }
 
+  filteredItem(){
+    if(this.CurrentFilter=="All") return this.contactList
+    else{
+      return this.contactList.filter(contact=>(contact.groups.includes(this.CurrentFilter)))
+    }
+  }
 
 }
