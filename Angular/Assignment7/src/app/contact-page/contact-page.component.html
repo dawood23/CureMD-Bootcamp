@@ -40,12 +40,14 @@
 
   <fieldset formArrayName="groups">
     <legend>Groups</legend>
-    <div *ngFor="let opt of groupOptions; let i = index">
+    @for(opt of groupOptions; track opt;let i =$index) {
+    <div>
       <label>
         <input type="checkbox" [formControlName]="i">
         {{ opt }}
       </label>
     </div>
+}
   </fieldset>
 
   <button type="submit" [disabled]="form.invalid">Add</button>

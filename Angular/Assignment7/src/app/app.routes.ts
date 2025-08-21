@@ -4,7 +4,7 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 
 export const routes: Routes = [
     {path:"",redirectTo:"/dashboard",pathMatch:'full'},
-    {path:"dashboard",component:DashboardComponent,pathMatch:'full'},
+    {path:"dashboard",component:DashboardComponent},
     {path:"contacts",children:[
         {path:"",redirectTo:"/contacts/new",pathMatch:'full'},
         {path:"new",component:ContactPageComponent,pathMatch:'full'}
