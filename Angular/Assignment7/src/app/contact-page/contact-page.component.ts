@@ -1,15 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { DataIndexService } from '../service/data-index.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-contact-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './contact-page.component.html',
   styleUrls: ['./contact-page.component.scss']
 })
 export class ContactPageComponent {
+  formData:any;
+  index=inject(DataIndexService)
+  router=inject(Router)
+
   constructor(public fb: FormBuilder) {}
 
   groupOptions = ['Favourites', 'Family', 'Friends', 'Classmates'];
@@ -33,6 +39,7 @@ export class ContactPageComponent {
       this.groupOptions.map(() => this.fb.control(false))
     )
   });
+  
 
   get f() {
     return this.form.controls;
@@ -40,7 +47,22 @@ export class ContactPageComponent {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value);
+       this.formData=this.form.value;
+       this.formData["id"]=this.index.getIndex();
+       const selectedGroups: string[] = [];
+
+      this.formData["groups"].forEach((option: boolean, index: number) => {
+          if (option) {
+            selectedGroups.push(this.groupOptions[index]);
+          }
+        });
+
+      this.formData["groups"] = selectedGroups;
+
+
+      this.index.addContact(this.formData)
+      this.router.navigateByUrl('/dashboard')
     }
+   
   }
 }
