@@ -1,0 +1,80 @@
+<app-navigation></app-navigation>
+
+<h2>Patients</h2>
+<button (click)="loadPatients()">Refresh</button>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>DOB</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (patient of patients; track patient.patientID) {
+      <tr>
+        <td>{{ patient.patientID }}</td>
+        <td>{{ patient.firstName }}</td>
+        <td>{{ patient.lastName }}</td>
+        <td>{{ patient.dateOfBirth | date: 'yyyy-MM-dd' }}</td>
+        <td>{{ patient.phoneNumber || '' }}</td>
+        <td>{{ patient.email || '' }}</td>
+        <td>
+          <button (click)="editPatient(patient)">Edit</button>
+          <button class="del" (click)="deletePatient(patient.patientID!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<h3>{{ isEditing ? 'Edit' : 'Add' }} Patient</h3>
+<form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+  <input type="hidden" formControlName="patientID" />
+
+  <label>
+    First Name
+    <input type="text" formControlName="firstName" />
+  </label>
+  @if (f.firstName.touched && f.firstName.hasError('required')) {
+    <div class="reqmsg">First name is required.</div>
+  }
+
+  <label>
+    Last Name
+    <input type="text" formControlName="lastName" />
+  </label>
+  @if (f.lastName.touched && f.lastName.hasError('required')) {
+    <div class="reqmsg">Last name is required.</div>
+  }
+
+  <label>
+    Date of Birth
+    <input type="date" formControlName="dateOfBirth" />
+  </label>
+
+  <label>
+    Phone
+    <input type="text" formControlName="phoneNumber" />
+  </label>
+
+  <label>
+    Email
+    <input type="email" formControlName="email" />
+  </label>
+  @if (f.email.touched && f.email.hasError('email')) {
+    <div class="reqmsg">Invalid email format.</div>
+  }
+
+  <div class="row">
+    <button type="submit" [disabled]="form.invalid">Save</button>
+    <button type="button" class="ghost" (click)="resetForm()">Reset</button>
+  </div>
+</form>

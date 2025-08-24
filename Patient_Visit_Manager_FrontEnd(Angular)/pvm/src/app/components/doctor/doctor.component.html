@@ -1,0 +1,73 @@
+<app-navigation></app-navigation>
+
+<h2>Doctors</h2>
+<button (click)="loadDoctors()">Refresh</button>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First</th>
+      <th>Last</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (doctor of doctors; track doctor.doctorID) {
+      <tr>
+        <td>{{ doctor.doctorID }}</td>
+        <td>{{ doctor.firstName }}</td>
+        <td>{{ doctor.lastName }}</td>
+        <td>{{ doctor.phoneNumber || '' }}</td>
+        <td>{{ doctor.email || '' }}</td>
+        <td>
+          <button (click)="editDoctor(doctor)">Edit</button>
+          <button class="del" (click)="deleteDoctor(doctor.doctorID!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<h3>{{ isEditing ? 'Edit' : 'Add' }} Doctor</h3>
+<form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+  <input type="hidden" formControlName="doctorID" />
+
+  <label>
+    First Name
+    <input type="text" formControlName="firstName" />
+  </label>
+  @if (f.firstName.touched && f.firstName.hasError('required')) {
+    <div class="reqmsg">First name is required.</div>
+  }
+
+  <label>
+    Last Name
+    <input type="text" formControlName="lastName" />
+  </label>
+  @if (f.lastName.touched && f.lastName.hasError('required')) {
+    <div class="reqmsg">Last name is required.</div>
+  }
+
+  <label>
+    Phone
+    <input type="text" formControlName="phoneNumber" />
+  </label>
+
+  <label>
+    Email
+    <input type="email" formControlName="email" />
+  </label>
+  @if (f.email.touched && f.email.hasError('email')) {
+    <div class="reqmsg">Invalid email format.</div>
+  }
+
+  <div class="row">
+    <button type="submit" [disabled]="form.invalid">Save</button>
+    <button type="button" class="ghost" (click)="resetForm()">Reset</button>
+  </div>
+</form>

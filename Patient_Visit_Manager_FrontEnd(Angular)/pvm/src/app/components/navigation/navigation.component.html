@@ -1,0 +1,29 @@
+ <nav>
+      @if (userRole === 'Admin') {
+        <div id="adminLinks">
+          <a routerLink="/users">Users</a> |
+          <a routerLink="/user-roles">User Roles</a> |
+          <a routerLink="/visit-types">Visit Types</a> |
+          <a routerLink="/doctors">Doctors</a> |
+          <a routerLink="/patients">Patients</a> |
+          <a routerLink="/visits">Visits</a>
+          <a href="#" (click)="onLogout()">Logout</a>
+        </div>
+      }
+      @if (userRole === 'Doctor') {
+        <div id="doctorLinks">
+          <a routerLink="/patients">Patients</a> |
+          <a routerLink="/visits">Visits</a>
+          <a href="#" (click)="onLogout()">Logout</a>
+        </div>
+      }
+      @if (userRole === 'Receptionist') {
+        <div id="receptionLinks">
+          <a routerLink="/patients">Patients</a> |
+          <a routerLink="/visits">Visits</a> |
+          <a routerLink="/visit-types">Visit Types</a>
+          <a href="#" (click)="onLogout()">Logout</a>
+          </div>
+      }
+      
+    </nav>

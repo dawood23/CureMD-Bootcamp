@@ -2,7 +2,6 @@
 -- 8th August, 2025
 -- Dawood Nadeem 6601
 -- description: data manipulation language script for patient visit manager database
-USE dawood_6601
 
 Insert into UserRoles (RoleName, Description) values
 ('Admin', 'Full system access with all privileges'),
