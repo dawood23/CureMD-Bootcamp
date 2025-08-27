@@ -4,11 +4,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ApiService } from '../../services/api/api.service';
 import { Patient } from '../../models/patient';
+import { LetterOnlyDirective } from '../../directive/letter-only.directive';
 
 @Component({
   selector: 'app-patients',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavigationComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavigationComponent,LetterOnlyDirective],
   templateUrl: './patients.component.html',
   styleUrls: ['./patients.component.scss']
 })
@@ -23,8 +24,8 @@ export class PatientsComponent {
     patientID: this.fb.control<number>(0),
     firstName: this.fb.nonNullable.control('', [Validators.required]),
     lastName: this.fb.nonNullable.control('', [Validators.required]),
-    dateOfBirth: this.fb.nonNullable.control(''),
-    phoneNumber: this.fb.nonNullable.control(''),
+    dateOfBirth: this.fb.nonNullable.control('',[Validators.required]),
+    phoneNumber: this.fb.nonNullable.control('',[Validators.required,Validators.maxLength(11),Validators.min(11)]),
     email: this.fb.nonNullable.control('', [Validators.email])
   });
 

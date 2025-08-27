@@ -35,7 +35,7 @@
 
   <label>
     Type Name
-    <input type="text" formControlName="typeName" />
+    <input type="text" formControlName="typeName" appLetterOnly/>
   </label>
   @if (f.typeName.touched && f.typeName.hasError('required')) {
   <div class="reqmsg">Type name is required.</div>

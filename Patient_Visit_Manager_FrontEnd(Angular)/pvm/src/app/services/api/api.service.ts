@@ -67,7 +67,7 @@ export class ApiService {
     return this.http.post<Patient>(`${this.API_BASE}/Patients/${performedBy}`, patient);
   }
 
-  updatePatient(patient: Patient): Observable<Patient> {
+   updatePatient(patient: Patient): Observable<Patient> {
     const performedBy = this.auth.getUserId() || 1;
     return this.http.put<Patient>(`${this.API_BASE}/Patients/${performedBy}`, patient);
   }

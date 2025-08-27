@@ -4,11 +4,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ApiService } from '../../services/api/api.service';
 import { Doctor } from '../../models/doctor';
+import { LetterOnlyDirective } from '../../directive/letter-only.directive';
 
 @Component({
   selector: 'app-doctors',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavigationComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavigationComponent,LetterOnlyDirective],
   templateUrl: './doctor.component.html',
   styleUrls: ['./doctor.component.scss']
 })
@@ -23,7 +24,7 @@ export class DoctorsComponent {
     doctorID: this.fb.control<number>(0),
     firstName: this.fb.nonNullable.control('', [Validators.required]),
     lastName: this.fb.nonNullable.control('', [Validators.required]),
-    phoneNumber: this.fb.nonNullable.control(''),
+    phoneNumber: this.fb.nonNullable.control('',[Validators.required,Validators.minLength(11),Validators.maxLength(11)]),
     email: this.fb.nonNullable.control('', [Validators.email])
   });
 

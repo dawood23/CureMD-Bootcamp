@@ -33,7 +33,7 @@
 
   <label>
     Role Name
-    <input type="text" formControlName="roleName" />
+    <input type="text" formControlName="roleName" appLetterOnly />
   </label>
   @if (f.roleName.touched && f.roleName.hasError('required')) {
   <div class="reqmsg">Role name is required.</div>

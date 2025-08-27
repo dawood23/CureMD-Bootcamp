@@ -41,7 +41,7 @@
 
   <label>
     First Name
-    <input type="text" formControlName="firstName" />
+    <input type="text" formControlName="firstName"  appLetterOnly/>
   </label>
   @if (f.firstName.touched && f.firstName.hasError('required')) {
     <div class="reqmsg">First name is required.</div>
@@ -49,7 +49,7 @@
 
   <label>
     Last Name
-    <input type="text" formControlName="lastName" />
+    <input type="text" formControlName="lastName"  appLetterOnly/>
   </label>
   @if (f.lastName.touched && f.lastName.hasError('required')) {
     <div class="reqmsg">Last name is required.</div>

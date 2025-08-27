@@ -4,11 +4,12 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ApiService } from '../../services/api/api.service';
 import { UserRole } from '../../models/user-roles';
+import { LetterOnlyDirective } from '../../directive/letter-only.directive';
 
 @Component({
   selector: 'app-userroles',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavigationComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavigationComponent,LetterOnlyDirective],
   templateUrl: './userroles.component.html',
   styleUrls: ['./userroles.component.scss']
 })

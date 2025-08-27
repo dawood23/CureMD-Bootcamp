@@ -4,11 +4,11 @@ import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { ApiService } from '../../services/api/api.service';
 import { VisitType } from '../../models/visittype';
-
+import { LetterOnlyDirective } from '../../directive/letter-only.directive';
 @Component({
   selector: 'app-visit-types',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NavigationComponent],
+  imports: [CommonModule, ReactiveFormsModule, NavigationComponent,LetterOnlyDirective],
   templateUrl: './visittypes.component.html',
   styleUrls: ['./visittypes.component.scss']
 })
