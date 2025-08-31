@@ -15,7 +15,6 @@ import { UserState } from './store/state/user.state';
 import { VisitState } from './store/state/visit.state';
 import { VisitTypeState } from './store/state/visit-type.state';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 export const appConfig: ApplicationConfig = {
    providers: [
@@ -36,9 +35,6 @@ export const appConfig: ApplicationConfig = {
       NgxsLoggerPluginModule.forRoot({
         disabled: false 
       }),
-      NgxsReduxDevtoolsPluginModule.forRoot({
-        disabled: false 
-      })
     )
   ]
 };

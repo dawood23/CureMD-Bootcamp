@@ -1,0 +1,27 @@
+2025-09-01 00:18:37.685 +05:00 [INF] User profile is available. Using 'C:\Users\xyz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-01 00:18:38.021 +05:00 [INF] Now listening on: http://localhost:5243
+2025-09-01 00:18:38.104 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-01 00:18:38.105 +05:00 [INF] Hosting environment: Development
+2025-09-01 00:18:38.108 +05:00 [INF] Content root path: D:\CureMD-Bootcamp\Web API Assignment\Web API Assignment
+2025-09-01 00:18:40.998 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/ - -
+2025-09-01 00:18:41.466 +05:00 [INF] Executing endpoint '/Index'
+2025-09-01 00:18:41.516 +05:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2025-09-01 00:18:41.528 +05:00 [INF] Executing handler method Web_API_Assignment.Pages.IndexModel.OnGet - ModelState is "Valid"
+2025-09-01 00:18:41.536 +05:00 [INF] Executed handler method OnGet, returned result .
+2025-09-01 00:18:41.542 +05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-09-01 00:18:41.543 +05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-09-01 00:18:41.664 +05:00 [INF] Executed page /Index in 143.6913ms
+2025-09-01 00:18:41.667 +05:00 [INF] Executed endpoint '/Index'
+2025-09-01 00:18:41.673 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/ - - - 200 - text/html;+charset=utf-8 676.5885ms
+2025-09-01 00:18:41.701 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/Web_API_Assignment.styles.css - -
+2025-09-01 00:18:41.709 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - -
+2025-09-01 00:18:41.710 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_vs/browserLink - -
+2025-09-01 00:18:41.713 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - - - 200 13768 application/javascript;+charset=utf-8 4.5664ms
+2025-09-01 00:18:41.714 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/Web_API_Assignment.styles.css - - - 404 0 - 13.0209ms
+2025-09-01 00:18:41.817 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 107.5296ms
+2025-09-01 00:22:13.210 +05:00 [INF] User profile is available. Using 'C:\Users\xyz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-01 00:22:13.691 +05:00 [INF] Now listening on: http://localhost:5243
+2025-09-01 00:22:13.760 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-01 00:22:13.761 +05:00 [INF] Hosting environment: Development
+2025-09-01 00:22:13.763 +05:00 [INF] Content root path: D:\CureMD-Bootcamp\Web API Assignment\Web API Assignment
+2025-09-01 00:22:14.278 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/ - -
