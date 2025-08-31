@@ -1,0 +1,39 @@
+2025-08-31 18:36:57.512 +05:00 [INF] User profile is available. Using 'C:\Users\xyz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-08-31 18:36:57.965 +05:00 [INF] Now listening on: http://localhost:5243
+2025-08-31 18:36:58.046 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-31 18:36:58.047 +05:00 [INF] Hosting environment: Development
+2025-08-31 18:36:58.049 +05:00 [INF] Content root path: D:\CureMD-Bootcamp\Web API Assignment\Web API Assignment
+2025-08-31 18:36:58.987 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/ - -
+2025-08-31 18:36:59.521 +05:00 [INF] Executing endpoint '/Index'
+2025-08-31 18:36:59.562 +05:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2025-08-31 18:36:59.576 +05:00 [INF] Executing handler method Web_API_Assignment.Pages.IndexModel.OnGet - ModelState is "Valid"
+2025-08-31 18:36:59.583 +05:00 [INF] Executed handler method OnGet, returned result .
+2025-08-31 18:36:59.587 +05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-08-31 18:36:59.588 +05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-08-31 18:36:59.745 +05:00 [INF] Executed page /Index in 176.1147ms
+2025-08-31 18:36:59.749 +05:00 [INF] Executed endpoint '/Index'
+2025-08-31 18:36:59.754 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/ - - - 200 - text/html;+charset=utf-8 776.9058ms
+2025-08-31 18:36:59.780 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/css/bootstrap.min.css - -
+2025-08-31 18:36:59.782 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - -
+2025-08-31 18:36:59.782 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2025-08-31 18:36:59.785 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/lib/jquery/dist/jquery.min.js - -
+2025-08-31 18:36:59.787 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - - - 200 13768 application/javascript;+charset=utf-8 4.1641ms
+2025-08-31 18:36:59.788 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/Web_API_Assignment.styles.css - -
+2025-08-31 18:36:59.791 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/Web_API_Assignment.styles.css - - - 404 0 - 3.6918ms
+2025-08-31 18:36:59.806 +05:00 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2025-08-31 18:36:59.806 +05:00 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2025-08-31 18:36:59.806 +05:00 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2025-08-31 18:36:59.806 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - -
+2025-08-31 18:36:59.807 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/css/bootstrap.min.css - - - 304 - text/css 27.7679ms
+2025-08-31 18:36:59.808 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/lib/jquery/dist/jquery.min.js - - - 304 - text/javascript 22.6748ms
+2025-08-31 18:36:59.808 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 304 - text/javascript 26.0014ms
+2025-08-31 18:36:59.810 +05:00 [INF] The file /css/site.css was not modified
+2025-08-31 18:36:59.820 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - - - 304 - text/css 13.7234ms
+2025-08-31 18:36:59.822 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2025-08-31 18:36:59.832 +05:00 [INF] The file /js/site.js was not modified
+2025-08-31 18:36:59.832 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_vs/browserLink - -
+2025-08-31 18:36:59.833 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 304 - text/javascript 10.8699ms
+2025-08-31 18:36:59.920 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 87.9271ms
+2025-08-31 18:37:00.025 +05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/favicon.ico - -
+2025-08-31 18:37:00.035 +05:00 [INF] The file /favicon.ico was not modified
+2025-08-31 18:37:00.037 +05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/favicon.ico - - - 304 - image/x-icon 11.5171ms
