@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { CheckAuth } from './store/actions/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +12,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
  title="Patient Visit Manager"
+
 }

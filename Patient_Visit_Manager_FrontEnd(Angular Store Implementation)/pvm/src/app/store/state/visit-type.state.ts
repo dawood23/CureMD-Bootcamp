@@ -83,6 +83,7 @@ export class VisitTypeState {
     return this.apiService.createVisitType(action.payload).pipe(
       tap(visitType => {
         ctx.dispatch(new VisitTypeActions.CreateVisitTypeSuccess(visitType));
+        ctx.dispatch(new VisitTypeActions.LoadVisitTypes())
       }),
       catchError(error => {
         ctx.dispatch(new VisitTypeActions.CreateVisitTypeFailure(error.message || 'Failed to create visit type'));
@@ -116,6 +117,7 @@ export class VisitTypeState {
     return this.apiService.updateVisitType(action.payload).pipe(
       tap(visitType => {
         ctx.dispatch(new VisitTypeActions.UpdateVisitTypeSuccess(visitType));
+        ctx.dispatch(new VisitTypeActions.LoadVisitTypes())
       }),
       catchError(error => {
         ctx.dispatch(new VisitTypeActions.UpdateVisitTypeFailure(error.message || 'Failed to update visit type'));

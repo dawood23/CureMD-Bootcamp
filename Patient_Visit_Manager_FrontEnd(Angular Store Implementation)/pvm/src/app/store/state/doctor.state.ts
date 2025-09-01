@@ -83,6 +83,7 @@ export class DoctorState {
     return this.apiService.createDoctor(action.payload).pipe(
       tap(doctor => {
         ctx.dispatch(new DoctorActions.CreateDoctorSuccess(doctor));
+        ctx.dispatch(new DoctorActions.LoadDoctors());
       }),
       catchError(error => {
         ctx.dispatch(new DoctorActions.CreateDoctorFailure(error.message || 'Failed to create doctor'));
@@ -116,6 +117,7 @@ export class DoctorState {
     return this.apiService.updateDoctor(action.payload).pipe(
       tap(doctor => {
         ctx.dispatch(new DoctorActions.UpdateDoctorSuccess(doctor));
+        ctx.dispatch(new DoctorActions.LoadDoctors());
       }),
       catchError(error => {
         ctx.dispatch(new DoctorActions.UpdateDoctorFailure(error.message || 'Failed to update doctor'));

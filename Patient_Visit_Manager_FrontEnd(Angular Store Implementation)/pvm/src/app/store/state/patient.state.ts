@@ -83,6 +83,7 @@ export class PatientState {
     return this.apiService.createPatient(action.payload).pipe(
       tap(patient => {
         ctx.dispatch(new PatientActions.CreatePatientSuccess(patient));
+        ctx.dispatch(new PatientActions.LoadPatients());
       }),
       catchError(error => {
         ctx.dispatch(new PatientActions.CreatePatientFailure(error.message || 'Failed to create patient'));
@@ -116,6 +117,7 @@ export class PatientState {
     return this.apiService.updatePatient(action.payload).pipe(
       tap(patient => {
         ctx.dispatch(new PatientActions.UpdatePatientSuccess(patient));
+        ctx.dispatch(new PatientActions.LoadPatients());
       }),
       catchError(error => {
         ctx.dispatch(new PatientActions.UpdatePatientFailure(error.message || 'Failed to update patient'));

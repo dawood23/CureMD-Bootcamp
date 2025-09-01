@@ -17,7 +17,9 @@ export class DashboardComponent implements OnInit {
   userRole$ = this.store.select(AuthState.userRole);
   isAuthenticated$ = this.store.select(AuthState.isAuthenticated);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.store.dispatch(new CheckAuth())
+  }
 
   ngOnInit(): void {
     this.store.dispatch(new CheckAuth());

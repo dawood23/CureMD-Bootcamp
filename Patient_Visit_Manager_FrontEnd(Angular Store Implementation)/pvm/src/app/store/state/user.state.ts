@@ -83,6 +83,7 @@ export class UserState {
     return this.apiService.createUser(action.payload).pipe(
       tap(user => {
         ctx.dispatch(new UserActions.CreateUserSuccess(user));
+        ctx.dispatch(new UserActions.LoadUsers())
       }),
       catchError(error => {
         ctx.dispatch(new UserActions.CreateUserFailure(error.message || 'Failed to create user'));
@@ -116,6 +117,7 @@ export class UserState {
     return this.apiService.updateUser(action.payload.id, action.payload.user).pipe(
       tap(user => {
         ctx.dispatch(new UserActions.UpdateUserSuccess(user));
+        ctx.dispatch(new UserActions.LoadUsers())
       }),
       catchError(error => {
         ctx.dispatch(new UserActions.UpdateUserFailure(error.message || 'Failed to update user'));

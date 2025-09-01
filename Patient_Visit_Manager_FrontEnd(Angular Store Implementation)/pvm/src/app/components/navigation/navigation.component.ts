@@ -5,6 +5,7 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { AuthState } from '../../store/state/auth.state';
 import { Logout } from '../../store/actions/auth.actions';
+import { CheckAuth } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-navigation',
@@ -16,10 +17,12 @@ export class NavigationComponent implements OnInit {
   userRole$ = this.store.select(AuthState.userRole);
   isAuthenticated$ = this.store.select(AuthState.isAuthenticated);
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    this.store.dispatch(new CheckAuth());
+}
 
-  ngOnInit(): void {
-  }
+ ngOnInit(): void {
+ }
 
   onLogout(): void {
     this.store.dispatch(new Logout());

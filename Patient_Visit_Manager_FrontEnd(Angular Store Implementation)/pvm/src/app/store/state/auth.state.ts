@@ -65,6 +65,7 @@ export class AuthState {
     return this.apiService.login(action.payload).pipe(
       tap(response => {
         ctx.dispatch(new AuthActions.LoginSuccess({ token: response.token, user: response }));
+        ctx.dispatch(new AuthActions.CheckAuth());
       }),
       catchError(error => {
         ctx.dispatch(new AuthActions.LoginFailure(error.message || 'Login failed'));

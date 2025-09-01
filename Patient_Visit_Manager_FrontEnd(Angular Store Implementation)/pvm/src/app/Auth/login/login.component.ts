@@ -6,6 +6,7 @@ import { Store } from '@ngxs/store';
 import { LoginRequest } from '../../models/loginreq';
 import { Login } from '../../store/actions/auth.actions';
 import { AuthState } from '../../store/state/auth.state';
+import { CheckAuth } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -26,5 +27,6 @@ export class LoginComponent {
 
   onLogin(): void {
     this.store.dispatch(new Login(this.credentials));
+    this.store.dispatch(new CheckAuth());
   }
 }

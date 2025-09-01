@@ -88,6 +88,7 @@ export class VisitState {
     return this.apiService.createVisit(action.payload).pipe(
       tap(visit => {
         ctx.dispatch(new VisitActions.CreateVisitSuccess(visit));
+        ctx.dispatch(new VisitActions.LoadVisits())
       }),
       catchError(error => {
         ctx.dispatch(new VisitActions.CreateVisitFailure(error.message || 'Failed to create visit'));
@@ -121,6 +122,7 @@ export class VisitState {
     return this.apiService.updateVisit(action.payload).pipe(
       tap(visit => {
         ctx.dispatch(new VisitActions.UpdateVisitSuccess(visit));
+        ctx.dispatch(new VisitActions.LoadVisits())
       }),
       catchError(error => {
         ctx.dispatch(new VisitActions.UpdateVisitFailure(error.message || 'Failed to update visit'));

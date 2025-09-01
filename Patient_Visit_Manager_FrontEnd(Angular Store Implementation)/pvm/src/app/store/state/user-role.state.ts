@@ -83,6 +83,7 @@ export class UserRoleState {
     return this.apiService.createUserRole(action.payload).pipe(
       tap(userRole => {
         ctx.dispatch(new UserRoleActions.CreateUserRoleSuccess(userRole));
+        ctx.dispatch(new UserRoleActions.LoadUserRoles());
       }),
       catchError(error => {
         ctx.dispatch(new UserRoleActions.CreateUserRoleFailure(error.message || 'Failed to create user role'));
@@ -116,6 +117,7 @@ export class UserRoleState {
     return this.apiService.updateUserRole(action.payload).pipe(
       tap(userRole => {
         ctx.dispatch(new UserRoleActions.UpdateUserRoleSuccess(userRole));
+        ctx.dispatch(new UserRoleActions.LoadUserRoles());
       }),
       catchError(error => {
         ctx.dispatch(new UserRoleActions.UpdateUserRoleFailure(error.message || 'Failed to update user role'));
