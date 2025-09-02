@@ -1,0 +1,51 @@
+<app-navigation></app-navigation>
+
+<h2>User Roles</h2>
+<button (click)="loadUserRoles()">Refresh</button>
+
+<table class="grid">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Role Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (role of userRoles; track role.roleID) {
+    <tr>
+      <td>{{ role.roleID }}</td>
+      <td>{{ role.roleName }}</td>
+      <td>{{ role.description || "" }}</td>
+      <td>
+        <button (click)="editRole(role)">Edit</button>
+        <button class="del" (click)="deleteRole(role.roleID!)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+<h3>{{ isEditing ? "Edit" : "Add" }} Role</h3>
+<form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+  <input type="hidden" formControlName="roleID" />
+
+  <label>
+    Role Name
+    <input type="text" formControlName="roleName" appLetterOnly />
+  </label>
+  @if (f.roleName.touched && f.roleName.hasError('required')) {
+  <div class="reqmsg">Role name is required.</div>
+  }
+
+  <label>
+    Description
+    <input type="text" formControlName="description" />
+  </label>
+
+  <div class="row">
+    <button type="submit" [disabled]="form.invalid">Save</button>
+    <button type="button" class="ghost" (click)="resetForm()">Reset</button>
+  </div>
+</form>

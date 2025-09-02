@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  backend:
+    image: ${DOCKER_HUB_USERNAME}/${DOCKER_HUB_REPO_API}:${API_IMAGE_VERSION}
+    container_name: dotnet-api-prod
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+    ports:
+      - "${API_PORT:-5000}:5000"
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    image: ${DOCKER_HUB_USERNAME}/${DOCKER_HUB_REPO_FRONTEND}:${FRONTEND_IMAGE_VERSION}
+    container_name: angular-app-prod
+    environment:
+      - API_BASE_URL=http://backend:5000
+    ports:
+      - "${FRONTEND_PORT:-4200}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  app-network:
+    driver: bridge

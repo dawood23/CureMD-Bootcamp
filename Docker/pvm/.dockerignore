@@ -1,0 +1,13 @@
+node_modules/
+npm-debug.log
+.angular/
+dist/
+.git
+.gitignore
+README.md
+.env
+Dockerfile*
+docker-compose*
+e2e/
+*.spec.ts
+coverage/

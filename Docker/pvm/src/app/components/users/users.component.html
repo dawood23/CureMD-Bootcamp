@@ -1,0 +1,82 @@
+<header>
+  <h1>Users Management</h1>
+</header>
+
+<app-navigation></app-navigation>
+
+<div class="container">
+  <h2>All Users</h2>
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>UserID</th>
+        <th>Username</th>
+        <th>RoleID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Password</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track user.userID) {
+      <tr>
+        <td>{{ user.userID }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.roleID }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>••••••</td>
+        <td>
+          <button class="btn btn-primary" (click)="editUser(user)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteUser(user.userID!)">
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <h2>{{ isEditing ? "Edit" : "Add" }} User</h2>
+  <form [formGroup]="form" (ngSubmit)="onSave()" novalidate>
+    <input type="hidden" formControlName="userID" />
+
+    <label>Username:</label>
+    <input type="text" formControlName="username" />
+    @if (f.username.touched && f.username.hasError('required')) {
+    <div class="reqmsg">Username is required.</div>
+    }
+
+    <label>Password {{ isEditing ? "(leave blank to keep current):" : ":" }}</label>
+    <input type="password" formControlName="password" />
+    @if (f.password.touched && f.password.hasError('required') && !isEditing) {
+    <div class="reqmsg">Password is required.</div>
+    }
+
+    <label>RoleID:</label>
+    <input type="number" formControlName="roleID" />
+    @if (f.roleID.touched && f.roleID.hasError('required')) {
+    <div class="reqmsg">Role ID is required.</div>
+    }
+
+    <label>First Name:</label>
+    <input type="text" formControlName="firstName"  appLetterOnly/>
+    @if (f.firstName.touched && f.firstName.hasError('required')) {
+    <div class="reqmsg">First name is required.</div>
+    }
+
+    <label>Last Name:</label>
+    <input type="text" formControlName="lastName" appLetterOnly/>
+    @if (f.lastName.touched && f.lastName.hasError('required')) {
+    <div class="reqmsg">Last name is required.</div>
+    }
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ isEditing ? "Update" : "Save" }} User
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">
+      Cancel
+    </button>
+  </form>
+</div>
