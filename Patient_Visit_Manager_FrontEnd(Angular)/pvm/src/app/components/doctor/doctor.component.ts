@@ -11,7 +11,7 @@ import { LetterOnlyDirective } from '../../directive/letter-only.directive';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, NavigationComponent,LetterOnlyDirective],
   templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.scss']
+  styleUrls: ['./doctor.component.scss'],
 })
 export class DoctorsComponent {
   api = inject(ApiService);
@@ -67,7 +67,7 @@ export class DoctorsComponent {
 
     if (this.isEditing) {
       this.api.updateDoctor(formValue).subscribe({
-        next: () => {
+        next: () =>{
           this.loadDoctors();
           this.resetForm();
         },
