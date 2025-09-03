@@ -10,7 +10,7 @@ import { isPlatformBrowser } from '@angular/common';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_BASE = 'http://localhost:5243/api';
+  private readonly API_BASE = 'http://localhost:5000/api';
   private platformId = inject(PLATFORM_ID);
 
   private tokenSubject = new BehaviorSubject<string | null>(this.getToken());

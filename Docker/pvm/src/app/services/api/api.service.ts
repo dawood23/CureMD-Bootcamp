@@ -13,7 +13,7 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly API_BASE = 'http://localhost:5243/api';
+  private readonly API_BASE = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
