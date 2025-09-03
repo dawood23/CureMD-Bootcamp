@@ -1,8 +1,8 @@
 # Dockerized Angular + .NET Web API
 
 **Building images**  
-docker-backend  
-docker-frontend  
+1. docker-backend  
+2. docker-frontend  
 
 **Docker Compose**
 
@@ -18,8 +18,11 @@ docker-compose up -d
 This will create the images and then run them on their following port.
 
 **Assigned Ports**
-Frontend: [http://localhost:4200](http://localhost:4200)
+
+Frontend: [http://localhost:4200](http://localhost:4200) 
+ 
 API: [http://localhost:5000](http://localhost:5000)
+
 API Health: [http://localhost:5000/health](http://localhost:5000/health)
 
 **Project Structure**
