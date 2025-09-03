@@ -59,4 +59,7 @@ docker run -d \
 ```
 
 Or just use the docker-compose.prod.yml that i have uploaded on this repo and run this command.
+
+```
 docker compose -f docker-compose.prod.yml --env-file .env up -d
+```
