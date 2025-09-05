@@ -1,0 +1,56 @@
+<button class="back-button" (click)="goBack()">
+  ← Back
+</button>
+<div class="patient-list-container">
+  <div>
+    <h2>Patients</h2>
+    <button (click)="redirect()">add</button>
+  </div> 
+  <div class="search-container">
+    <input type="text" [formControl]="searchControl" placeholder="Search patients..." class="search-input" />
+  </div>
+
+  <div class="patient-cards">
+    @for (patient of patients; track patient.patientID) {
+      <div class="patient-card">
+        <div class="patient-header">
+          <h3>{{ patient.firstName }} {{ patient.lastName }}</h3>
+          <span class="patient-id">ID: {{ patient.patientID }}</span>
+        </div>
+        
+        <div class="patient-details">
+          <div class="detail-row">
+            <span class="label">Contact:</span>
+            <span class="value">{{ patient.phone || 'Not provided' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Email:</span>
+            <span class="value">{{ patient.email || 'Not provided' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Date of Birth:</span>
+            <span class="value">{{ patient.dob ? (patient.dob | date: 'mediumDate') : 'Not provided' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Gender:</span>
+            <span class="value">{{ patient.gender || 'Not provided' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Address:</span>
+            <span class="value">{{ patient.address || 'Not provided' }}</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Registered:</span>
+            <span class="value">{{ patient.createdAt | date: 'mediumDate' }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (!patients.length) {
+    <div class="empty-state">
+      <p>No patients found</p>
+    </div>
+  }
+</div>

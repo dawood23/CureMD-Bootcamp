@@ -1,0 +1,52 @@
+2025-09-04 09:44:11.102 -04:00 [INF] User profile is available. Using 'C:\Users\dawood.nadeem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-04 09:44:11.349 -04:00 [INF] Now listening on: http://localhost:5243
+2025-09-04 09:44:11.352 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-04 09:44:11.354 -04:00 [INF] Hosting environment: Development
+2025-09-04 09:44:11.355 -04:00 [INF] Content root path: C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\Docker\WebAPIAssignment\WebAPIAssignment
+2025-09-04 09:44:12.052 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/ - -
+2025-09-04 09:44:12.759 -04:00 [INF] Executing endpoint '/Index'
+2025-09-04 09:44:12.782 -04:00 [INF] Route matched with {page = "/Index", action = "", controller = ""}. Executing page /Index
+2025-09-04 09:44:12.789 -04:00 [INF] Executing handler method Web_API_Assignment.Pages.IndexModel.OnGet - ModelState is "Valid"
+2025-09-04 09:44:12.794 -04:00 [INF] Executed handler method OnGet, returned result .
+2025-09-04 09:44:12.796 -04:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-09-04 09:44:12.797 -04:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-09-04 09:44:12.931 -04:00 [INF] Executed page /Index in 145.5525ms
+2025-09-04 09:44:12.932 -04:00 [INF] Executed endpoint '/Index'
+2025-09-04 09:44:12.958 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2025-09-04 09:44:12.961 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/Web_API_Assignment.styles.css - -
+2025-09-04 09:44:12.961 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - -
+2025-09-04 09:44:12.961 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/lib/jquery/dist/jquery.min.js - -
+2025-09-04 09:44:12.964 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/ - - - 200 - text/html;+charset=utf-8 915.1489ms
+2025-09-04 09:44:12.958 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/css/bootstrap.min.css - -
+2025-09-04 09:44:12.981 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/Web_API_Assignment.styles.css - - - 404 0 - 19.9833ms
+2025-09-04 09:44:12.986 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - -
+2025-09-04 09:44:12.987 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2025-09-04 09:44:12.993 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 6.8093ms
+2025-09-04 09:44:13.004 -04:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\Docker\WebAPIAssignment\WebAPIAssignment\wwwroot\css\site.css'
+2025-09-04 09:44:13.004 -04:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\Docker\WebAPIAssignment\WebAPIAssignment\wwwroot\js\site.js'
+2025-09-04 09:44:13.018 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/css/site.css?v=pAGv4ietcJNk_EwsQZ5BN9-K4MuNYS2a9wl4Jw-q9D0 - - - 200 362 text/css 56.5597ms
+2025-09-04 09:44:13.020 -04:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\Docker\WebAPIAssignment\WebAPIAssignment\wwwroot\lib\jquery\dist\jquery.min.js'
+2025-09-04 09:44:13.020 -04:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\Docker\WebAPIAssignment\WebAPIAssignment\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2025-09-04 09:44:13.020 -04:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\Docker\WebAPIAssignment\WebAPIAssignment\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2025-09-04 09:44:13.021 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 text/javascript 33.6919ms
+2025-09-04 09:44:13.022 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_vs/browserLink - -
+2025-09-04 09:44:13.024 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/lib/jquery/dist/jquery.min.js - - - 200 89503 text/javascript 63.3821ms
+2025-09-04 09:44:13.025 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/css/bootstrap.min.css - - - 200 162726 text/css 67.5137ms
+2025-09-04 09:44:13.027 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 200 78474 text/javascript 68.7572ms
+2025-09-04 09:44:13.055 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 32.7449ms
+2025-09-04 09:44:15.234 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/swagger/index.html - -
+2025-09-04 09:44:15.293 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/swagger/index.html - - - 200 - text/html;charset=utf-8 59.9459ms
+2025-09-04 09:44:15.297 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/swagger/swagger-ui.css - -
+2025-09-04 09:44:15.298 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/swagger/index.css - -
+2025-09-04 09:44:15.298 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/swagger/index.js - -
+2025-09-04 09:44:15.298 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - -
+2025-09-04 09:44:15.301 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/_vs/browserLink - -
+2025-09-04 09:44:15.304 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_framework/aspnetcore-browser-refresh.js - - - 200 12364 application/javascript;+charset=utf-8 5.8321ms
+2025-09-04 09:44:15.305 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/swagger/index.js - - - 200 - application/javascript;charset=utf-8 6.6798ms
+2025-09-04 09:44:15.307 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-09-04 09:44:15.301 -04:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-09-04 09:44:15.317 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 15.3853ms
+2025-09-04 09:44:15.317 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/swagger/swagger-ui.css - - - 200 154948 text/css 20.1946ms
+2025-09-04 09:44:15.318 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/swagger/index.css - - - 200 202 text/css 20.7079ms
+2025-09-04 09:44:15.438 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:5243/swagger/v1/swagger.json - -
+2025-09-04 09:44:15.521 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:5243/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 82.0694ms

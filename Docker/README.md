@@ -58,7 +58,7 @@ docker run -d \
 
 ```
 
-Or just use the docker-compose.prod.yml that i have uploaded on this repo and run this command.
+Or just use the docker-compose.prod.yml that i have uploaded on this repo and run this command in the project root (The Docker Folder).
 
 ```
 docker compose -f docker-compose.prod.yml --env-file .env up -d
