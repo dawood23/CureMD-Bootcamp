@@ -10,7 +10,7 @@
   <form [formGroup]="form">
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" formControlName="firstName" />
+      <input type="text" formControlName="firstName" appLetterOnly/>
       @if (formControl.firstName.touched && formControl.firstName.invalid) {
         <small class="error">First name is required</small>
       }
@@ -18,7 +18,7 @@
 
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" formControlName="lastName" />
+      <input type="text" formControlName="lastName" appLetterOnly/>
       @if (formControl.lastName.touched && formControl.lastName.invalid) {
         <small class="error">Last name is required</small>
       }
@@ -26,7 +26,7 @@
 
     <div class="form-group">
       <label>Date of Birth</label>
-      <input type="date" formControlName="dob" />
+      <input type="date" formControlName="dob" [max]="maxdate"/>
     </div>
 
     <div class="form-group">
@@ -40,7 +40,7 @@
 
     <div class="form-group">
       <label>Phone</label>
-      <input type="tel" formControlName="phone" />
+      <input type="tel" formControlName="phone" appDigitOnly/>
       @if (formControl.phone.touched && formControl.phone.invalid) {
         <small class="error">Phone is required</small>
       }

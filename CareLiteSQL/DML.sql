@@ -1,11 +1,8 @@
--- project-02-DML.sql
--- 4th September, 2025
--- Dawood Nadeem 6601
--- Description: Sample data insertion scripts for CareLite Patient Visit Manager
-
 ------------------------------------------------------------
 -- 1) Insert Roles
 ------------------------------------------------------------
+use dawood_nadeem_carelite
+
 INSERT INTO Roles (Name, Description) VALUES 
 ('Admin', 'System administrator with full access'),
 ('Staff', 'Front desk staff for registration and scheduling'),
@@ -39,9 +36,9 @@ INSERT INTO Patients (FirstName, LastName, DOB, Gender, Phone, Email, Address) V
 ------------------------------------------------------------
 -- 4) Insert Doctors
 ------------------------------------------------------------
-INSERT INTO Doctors (UserID, Specialization) VALUES 
-(4, 'General Medicine'),
-(5, 'Pediatrics');
+INSERT INTO Doctors (DoctorName, Specialization) VALUES 
+('Dr. Ahmed', 'General Medicine'),
+('Dr. Sara', 'Pediatrics');
 
 ------------------------------------------------------------
 -- 5) Insert Sample Appointments
@@ -76,6 +73,7 @@ INSERT INTO Bills (AppointmentID, PatientID, TotalAmount, PendingAmount, Status)
 -- 8) Insert Payments
 ------------------------------------------------------------
 INSERT INTO Payments (BillID, Amount, Method, RecordedBy) VALUES 
+(1, 1500.00, 'Cash', 2),
 (2, 1000.00, 'Cash', 2),
 (3, 1200.00, 'Card', 3);
 
@@ -90,6 +88,3 @@ INSERT INTO Logs (UserID, Action, TableAffected, RecordID, Status) VALUES
 (2, 'INSERT', 'Payments', 1, 'Success'),
 (3, 'UPDATE', 'Appointments', 5, 'Success'),
 (1, 'DELETE', 'Users', 999, 'Failed');
-
-
-select * from Users

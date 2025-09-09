@@ -161,6 +161,10 @@ BEGIN
     );
 END
 
+select * from Users
+update Users set PasswordHash='JAvlGPq9JyTdtvBO6x2llnRI1+gxwIyPqCKAn3THIKk=' where UserID=1
+
+select * from logs
 ------------------------------------------------------------
 -- Constraints
 ------------------------------------------------------------

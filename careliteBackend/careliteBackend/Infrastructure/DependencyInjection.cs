@@ -2,6 +2,7 @@
 using careliteBackend.Repository;
 using careliteBackend.Repository.PatientRepository;
 using careliteBackend.Services;
+using careliteBackend.Services.AppointmentService;
 using careliteBackend.Services.DoctorService;
 using careliteBackend.Services.Interfaces;
 using careliteBackend.Services.PatientService;
@@ -17,12 +18,15 @@ namespace careliteBackend.Infrastructure
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IPatientRepository,PatientRepository>();
             services.AddScoped<IDoctorRepository,DoctorRepository>();
+            services.AddScoped<IAppointmentRepository,AppointmentRepository>();
 
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IJwtTokenService,JwtTokenService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IDoctorService,DoctorService>();
-            services.AddScoped<IAuth, AuthService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
+
            return services;
         }
     }

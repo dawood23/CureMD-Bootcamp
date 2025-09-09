@@ -7,7 +7,7 @@ using careliteBackend.Models;
 
 namespace careliteBackend.Services
 {
-    public class AuthService:IAuth
+    public class AuthService:IAuthService
     {
         private readonly IAuthRepository _auth;
         private readonly IRoleRepository _roleRepository;

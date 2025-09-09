@@ -28,9 +28,9 @@
         <small class="error">Password is required</small>
       }
     </div>
-
     <button type="submit" [disabled]="form.invalid" (click)="SubmitForm()">
       Login
     </button>
   </form>
+   <span>Dont have an account? <a [routerLink]="'/signup'">signup</a></span>
 </div>

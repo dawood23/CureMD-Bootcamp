@@ -222,46 +222,52 @@ BEGIN
 END
 GO
 
-
 ------------------------------------------------------------
 -- 4) Doctors
 ------------------------------------------------------------
+-- Drop and recreate AddDoctor procedure
 IF OBJECT_ID('stp_AddDoctor', 'P') IS NOT NULL DROP PROCEDURE stp_AddDoctor;
 GO
 CREATE PROCEDURE stp_AddDoctor
-    @UserID int,
+    @DoctorName varchar(50),
     @Specialization varchar(100) = NULL
 AS
 BEGIN
-    INSERT INTO Doctors (UserID, Specialization)
-    VALUES (@UserID, @Specialization);
+    INSERT INTO Doctors (DoctorName, Specialization)
+    VALUES (@DoctorName, @Specialization);
     SELECT SCOPE_IDENTITY() AS NewDoctorID;
 END
 GO
 
+-- Drop and recreate GetDoctors procedure
 IF OBJECT_ID('stp_GetDoctors', 'P') IS NOT NULL DROP PROCEDURE stp_GetDoctors;
 GO
 CREATE PROCEDURE stp_GetDoctors
 AS
 BEGIN
-    SELECT d.*, u.Username, u.Email
-    FROM Doctors d
-    JOIN Users u ON d.UserID = u.UserID;
+    SELECT DoctorID, DoctorName, Specialization
+    FROM Doctors;
 END
 GO
 
+-- Drop and recreate UpdateDoctor procedure
 IF OBJECT_ID('stp_UpdateDoctor', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateDoctor;
 GO
 CREATE PROCEDURE stp_UpdateDoctor
     @DoctorID int,
+    @DoctorName varchar(50) = NULL,
     @Specialization varchar(100) = NULL
 AS
 BEGIN
-    UPDATE Doctors SET Specialization = @Specialization
+    UPDATE Doctors
+    SET 
+        DoctorName = COALESCE(@DoctorName, DoctorName),
+        Specialization = COALESCE(@Specialization, Specialization)
     WHERE DoctorID = @DoctorID;
 END
 GO
 
+-- Drop and recreate DeleteDoctor procedure
 IF OBJECT_ID('stp_DeleteDoctor', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteDoctor;
 GO
 CREATE PROCEDURE stp_DeleteDoctor
@@ -272,10 +278,44 @@ BEGIN
 END
 GO
 
-
 ------------------------------------------------------------
 -- 5) Appointments
 ------------------------------------------------------------
+IF OBJECT_ID('stp_GetAppointments', 'P') IS NOT NULL DROP PROCEDURE stp_GetAppointments;
+GO
+CREATE PROCEDURE stp_GetAppointments
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 
+        a.AppointmentID,
+        a.StartTime,
+        a.DurationMinutes,
+        a.Status,
+        a.CreatedAt,
+
+        -- Patient info
+        a.PatientID,
+        p.FirstName + ' ' + p.LastName AS PatientName,
+
+        -- Doctor info
+        a.DoctorID,
+       d.DoctorName,
+
+        -- User who created
+        a.CreatedBy,
+        u.Username AS CreatedByName
+
+    FROM Appointments a
+    INNER JOIN Patients p ON a.PatientID = p.PatientID
+    INNER JOIN Doctors d ON a.DoctorID = d.DoctorID
+    INNER JOIN Users u ON a.CreatedBy = u.UserID
+
+    ORDER BY a.StartTime;
+END
+GO
+
 IF OBJECT_ID('stp_AddAppointment', 'P') IS NOT NULL DROP PROCEDURE stp_AddAppointment;
 GO
 CREATE PROCEDURE stp_AddAppointment
@@ -287,20 +327,45 @@ CREATE PROCEDURE stp_AddAppointment
     @Status varchar(20) = 'Scheduled'
 AS
 BEGIN
+    SET NOCOUNT ON;
+
+    IF @DurationMinutes NOT IN (15, 30, 60)
+    BEGIN
+        RAISERROR('Invalid duration. Only 15, 30, or 60 minutes are allowed.', 16, 1);
+        RETURN;
+    END
+
+    DECLARE @BusinessStart time = '09:00';
+    DECLARE @BusinessEnd time = '17:00';
+    DECLARE @EndTime datetime = DATEADD(MINUTE, @DurationMinutes, @StartTime);
+
+    IF (CAST(@StartTime AS time) < @BusinessStart OR CAST(@EndTime AS time) > @BusinessEnd)
+    BEGIN
+        RAISERROR('Appointment must be within business hours (09:00 - 17:00).', 16, 1);
+        RETURN;
+    END
+
+    IF EXISTS (
+        SELECT 1
+        FROM Appointments
+        WHERE DoctorID = @DoctorID
+          AND Status = 'Scheduled'
+          AND (
+                (@StartTime < DATEADD(MINUTE, DurationMinutes, StartTime) AND @EndTime > StartTime)
+              )
+    )
+    BEGIN
+        RAISERROR('Conflict: Overlapping appointment exists for this provider.', 16, 1);
+        RETURN;
+    END
+
     INSERT INTO Appointments (PatientID, DoctorID, CreatedBy, StartTime, DurationMinutes, Status)
     VALUES (@PatientID, @DoctorID, @CreatedBy, @StartTime, @DurationMinutes, @Status);
+
     SELECT SCOPE_IDENTITY() AS NewAppointmentID;
 END
 GO
 
-IF OBJECT_ID('stp_GetAppointments', 'P') IS NOT NULL DROP PROCEDURE stp_GetAppointments;
-GO
-CREATE PROCEDURE stp_GetAppointments
-AS
-BEGIN
-    SELECT * FROM Appointments;
-END
-GO
 
 IF OBJECT_ID('stp_UpdateAppointment', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateAppointment;
 GO
@@ -313,6 +378,39 @@ CREATE PROCEDURE stp_UpdateAppointment
     @Status varchar(20)
 AS
 BEGIN
+
+    IF @DurationMinutes NOT IN (15, 30, 60)
+    BEGIN
+        RAISERROR('Invalid duration. Only 15, 30, or 60 minutes are allowed.', 16, 1);
+        RETURN;
+    END
+
+    DECLARE @BusinessStart time = '09:00';
+    DECLARE @BusinessEnd time = '17:00';
+    DECLARE @EndTime datetime = DATEADD(MINUTE, @DurationMinutes, @StartTime);
+
+    IF (CAST(@StartTime AS time) < @BusinessStart OR CAST(@EndTime AS time) > @BusinessEnd)
+    BEGIN
+        RAISERROR('Appointment must be within business hours (09:00 - 17:00).', 16, 1);
+        RETURN;
+    END
+
+    IF EXISTS (
+        SELECT 1
+        FROM Appointments
+        WHERE DoctorID = @DoctorID
+          AND Status = 'Scheduled'
+          AND AppointmentID <> @AppointmentID
+          AND (
+                (@StartTime < DATEADD(MINUTE, DurationMinutes, StartTime) AND @EndTime > StartTime)
+              )
+    )
+    BEGIN
+        RAISERROR('Conflict: Overlapping appointment exists for this provider.', 16, 1);
+        RETURN;
+    END
+
+
     UPDATE Appointments
     SET PatientID = @PatientID,
         DoctorID = @DoctorID,
@@ -320,16 +418,6 @@ BEGIN
         DurationMinutes = @DurationMinutes,
         Status = @Status
     WHERE AppointmentID = @AppointmentID;
-END
-GO
-
-IF OBJECT_ID('stp_DeleteAppointment', 'P') IS NOT NULL DROP PROCEDURE stp_DeleteAppointment;
-GO
-CREATE PROCEDURE stp_DeleteAppointment
-    @AppointmentID int
-AS
-BEGIN
-    DELETE FROM Appointments WHERE AppointmentID = @AppointmentID;
 END
 GO
 
@@ -485,4 +573,6 @@ BEGIN
 END
 GO
 
-select * from Doctors
+
+update Users 
+set PasswordHash='A6xnQhbz4Vx2HuGl4lXwZ5U2I8izjLRFnhP5eNfIRvQ=' where UserID=1

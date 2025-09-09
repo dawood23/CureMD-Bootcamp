@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\careLiteBackend</_PublishTargetUrl>
+    <History>True|2025-09-08T06:33:02.8686690Z;False|2025-09-08T02:32:28.8272723-04:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

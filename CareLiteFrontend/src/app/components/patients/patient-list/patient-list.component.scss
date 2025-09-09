@@ -202,3 +202,17 @@
     width: 16px;
     height: 16px;
   }
+
+  .pagination{
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .prev-btn{
+    margin-right: 5px;
+  }
+  .next-btn{
+    margin-left: 5px;
+  }
