@@ -20,6 +20,7 @@
         <th>Duration</th>
         <th>Status</th>
         <th>Created</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -27,11 +28,15 @@
         <tr>
           <td>{{ appointment.appointmentID }}</td>
           <td [innerHTML]="appointment.patientName | highlightPipe:(searchControl.value ?? '')"></td>
-          <td [innerHTML]="appointment.doctorName |highlightPipe:(searchControl.value??'')"></td>
+          <td [innerHTML]="appointment.doctorName | highlightPipe:(searchControl.value ?? '')"></td>
           <td>{{ appointment.startTime | date:'short' }}</td>
           <td>{{ appointment.durationMinutes }} min</td>
-          <td [innerHTML]="appointment.status | highlightPipe:(searchControl.value??'')"></td>
+          <td [innerHTML]="appointment.status | highlightPipe:(searchControl.value ?? '')"></td>
           <td>{{ appointment.createdAt | date:'mediumDate' }}</td>
+          <td>
+            <button (click)="editAppointment(appointment.appointmentID)" class="edit-btn">Edit</button>
+            <button (click)="deleteAppointment(appointment.appointmentID)" class="del-btn">Delete</button>
+          </td>
         </tr>
       }
     </tbody>

@@ -79,4 +79,18 @@ export class AppointmentListComponent {
   goBack() {
     this.router.navigate(['/dashboard']);
   }
+  
+  editAppointment(id: number) {
+  this.router.navigate([`/appointments/edit/${id}`]);
+  }
+
+  deleteAppointment(id:number){
+    this.appointmentService.deleteAppointment(id).subscribe({
+      next:()=>{
+        this.appointments=this.appointments.filter(a=>a.appointmentID!=id)
+        this.filteredAppointments=this.filteredAppointments.filter(a=>a.appointmentID!=id)  
+      },
+      error:(e)=>console.log(e)
+    })
+  }
 }

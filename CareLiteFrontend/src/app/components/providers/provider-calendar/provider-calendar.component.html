@@ -1,0 +1,84 @@
+<div class="calendar-container">
+  <div class="calendar-header">
+    <h2>Provider Calendar</h2>
+
+    <div class="controls">
+      <div class="doctor-selector">
+        <label for="doctorSelect">Select Provider:</label>
+        <select
+          id="doctorSelect"
+          [(ngModel)]="selectedDoctorId"
+          (change)="loadAppointments()"
+        >
+          <option [value]="null">Select a provider</option>
+          <option *ngFor="let doctor of doctors;" [value]="doctor.doctorID">
+            {{ doctor.doctorName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="slot-selector">
+        <label for="slotSelect">Slot Duration:</label>
+        <select
+          id="slotSelect"
+          [(ngModel)]="slotDuration"
+          (change)="onSlotDurationChange()"
+        >
+          <option [value]="15">15 minutes</option>
+          <option [value]="30">30 minutes</option>
+          <option [value]="60">60 minutes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="week-navigation">
+      <button (click)="prevWeek()">← Previous Week</button>
+      <span class="week-display">
+        Week of {{ currentWeekStart | date: 'MMM d, y' }} to
+        {{ addDays(currentWeekStart, 6) | date: 'MMM d, y' }}
+      </span>
+      <button (click)="nextWeek()">Next Week →</button>
+    </div>
+  </div>
+
+  <div class="calendar-grid">
+    <table class="calendar-table">
+      <thead>
+        <tr>
+          <th class="time-column">Time</th>
+          <th *ngFor="let day of daysOfWeek; trackBy: trackByDate">
+            {{ day | date: 'EEE MMM d' }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let slot of timeSlots; trackBy: trackBySlot">
+          <td class="time-column">{{ slot }}</td>
+
+          <td
+            *ngFor="let day of daysOfWeek; trackBy: trackByDate"
+            [ngClass]="getSlotClass(day, slot)"
+          >
+            <ng-container *ngIf="getSlotInfo(day, slot) as slotInfo">
+              <!-- Show appointment details on the START slot -->
+              <div *ngIf="slotInfo.isStart" class="appointment-slot">
+                <div class="appointment-details">
+                  <div class="patient-name">
+                    {{ slotInfo.appointment.patientName }}
+                  </div>
+                  <div class="appointment-time">
+                    {{ formatTime(slotInfo.appointment.startTime) }} -
+                    {{ formatEndTime(slotInfo.appointment) }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Continuation slots just get shaded -->
+              <div *ngIf="slotInfo.isContinuation" class="appointment-continuation"></div>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -27,6 +27,15 @@ export const routes: Routes = [
 {
   path:'appointment-add',loadComponent:()=> import('./components/appointments/create-appointment/create-appointment.component').then(m=>m.CreateAppointmentComponent),pathMatch:'full',
   canActivate:[AuthGuard]
+},
+{
+    path: 'appointments/edit/:id',
+    loadComponent: () =>
+      import('./components/appointments/edit-appointment/edit-appointment.component')
+        .then(m => m.EditAppointmentComponent)
+},
+{path:'provider-calendar',loadComponent:()=>
+  import('./components/providers/provider-calendar/provider-calendar.component').then(m=>m.ProviderCalendarComponent)
 }
   ,
   {path:'**',redirectTo:'login'}

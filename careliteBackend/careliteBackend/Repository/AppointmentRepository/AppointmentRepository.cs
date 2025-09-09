@@ -48,12 +48,14 @@ namespace careliteBackend.Repository
                 {
                     AppointmentID = (int)reader["AppointmentID"],
                     PatientName = reader["PatientName"].ToString()!,
+                    PatientID = (int)reader["PatientID"],
+                    DoctorID= (int)reader["DoctorID"],
                     DoctorName = reader["DoctorName"].ToString()!,
                     StartTime = (DateTime)reader["StartTime"],
                     DurationMinutes = (int)reader["DurationMinutes"],
                     Status = reader["Status"].ToString()!,
                     CreatedAt = (DateTime)reader["CreatedAt"]
-                });
+                }); 
             }
 
             return appointments;
