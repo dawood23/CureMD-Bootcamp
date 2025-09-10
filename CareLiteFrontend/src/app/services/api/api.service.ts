@@ -9,6 +9,7 @@ import { Appointment } from '../../models/appointment';
 import { AppointmentRequest } from '../../models/appointmentRequest';
 import { doctor } from '../../models/doctor';
 import { CalendarAppointment } from '../../models/calendar-models';
+import { CreateVisitRequeset, UpdateVisitRequest, visitNotes } from '../../models/visitNotes';
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +69,26 @@ export class ApiService {
   return this.http.get<CalendarAppointment[]>(
     `${URL.API_BASE}/Appointments/weekly-calendar/${doctorId}/${weekStartDate}`
   );
-}
+  }
+  //VisitNotes
+  getVisits(): Observable<visitNotes[]> {
+    return this.http.get<visitNotes[]>(`${URL.API_BASE}/VisitNote`);
+  }
+
+  getVisitById(id: number): Observable<visitNotes> {
+    return this.http.get<visitNotes>(`${URL.API_BASE}/VisitNote/${id}`);
+  }
+
+  updateVisit(id: number, request: UpdateVisitRequest): Observable<any> {
+    return this.http.put(`${URL.API_BASE}/VisitNote/${id}`, request);
+  }
+
+  addVisit(request: CreateVisitRequeset): Observable<any> {
+    return this.http.post(`${URL.API_BASE}/VisitNote`, request);
+  }
+
+  deleteVisit(id: number): Observable<any> {
+    return this.http.delete(`${URL.API_BASE}/VisitNote/${id}`);
+  }
+
 }

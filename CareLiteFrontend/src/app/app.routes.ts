@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/Auth/auth.guard';
 import { GuestGuard } from './guards/guest/guest.guard';
+import { VisitNoteComponent } from './components/visit-note/visit-note.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'
@@ -36,6 +37,9 @@ export const routes: Routes = [
 },
 {path:'provider-calendar',loadComponent:()=>
   import('./components/providers/provider-calendar/provider-calendar.component').then(m=>m.ProviderCalendarComponent)
+},
+{path:'visit-note',loadComponent:()=>
+  import('./components/visit-note/visit-note.component').then(m=>VisitNoteComponent)
 }
   ,
   {path:'**',redirectTo:'login'}

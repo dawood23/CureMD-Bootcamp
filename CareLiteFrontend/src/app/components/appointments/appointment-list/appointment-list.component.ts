@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { Appointment } from '../../../models/appointment';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HighlightPipe } from '../../../pipes/highlight/highlight.pipe';
 
-// NGXS
 import { Store, Select } from '@ngxs/store';
 import { AppointmentState } from '../../../store/appointments/appointment.state';
 import { LoadAppointments, DeleteAppointment } from '../../../store/appointments/appointment.actions';
@@ -15,7 +14,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HighlightPipe],
+  imports: [CommonModule, ReactiveFormsModule, HighlightPipe, RouterLink],
   templateUrl: './appointment-list.component.html',
   styleUrls: ['./appointment-list.component.scss']
 })
@@ -94,5 +93,13 @@ export class AppointmentListComponent {
       },
       error: (e) => console.log(e)
     });
+  }
+
+  goToVisitNotes(id:number){
+    this.router.navigate(['/visit-note'],{
+      queryParams:{
+        appID:id
+      }
+    })
   }
 }

@@ -34,6 +34,7 @@
           <td [innerHTML]="appointment.status | highlightPipe:(searchControl.value ?? '')"></td>
           <td>{{ appointment.createdAt | date:'mediumDate' }}</td>
           <td>
+            <button (click)="goToVisitNotes(appointment.appointmentID)" style="margin-right: 5px;" class="edit-btn">View Notes</button>
             <button (click)="editAppointment(appointment.appointmentID)" class="edit-btn">Edit</button>
             <button (click)="deleteAppointment(appointment.appointmentID)" class="del-btn">Delete</button>
           </td>

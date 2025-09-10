@@ -11,6 +11,7 @@ import { AppointmentState } from './store/appointments/appointment.state';
 import { NgxsModule } from '@ngxs/store';
 import { importProvidersFrom } from '@angular/core';
 import { CalendarState } from './store/calendar/calendar.state';
+import { VisitState } from './store/visitNotes/visitNotes.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +28,8 @@ export const appConfig: ApplicationConfig = {
         PatientState,
         DoctorState,
         AppointmentState,
-        CalendarState
+        CalendarState,
+        VisitState
       ]),
     ),
   ]
