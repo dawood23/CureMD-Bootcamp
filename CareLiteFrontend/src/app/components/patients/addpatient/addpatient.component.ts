@@ -1,31 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Patient } from '../../../models/patient';
-import { FormBuilder, ReactiveFormsModule,Validators} from '@angular/forms';
-import { inject } from '@angular/core';
-import { ApiService } from '../../../services/api/api.service';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LetterOnlyDirective } from '../../../directive/letter-only/letter-only.directive';
 import { DigitOnlyDirective } from '../../../directive/digit-only/digit-only.directive';
+import { Store } from '@ngxs/store';
+import { AddPatient } from '../../../store/patients/patient.actions';
 
 @Component({
   selector: 'app-addpatient',
   standalone: true,
-  imports: [ReactiveFormsModule,LetterOnlyDirective,DigitOnlyDirective],
+  imports: [ReactiveFormsModule, LetterOnlyDirective, DigitOnlyDirective],
   templateUrl: './addpatient.component.html',
   styleUrl: './addpatient.component.scss'
 })
 export class AddpatientComponent {
   fb = inject(FormBuilder);
-  patientService = inject(ApiService);
+  store = inject(Store);
   router = inject(Router);
-  maxdate=new Date().toISOString().split('T')[0];
+
+  maxdate = new Date().toISOString().split('T')[0];
 
   form = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     dob: [''],
     gender: [''],
-    phone: ['', Validators.required,Validators.minLength(11),Validators.maxLength(11)],
+    phone: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
     email: ['', [Validators.email]],
     address: ['']
   });
@@ -50,10 +51,10 @@ export class AddpatientComponent {
       createdAt: new Date()
     };
 
-    this.patientService.createPatient(patient).subscribe({
-      next: (res) => {
-        alert(res.message || 'Patient created successfully');
-        this.router.navigate(['/patient-list']); 
+    this.store.dispatch(new AddPatient(patient)).subscribe({
+      next: () => {
+        alert('Patient created successfully');
+        this.router.navigate(['/patient-list']);
       },
       error: (err) => {
         alert(err.error?.message || 'Error creating patient');
@@ -61,7 +62,7 @@ export class AddpatientComponent {
     });
   }
 
-  goBack(){
-    this.router.navigate(['/patient-list'])
+  goBack() {
+    this.router.navigate(['/patient-list']);
   }
 }

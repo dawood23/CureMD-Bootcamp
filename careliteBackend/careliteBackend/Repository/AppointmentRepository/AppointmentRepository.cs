@@ -1,6 +1,7 @@
 ﻿using careliteBackend.DBHelper;
 using careliteBackend.DTOs;
 using careliteBackend.Models;
+using Microsoft.Data.SqlClient;
 
 namespace careliteBackend.Repository
 {
@@ -93,6 +94,41 @@ namespace careliteBackend.Repository
             return await cmd.ExecuteNonQueryAsync();
         }
 
-        
+                public async Task<IEnumerable<WeeklyCalendarDto>> GetWeeklyCalendar(int doctorId, DateTime weekStartDate)
+                {
+                    var results = new List<WeeklyCalendarDto>();
+
+                    await using var conn = _db.GetConnection();
+                    await conn.OpenAsync();
+
+                    await using var cmd = _db.CreateCommand(conn, "stp_GetWeeklyCalendar", new Dictionary<string, object>
+                        {
+                            { "@DoctorID", doctorId },
+                            { "@WeekStartDate", weekStartDate }
+                        });
+    
+                    await using var reader = await cmd.ExecuteReaderAsync();
+                    while (await reader.ReadAsync())
+                    {
+                        results.Add(new WeeklyCalendarDto
+                        {
+                            AppointmentID = reader.GetInt32(reader.GetOrdinal("AppointmentID")),
+                            StartTime = reader.GetDateTime(reader.GetOrdinal("StartTime")),
+                            DurationMinutes = reader.GetInt32(reader.GetOrdinal("DurationMinutes")),
+                            Status = reader.GetString(reader.GetOrdinal("Status")),
+                            PatientID = reader.GetInt32(reader.GetOrdinal("PatientID")),
+                            PatientName = reader.GetString(reader.GetOrdinal("PatientName")),
+                            DoctorID = reader.GetInt32(reader.GetOrdinal("DoctorID")),
+                            DoctorName = reader.GetString(reader.GetOrdinal("DoctorName")),
+                            AppointmentDate = reader.GetDateTime(reader.GetOrdinal("AppointmentDate")),
+                            AppointmentTime = reader.GetTimeSpan(reader.GetOrdinal("AppointmentTime")),
+                            EndTime = reader.GetDateTime(reader.GetOrdinal("EndTime"))
+                        });
+                    }
+
+                    return results;
+                }
+
+
     }
 }

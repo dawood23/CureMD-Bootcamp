@@ -1,0 +1,18 @@
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'highlightPipe',
+  standalone: true
+})
+export class HighlightPipe implements PipeTransform {
+
+  transform(value: string, search:string) {
+    if(!search || !value){
+      return value;
+    }
+    const regex=new RegExp(search,'gi')
+    
+    console.log(regex)
+    return value.replace(regex,match=>`<mark>${match}</mark>`)
+  }
+}

@@ -26,7 +26,13 @@ h2 {
   margin-bottom: 2rem;
   text-align: center;
 }
-
+.error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  color:red
+}
 .error-message {
   background: linear-gradient(135deg, #e74c3c, #c0392b);
   color: white;

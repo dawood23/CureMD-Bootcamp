@@ -81,5 +81,20 @@ namespace careliteBackend.Controllers
 
             return Ok(new { Success = true, DeletedRows = rows });
         }
+
+        [HttpGet("weekly-calendar/{doctorId}/{weekStartDate}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetWeeklyCalendar(int doctorId, string weekStartDate)
+        {
+            try
+            {
+                var date = DateTime.Parse(weekStartDate);
+                var appointments = await _service.GetWeeklyCalendar(doctorId, date);
+                return Ok(appointments);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -32,5 +32,10 @@ namespace careliteBackend.Services.AppointmentService
         {
             return await _repo.DeleteAppointment(id);
         }
+
+        public async Task<IEnumerable<WeeklyCalendarDto>> GetWeeklyCalendar(int doctorId, DateTime weekStartDate)
+        {
+            return await _repo.GetWeeklyCalendar(doctorId, weekStartDate);
+        }
     }
 }

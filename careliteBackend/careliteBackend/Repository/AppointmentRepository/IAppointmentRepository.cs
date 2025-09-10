@@ -8,5 +8,7 @@ namespace careliteBackend.Repository
         Task<List<AppointmentDto>> GetAppointments();
         Task<int> UpdateAppointment(AppointmentRequest request);
         Task<int> DeleteAppointment(int id);
+
+        Task<IEnumerable<WeeklyCalendarDto>> GetWeeklyCalendar(int doctorId, DateTime weekStartDate);
     }
 }

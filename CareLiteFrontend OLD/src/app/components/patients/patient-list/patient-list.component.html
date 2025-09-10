@@ -1,0 +1,47 @@
+<button class="back-button" (click)="goBack()">← Back</button>
+
+<div class="patient-list-container">
+  <div>
+    <h2>Patients</h2>
+    <button (click)="redirect()">Add</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" [formControl]="searchControl" placeholder="Search patients..." class="search-input" />
+  </div>
+
+  <div class="patient-cards">
+    @for (patient of paginatedPatients; track patient.patientID) {
+      <div class="patient-card">
+        <div class="patient-header">
+          <h3 [innerHTML]="(patient.firstName + ' ' + patient.lastName) | highlightPipe:(searchControl.value?? '')"></h3>
+          <span class="patient-id">ID: {{ patient.patientID }}</span>
+        </div>
+
+        <div class="patient-details">
+          <div class="detail-row"><span class="label">Contact:</span><span class="value" >{{ patient.phone || 'Not provided' }}</span></div>
+          <div class="detail-row"><span class="label">Email:</span><span class="value" [innerHTML]="(patient.email || 'Not provided') | highlightPipe:(searchControl.value??'')"></span></div>
+          <div class="detail-row"><span class="label">Date of Birth:</span><span class="value">{{ patient.dob ? (patient.dob | date: 'mediumDate') : 'Not provided' }}</span></div>
+          <div class="detail-row"><span class="label">Gender:</span><span class="value">{{ patient.gender || 'Not provided' }}</span></div>
+          <div class="detail-row"><span class="label">Address:</span><span class="value">{{ patient.address || 'Not provided' }}</span></div>
+          <div class="detail-row"><span class="label">Registered:</span><span class="value">{{ patient.createdAt | date: 'mediumDate' }}</span></div>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (!filteredPatients.length) {
+    <div class="empty-state">
+      <p>No patients found</p>
+    </div>
+  }
+
+  <div class="pagination">
+  @if (filteredPatients.length > pageSize) {
+    <button (click)="prevPage()" [disabled]="currentPage === 1" class="prev-btn">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage * pageSize >= filteredPatients.length" class="next-btn">Next</button>
+  }
+</div>
+
+</div>

@@ -1,0 +1,61 @@
+<button class="back-button" (click)="cancel()">← Back</button>
+
+<h2>Create Appointment</h2>
+
+@if (errorMessage) {
+  <div class="error-message">{{ errorMessage }}</div>
+}
+@if (successMessage) {
+  <div class="success-message">{{ successMessage }}</div>
+}
+
+<form [formGroup]="form">
+  <div>
+    <label>Patient:</label>
+    <select formControlName="patientID">
+      <option [ngValue]="null" disabled>Select a patient</option>
+      @for (p of patients; track p.patientID) {
+        <option [value]="p.patientID">
+          {{ p.firstName }} {{ p.lastName }}
+        </option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label>Doctor:</label>
+    <select formControlName="doctorID">
+      <option [ngValue]="null" disabled>Select a doctor</option>
+      @for (d of doctors; track d.doctorID) {
+        <option [value]="d.doctorID">
+          {{ d.doctorName }}
+        </option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label>Start Time:</label>
+    <input type="datetime-local" formControlName="startTime" />
+  </div>
+
+  <div>
+    <label>Duration (minutes):</label>
+    <select formControlName="durationMinutes">
+      <option [value]="15">15</option>
+      <option [value]="30">30</option>
+      <option [value]="60">60</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Status:</label>
+    <select formControlName="status">
+      <option value="Scheduled">Scheduled</option>
+      <option value="Completed">Completed</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid" (click)="submit()">Create</button>
+</form>

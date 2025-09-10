@@ -1,12 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { ApiService } from '../../../services/api/api.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { AppointmentRequest } from '../../../models/appointmentRequest';
-import { AuthService } from '../../../services/auth/auth.service';
 import { Patient } from '../../../models/patient';
 import { doctor } from '../../../models/doctor';
-import { CommonModule } from '@angular/common';
+
+import { Store, Select } from '@ngxs/store';
+import { AddAppointment } from '../../../store/appointments/appointment.actions';
+import { AppointmentState } from '../../../store/appointments/appointment.state';
+import { PatientState } from '../../../store/patients/patient.state';
+import { DoctorState } from '../../../store/doctor/doctor.state';
+import { Observable } from 'rxjs';
+
+import { AuthService } from '../../../services/auth/auth.service';
+import { LoadPatients } from '../../../store/patients/patient.actions';
+import { LoadDoctors } from '../../../store/doctor/doctor.actions';
+import { appointmentValidator} from '../../../validator/time.validator';
 
 @Component({
   selector: 'app-create-appointment',
@@ -17,9 +27,13 @@ import { CommonModule } from '@angular/common';
 })
 export class CreateAppointmentComponent implements OnInit {
   private fb = inject(FormBuilder);
-  private api = inject(ApiService);
+  private store = inject(Store);
   private router = inject(Router);
   private authService = inject(AuthService);
+  public minDate:string=""
+
+  @Select(PatientState.patients) patients$!: Observable<Patient[]>;
+  @Select(DoctorState.doctors) doctors$!: Observable<doctor[]>;
 
   patients: Patient[] = [];
   doctors: doctor[] = [];
@@ -29,29 +43,21 @@ export class CreateAppointmentComponent implements OnInit {
   successMessage: string | null = null;
 
   form = this.fb.group({
-    patientID: [null, Validators.required],
-    doctorID: [null, Validators.required],
-    startTime: ['', Validators.required],
+    patientID: [null, [Validators.required,Validators.nullValidator]],
+    doctorID: [null, [Validators.required,Validators.nullValidator]],
+    startTime: ['', [Validators.required,appointmentValidator]],
     durationMinutes: [30, [Validators.required, Validators.min(1)]],
     status: ['Scheduled', Validators.required]
   });
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId() ?? 1;
+    this.store.dispatch(new LoadPatients())
+    this.store.dispatch(new LoadDoctors())
+    this.patients$.subscribe(res => (this.patients = res));
+    this.doctors$.subscribe(res => (this.doctors = res));
 
-    this.api.getAllPatients().subscribe({
-      next: (res) => (this.patients = res),
-      error: () => (this.errorMessage = 'Failed to load patients.')
-    });
-
-    this.api.getDoctors().subscribe({
-      next: (res) => {(this.doctors = res)
-        console.log(res)
-        console.log(this.doctors)
-      },
-      
-      error: () => (this.errorMessage = 'Failed to load doctors.')
-    });
+    this.minDate=new Date().toISOString().slice(0,16)
   }
 
   submit() {
@@ -70,11 +76,11 @@ export class CreateAppointmentComponent implements OnInit {
       status: this.form.value.status!
     };
 
-    this.api.AddAppointment(request).subscribe({
+    this.store.dispatch(new AddAppointment(request)).subscribe({
       next: () => {
         this.successMessage = 'Appointment created successfully!';
         this.errorMessage = null;
-        setTimeout(() => this.router.navigate(['/appointment-list']), 500);
+        setTimeout(() => this.router.navigate(['/appointment-list']), 1500);
       },
       error: (err) => {
         this.successMessage = null;

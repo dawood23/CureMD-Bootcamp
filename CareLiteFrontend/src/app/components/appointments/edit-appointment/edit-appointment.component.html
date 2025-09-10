@@ -24,11 +24,19 @@
         <option [value]="d.doctorID">{{ d.doctorName }}</option>
       }
     </select>
+
+    @if(form.controls.doctorID.touched && form.controls.doctorID.invalid){
+      <div class="error">Please enter a valid doctor.</div>
+    }
   </div>
 
   <div>
     <label>Start Time:</label>
     <input type="datetime-local" formControlName="startTime" />
+    @if(form.controls.startTime.touched && form.controls.startTime.invalid){
+      <div class="error">Please enter a start time.</div>
+    }
+
   </div>
 
   <div>
@@ -38,6 +46,11 @@
       <option [value]="30">30</option>
       <option [value]="60">60</option>
     </select>
+        @if(form.controls.durationMinutes.touched && form.controls.durationMinutes.invalid){
+      <div class="error">Please enter a valid duration.</div>
+    }
+
+
   </div>
 
   <div>
@@ -47,6 +60,11 @@
       <option value="Completed">Completed</option>
       <option value="Cancelled">Cancelled</option>
     </select>
+
+        @if(form.controls.status.touched && form.controls.status.invalid){
+      <div class="error">Please enter a valid status.</div>
+    }
+
   </div>
 
   <button type="submit" [disabled]="form.invalid" (click)="submit()">Update</button>

@@ -1,0 +1,66 @@
+<div class="patient-container">
+   
+  <button class="back-button" (click)="goBack()">
+  ← Back
+</button>
+
+
+  <h2>Create Patient</h2>
+
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label>First Name</label>
+      <input type="text" formControlName="firstName" appLetterOnly/>
+      @if (formControl.firstName.touched && formControl.firstName.invalid) {
+        <small class="error">First name is required</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" formControlName="lastName" appLetterOnly/>
+      @if (formControl.lastName.touched && formControl.lastName.invalid) {
+        <small class="error">Last name is required</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Date of Birth</label>
+      <input type="date" formControlName="dob" [max]="maxdate"/>
+    </div>
+
+    <div class="form-group">
+      <label>Gender</label>
+      <select formControlName="gender">
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Phone</label>
+      <input type="tel" formControlName="phone" appDigitOnly/>
+      @if (formControl.phone.touched && formControl.phone.invalid) {
+        <small class="error">Phone is required</small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" />
+      @if (formControl.email.touched && formControl.email.invalid) {
+        <small class="error">
+          @if (formControl.email.errors?.['email']) { Invalid email }
+        </small>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Address</label>
+      <textarea formControlName="address"></textarea>
+    </div>
+
+    <button type="button" (click)="submit()" [disabled]="form.invalid">Create Patient</button>
+  </form>
+</div>

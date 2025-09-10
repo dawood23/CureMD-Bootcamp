@@ -8,6 +8,7 @@ import { Patient } from '../../models/patient';
 import { Appointment } from '../../models/appointment';
 import { AppointmentRequest } from '../../models/appointmentRequest';
 import { doctor } from '../../models/doctor';
+import { CalendarAppointment } from '../../models/calendar-models';
 
 @Injectable({
   providedIn: 'root'
@@ -61,4 +62,11 @@ export class ApiService {
   getDoctors():Observable<doctor[]>{
     return this.http.get<doctor[]>(`${URL.API_BASE}/doctors`)
   }
+
+  //slots
+  getWeeklyCalendar(doctorId: number, weekStartDate: string): Observable<CalendarAppointment[]> {
+  return this.http.get<CalendarAppointment[]>(
+    `${URL.API_BASE}/Appointments/weekly-calendar/${doctorId}/${weekStartDate}`
+  );
+}
 }

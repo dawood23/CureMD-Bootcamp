@@ -1,84 +1,170 @@
-<div class="calendar-container">
+<div class="weekly-calendar-container">
   <div class="calendar-header">
-    <h2>Provider Calendar</h2>
+    <div class="header-row">
+      <h2>Provider Weekly Calendar</h2>
+      <div class="header-controls">
+   
+        <div class="slot-duration-selector">
+          <label for="slotDuration">Slot Duration:</label>
+          <select id="slotDuration"
+                  [value]="slotDuration"
+                  (change)="onSlotDurationChange(+$any($event.target).value)"
+                  class="form-select">
+            @for (duration of slotDurations; track duration.value) {
+              <option [value]="duration.value">
+                {{ duration.label }}
+              </option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
 
-    <div class="controls">
-      <div class="doctor-selector">
+    <div class="header-row">
+    
+      <div class="provider-selector">
         <label for="doctorSelect">Select Provider:</label>
-        <select
-          id="doctorSelect"
-          [(ngModel)]="selectedDoctorId"
-          (change)="loadAppointments()"
-        >
-          <option [value]="null">Select a provider</option>
-          <option *ngFor="let doctor of doctors;" [value]="doctor.doctorID">
-            {{ doctor.doctorName }}
-          </option>
+        <select id="doctorSelect"
+                [value]="selectedDoctor?.doctorID || ''"
+                (change)="onDoctorChange($event)"
+                class="form-select">
+          <option value="">Select a provider...</option>
+          @for (doctor of (doctors$ | async) ?? []; track doctor.doctorID) {
+            <option [value]="doctor.doctorID">
+              {{ doctor.doctorName }} - {{ doctor.specialization }}
+            </option>
+          }
         </select>
       </div>
 
-      <div class="slot-selector">
-        <label for="slotSelect">Slot Duration:</label>
-        <select
-          id="slotSelect"
-          [(ngModel)]="slotDuration"
-          (change)="onSlotDurationChange()"
-        >
-          <option [value]="15">15 minutes</option>
-          <option [value]="30">30 minutes</option>
-          <option [value]="60">60 minutes</option>
-        </select>
-      </div>
-    </div>
+      <div class="week-navigation">
+        <button type="button"
+                class="btn btn-outline-primary"
+                (click)="navigateWeek('prev')"
+                [disabled]="!selectedDoctor">
+          <i class="fas fa-chevron-left"></i> Previous Week
+        </button>
 
-    <div class="week-navigation">
-      <button (click)="prevWeek()">← Previous Week</button>
-      <span class="week-display">
-        Week of {{ currentWeekStart | date: 'MMM d, y' }} to
-        {{ addDays(currentWeekStart, 6) | date: 'MMM d, y' }}
-      </span>
-      <button (click)="nextWeek()">Next Week →</button>
+        @if (weeklyCalendar$ | async; as calendar) {
+          <span class="week-range">
+            {{ getWeekDateRange(calendar) }}
+          </span>
+        }
+
+        <button type="button"
+                class="btn btn-outline-primary"
+                (click)="goToCurrentWeek()"
+                [disabled]="!selectedDoctor">
+          Today
+        </button>
+
+        <button type="button"
+                class="btn btn-outline-primary"
+                (click)="navigateWeek('next')"
+                [disabled]="!selectedDoctor">
+          Next Week <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="calendar-grid">
-    <table class="calendar-table">
-      <thead>
-        <tr>
-          <th class="time-column">Time</th>
-          <th *ngFor="let day of daysOfWeek; trackBy: trackByDate">
-            {{ day | date: 'EEE MMM d' }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let slot of timeSlots; trackBy: trackBySlot">
-          <td class="time-column">{{ slot }}</td>
 
-          <td
-            *ngFor="let day of daysOfWeek; trackBy: trackByDate"
-            [ngClass]="getSlotClass(day, slot)"
-          >
-            <ng-container *ngIf="getSlotInfo(day, slot) as slotInfo">
-              <!-- Show appointment details on the START slot -->
-              <div *ngIf="slotInfo.isStart" class="appointment-slot">
-                <div class="appointment-details">
-                  <div class="patient-name">
-                    {{ slotInfo.appointment.patientName }}
-                  </div>
-                  <div class="appointment-time">
-                    {{ formatTime(slotInfo.appointment.startTime) }} -
-                    {{ formatEndTime(slotInfo.appointment) }}
-                  </div>
+  @if (loading$ | async) {
+    <div class="loading-container">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <p>Loading calendar...</p>
+    </div>
+  }
+
+
+  @if (!(loading$ | async) && (weeklyCalendar$ | async); as calendar) {
+    <div class="calendar-grid">
+      
+      <div class="time-header">Time</div>
+
+   
+      @for (day of calendar.days; track day.date.getTime()) {
+        <div class="day-header" [class.today]="day.isToday">
+          <div class="day-name">{{ day.dayName }}</div>
+          <div class="day-date">{{ day.date | date:'MMM d' }}</div>
+        </div>
+      }
+
+      @if (calendar.days.length > 0 && calendar.days[0].slots; as firstDaySlots) {
+        @for (slot of firstDaySlots; track slot.time; let timeIndex = $index) {
+        
+          <div class="time-label">
+            {{ formatTime(slot.time) }}
+          </div>
+
+          @for (day of calendar.days; track day.date.getTime()) {
+            <div class="day-column">
+              @if (day.slots[timeIndex]; as daySlot) {
+                <div class="calendar-slot"
+                     [class]="getSlotClass(daySlot)"
+                     [class.has-appointment]="daySlot.appointment"
+                     (click)="onSlotClick(day, daySlot)">
+                  
+                
+                  @if (!daySlot.isBooked) {
+                    <div class="available-slot">
+                      <span class="slot-time">{{ daySlot.duration }}min</span>
+                    </div>
+                  }
+
+                  @if (daySlot.isBooked && daySlot.appointment) {
+                    <div class="booked-slot"
+                         [class]="getAppointmentDurationClass(daySlot.appointment)">
+                      <div class="appointment-info">
+                        <div class="patient-name">{{ daySlot.appointment.patientName }}</div>
+                        <div class="appointment-time">
+                          {{ formatTime(daySlot.appointment.appointmentTime) }} 
+                          ({{ daySlot.appointment.durationMinutes }}min)
+                        </div>
+                        <div class="appointment-status">{{ daySlot.appointment.status }}</div>
+                      </div>
+                    </div>
+                  }
                 </div>
-              </div>
+              }
+            </div>
+          }
+        }
+      }
+    </div>
+  }
 
-              <!-- Continuation slots just get shaded -->
-              <div *ngIf="slotInfo.isContinuation" class="appointment-continuation"></div>
-            </ng-container>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+  @if (!(loading$ | async) && !selectedDoctor) {
+    <div class="no-provider-state">
+      <div class="text-center py-5">
+        <i class="fas fa-user-md fa-3x text-muted mb-3"></i>
+        <h4>Select a Provider</h4>
+        <p class="text-muted">Choose a provider from the dropdown above to view their weekly calendar.</p>
+      </div>
+    </div>
+  }
+
+
+  @if (selectedDoctor) {
+    <div class="calendar-legend">
+      <h5>Legend:</h5>
+      <div class="legend-items">
+        <div class="legend-item">
+          <div class="legend-color available"></div>
+          <span>Available</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color booked"></div>
+          <span>Booked</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color today-highlight"></div>
+          <span>Today</span>
+        </div>
+      </div>
+    </div>
+  }
 </div>

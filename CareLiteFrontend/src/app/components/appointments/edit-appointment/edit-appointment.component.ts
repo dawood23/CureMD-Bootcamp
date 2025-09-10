@@ -6,6 +6,16 @@ import { AppointmentRequest } from '../../../models/appointmentRequest';
 import { Patient } from '../../../models/patient';
 import { doctor } from '../../../models/doctor';
 import { CommonModule } from '@angular/common';
+import { Select, Selector } from '@ngxs/store';
+import { DoctorState } from '../../../store/doctor/doctor.state';
+import { Observable } from 'rxjs';
+import { AppointmentState } from '../../../store/appointments/appointment.state';
+import { Appointment } from '../../../models/appointment';
+import { Store } from '@ngxs/store';
+import { inject } from '@angular/core';
+import { UpdateAppointment } from '../../../store/appointments/appointment.actions';
+import { LoadDoctors } from '../../../store/doctor/doctor.actions';
+import { appointmentValidator } from '../../../validator/time.validator';
 
 @Component({
   selector: 'app-edit-appointment',
@@ -15,6 +25,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './edit-appointment.component.scss'
 })
 export class EditAppointmentComponent implements OnInit {
+
   appointmentId!: number;
   patients: Patient[] = [];
   doctors: doctor[] = [];
@@ -22,12 +33,15 @@ export class EditAppointmentComponent implements OnInit {
   successMessage: string | null = null;
   patientid:number=0
   patientName: string = '';
+  store=inject(Store)
 
+  @Select(DoctorState.doctors) doctors$!:Observable<doctor[]>
+  @Select(AppointmentState.appointments) appointments$!:Observable<Appointment[]>
   form = this.fb.group({
     appointmentID: [0],
     patientID: [0],
     doctorID: [0, Validators.required],
-    startTime: ['', Validators.required],
+    startTime: ['', [Validators.required,appointmentValidator]],
     durationMinutes: [30, [Validators.required, Validators.min(1)]],
     status: ['Scheduled', Validators.required]
   });
@@ -41,12 +55,11 @@ export class EditAppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.appointmentId = Number(this.route.snapshot.paramMap.get('id'));
+    this.store.dispatch(new LoadDoctors())
+    this.doctors$.subscribe(doctors=>this.doctors=doctors)
 
-  
-    this.api.getDoctors().subscribe(d => (this.doctors = d));
 
-
-    this.api.getAppointments().subscribe(appts => {
+    this.appointments$.subscribe(appts => {
       const appt = appts.find(a => a.appointmentID === this.appointmentId);
       if (appt) {
         this.patientName = appt.patientName; 
@@ -72,7 +85,7 @@ export class EditAppointmentComponent implements OnInit {
 
     const request = this.form.value as AppointmentRequest;
 
-    this.api.updateAppointment(request).subscribe({
+    this.store.dispatch(new UpdateAppointment(request)).subscribe({
       next: () => {
         this.successMessage = 'Appointment updated successfully!';
         this.errorMessage = null;

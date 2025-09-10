@@ -1,0 +1,58 @@
+<button class="back-button" (click)="goBack()">← Back</button>
+
+<div class="appointment-list-container">
+  <div class="header-row">
+    <h2>Appointments</h2>
+    <button (click)="redirect()">Add</button>
+  </div>
+
+  <div class="search-container">
+    <input type="text" [formControl]="searchControl" placeholder="Search appointments..." class="search-input" />
+  </div>
+
+  <table class="appointment-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Start Time</th>
+        <th>Duration</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (appointment of paginatedAppointments; track appointment.appointmentID) {
+        <tr>
+          <td>{{ appointment.appointmentID }}</td>
+          <td [innerHTML]="appointment.patientName | highlightPipe:(searchControl.value ?? '')"></td>
+          <td [innerHTML]="appointment.doctorName | highlightPipe:(searchControl.value ?? '')"></td>
+          <td>{{ appointment.startTime | date:'short' }}</td>
+          <td>{{ appointment.durationMinutes }} min</td>
+          <td [innerHTML]="appointment.status | highlightPipe:(searchControl.value ?? '')"></td>
+          <td>{{ appointment.createdAt | date:'mediumDate' }}</td>
+          <td>
+            <button (click)="editAppointment(appointment.appointmentID)" class="edit-btn">Edit</button>
+            <button (click)="deleteAppointment(appointment.appointmentID)" class="del-btn">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (!filteredAppointments.length) {
+    <div class="empty-state">
+      <p>No appointments found</p>
+    </div>
+  }
+
+  <div class="pagination">
+    @if (filteredAppointments.length > pageSize) {
+      <button (click)="prevPage()" [disabled]="currentPage === 1" class="prev-btn">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage * pageSize >= filteredAppointments.length" class="next-btn">Next</button>
+    }
+  </div>
+</div>

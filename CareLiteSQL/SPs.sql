@@ -281,8 +281,10 @@ GO
 ------------------------------------------------------------
 -- 5) Appointments
 ------------------------------------------------------------
-IF OBJECT_ID('stp_GetAppointments', 'P') IS NOT NULL DROP PROCEDURE stp_GetAppointments;
+IF OBJECT_ID('stp_GetAppointments', 'P') IS NOT NULL 
+    DROP PROCEDURE stp_GetAppointments;
 GO
+
 CREATE PROCEDURE stp_GetAppointments
 AS
 BEGIN
@@ -295,15 +297,12 @@ BEGIN
         a.Status,
         a.CreatedAt,
 
-        -- Patient info
         a.PatientID,
         p.FirstName + ' ' + p.LastName AS PatientName,
 
-        -- Doctor info
         a.DoctorID,
-       d.DoctorName,
+        d.DoctorName,
 
-        -- User who created
         a.CreatedBy,
         u.Username AS CreatedByName
 
@@ -312,6 +311,47 @@ BEGIN
     INNER JOIN Doctors d ON a.DoctorID = d.DoctorID
     INNER JOIN Users u ON a.CreatedBy = u.UserID
 
+    ORDER BY 
+        CASE a.Status
+            WHEN 'Scheduled' THEN 1
+            WHEN 'Canceled'  THEN 2
+            WHEN 'Completed' THEN 3
+            ELSE 4
+        END,
+        a.StartTime;
+END
+GO
+
+
+IF OBJECT_ID('stp_getAppointmentsByUser','P') IS NOT NULL DROP PROCEDURE stp_getAppointmentsByUser;
+GO
+CREATE PROCEDURE stp_getAppointmentsByUser
+ @PatientID int
+AS 
+BEGIN
+	SET NOCOUNT ON;
+	   SELECT 
+        a.AppointmentID,
+        a.StartTime,
+        a.DurationMinutes,
+        a.Status,
+        a.CreatedAt,
+
+        a.PatientID,
+        p.FirstName + ' ' + p.LastName AS PatientName,
+
+        a.DoctorID,
+       d.DoctorName,
+
+        a.CreatedBy,
+        u.Username AS CreatedByName
+
+    FROM Appointments a
+    INNER JOIN Patients p ON a.PatientID = p.PatientID
+    INNER JOIN Doctors d ON a.DoctorID = d.DoctorID
+    INNER JOIN Users u ON a.CreatedBy = u.UserID
+
+	where a.PatientID=@PatientID
     ORDER BY a.StartTime;
 END
 GO
@@ -365,6 +405,7 @@ BEGIN
     SELECT SCOPE_IDENTITY() AS NewAppointmentID;
 END
 GO
+
 
 
 IF OBJECT_ID('stp_UpdateAppointment', 'P') IS NOT NULL DROP PROCEDURE stp_UpdateAppointment;
@@ -421,6 +462,39 @@ BEGIN
 END
 GO
 
+
+IF OBJECT_ID('stp_GetWeeklyCalendar', 'P') IS NOT NULL DROP PROCEDURE stp_GetWeeklyCalendar;
+GO
+CREATE PROCEDURE stp_GetWeeklyCalendar
+    @DoctorID int,
+    @WeekStartDate date
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @WeekEndDate date = DATEADD(DAY, 6, @WeekStartDate);
+    
+    SELECT 
+        a.AppointmentID,
+        a.StartTime,
+        a.DurationMinutes,
+        a.Status,
+        a.PatientID,
+        p.FirstName + ' ' + p.LastName AS PatientName,
+        a.DoctorID,
+        d.DoctorName,
+        CAST(a.StartTime AS date) AS AppointmentDate,
+        CAST(a.StartTime AS time) AS AppointmentTime,
+        DATEADD(MINUTE, a.DurationMinutes, a.StartTime) AS EndTime
+    FROM Appointments a
+    INNER JOIN Patients p ON a.PatientID = p.PatientID
+    INNER JOIN Doctors d ON a.DoctorID = d.DoctorID
+    WHERE a.DoctorID = @DoctorID
+      AND CAST(a.StartTime AS date) BETWEEN @WeekStartDate AND @WeekEndDate
+      AND a.Status = 'Scheduled'
+    ORDER BY a.StartTime;
+END
+GO
 
 ------------------------------------------------------------
 -- 6) VisitNotes

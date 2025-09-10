@@ -53,6 +53,32 @@ INSERT INTO Appointments (PatientID, DoctorID, CreatedBy, StartTime, DurationMin
 (7, 1, 3, '2025-09-06 10:30:00', 30, 'Completed'),
 (8, 2, 2, '2025-09-06 16:00:00', 15, 'Canceled');
 
+INSERT INTO Appointments (PatientID, DoctorID, CreatedBy, StartTime, DurationMinutes, Status) VALUES 
+(1, 1, 2, '2025-09-15 09:00:00', 30, 'Scheduled'),
+(2, 2, 3, '2025-09-15 10:15:00', 15, 'Scheduled'),
+(3, 1, 2, '2025-09-15 13:30:00', 30, 'Scheduled'),
+
+(4, 2, 2, '2025-09-16 09:15:00', 30, 'Scheduled'),
+(5, 1, 3, '2025-09-16 11:00:00', 60, 'Scheduled'),
+(6, 2, 2, '2025-09-16 15:45:00', 30, 'Scheduled'),
+
+(7, 1, 2, '2025-09-17 09:30:00', 30, 'Scheduled'),
+(8, 2, 3, '2025-09-17 10:45:00', 15, 'Scheduled'),
+(1, 1, 2, '2025-09-17 14:00:00', 30, 'Scheduled'),
+
+(2, 2, 2, '2025-09-18 09:00:00', 60, 'Scheduled'),
+(3, 1, 3, '2025-09-18 11:15:00', 30, 'Scheduled'),
+(4, 2, 2, '2025-09-18 16:30:00', 15, 'Scheduled'),
+
+(5, 1, 2, '2025-09-19 09:45:00', 30, 'Scheduled'),
+(6, 2, 3, '2025-09-19 13:15:00', 30, 'Scheduled'),
+(7, 1, 2, '2025-09-19 15:00:00', 15, 'Scheduled');
+
+
+select * from logs
+select * from Appointments
+
+select * from Payments
 ------------------------------------------------------------
 -- 6) Insert Visit Notes (only for completed appointments)
 ------------------------------------------------------------

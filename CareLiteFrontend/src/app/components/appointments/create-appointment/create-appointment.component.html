@@ -2,14 +2,13 @@
 
 <h2>Create Appointment</h2>
 
-@if (errorMessage) {
+<form [formGroup]="form">
+  @if (errorMessage) {
   <div class="error-message">{{ errorMessage }}</div>
 }
 @if (successMessage) {
   <div class="success-message">{{ successMessage }}</div>
 }
-
-<form [formGroup]="form">
   <div>
     <label>Patient:</label>
     <select formControlName="patientID">
@@ -20,6 +19,11 @@
         </option>
       }
     </select>
+    @if (form.controls['patientID'].touched && form.controls['patientID'].invalid) {
+      <div class="error">
+        Patient selection is required.
+      </div>
+    }
   </div>
 
   <div>
@@ -32,11 +36,21 @@
         </option>
       }
     </select>
+    @if (form.controls['doctorID'].touched && form.controls['doctorID'].invalid) {
+      <div class="error">
+        Doctor selection is required.
+      </div>
+    }
   </div>
 
   <div>
     <label>Start Time:</label>
-    <input type="datetime-local" formControlName="startTime" />
+    <input type="datetime-local" formControlName="startTime" [min]="minDate" />
+    @if (form.controls['startTime'].touched && form.controls['startTime'].invalid) {
+      <div class="error">
+        Please select a valid time.
+      </div>
+    }
   </div>
 
   <div>
@@ -46,6 +60,11 @@
       <option [value]="30">30</option>
       <option [value]="60">60</option>
     </select>
+    @if (form.controls['durationMinutes'].touched && form.controls['durationMinutes'].invalid) {
+      <div class="error">
+        Please select a valid duration.
+      </div>
+    }
   </div>
 
   <div>
@@ -55,6 +74,11 @@
       <option value="Completed">Completed</option>
       <option value="Cancelled">Cancelled</option>
     </select>
+    @if (form.controls['status'].touched && form.controls['status'].invalid) {
+      <div class="error">
+        Status is required.
+      </div>
+    }
   </div>
 
   <button type="submit" [disabled]="form.invalid" (click)="submit()">Create</button>
