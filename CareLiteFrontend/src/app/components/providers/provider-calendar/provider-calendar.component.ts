@@ -11,19 +11,13 @@ import { DoctorState } from '../../../store/doctor/doctor.state';
 import { LoadWeeklyCalendar,SetSelectedDoctor,SetSelectedWeek,SetSlotDuration } from '../../../store/calendar/calendar.actions';
 import { Observable,Subject } from 'rxjs';
 import { Store } from '@ngxs/store';
+import { RouterLink } from "@angular/router";
 
-
-interface SlotInfo {
-  isStart: boolean;
-  isContinuation: boolean;
-  appointment: Appointment;
-  durationInSlots: number;
-}
 
 @Component({
   selector: 'app-provider-calendar',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './provider-calendar.component.html',
   styleUrls: ['./provider-calendar.component.scss']
 })

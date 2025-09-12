@@ -1,11 +1,13 @@
 ﻿using careliteBackend.Models;
 using careliteBackend.Services.DoctorService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace careliteBackend.Controllers
 {
     [ApiController]
     [Route("doctors")]
+    [Authorize]
     public class DoctorsController : ControllerBase
     {
         private readonly IDoctorService _service;

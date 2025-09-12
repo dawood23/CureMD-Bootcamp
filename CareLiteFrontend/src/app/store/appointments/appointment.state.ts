@@ -4,17 +4,20 @@ import { tap } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
 import { Appointment } from '../../models/appointment';
 import {
-  LoadAppointments, AddAppointment, UpdateAppointment, DeleteAppointment
+  LoadAppointments, AddAppointment, UpdateAppointment, DeleteAppointment,
+  getAppointmentByID
 } from './appointment.actions';
 
 export interface AppointmentStateModel {
   appointments: Appointment[];
+  currentAppointment:Appointment|null
 }
 
 @State<AppointmentStateModel>({
   name: 'appointments',
   defaults: {
-    appointments: []
+    appointments: [],
+    currentAppointment:null
   }
 })
 @Injectable()
@@ -25,14 +28,24 @@ export class AppointmentState {
   static appointments(state: AppointmentStateModel) {
     return state.appointments;
   }
+  @Selector()
+  static currentAppointment(state:AppointmentStateModel){
+    return state.currentAppointment
+  }
 
   @Action(LoadAppointments)
   loadAppointments({ patchState }: StateContext<AppointmentStateModel>) {
     return this.api.getAppointments().pipe(
-      tap(appointments => patchState({ appointments }))
+      tap(appointments => patchState({ appointments:appointments }))
     );
   }
 
+  @Action(getAppointmentByID)
+  getAppoitnmentByID({patchState}:StateContext<AppointmentStateModel>,{id}:getAppointmentByID){
+    return this.api.getAppointmentByID(id).pipe(
+      tap(appointment=>patchState({currentAppointment:appointment}))
+    )
+  }
   @Action(AddAppointment)
   addAppointment({ dispatch }: StateContext<AppointmentStateModel>, { payload }: AddAppointment) {
     return this.api.AddAppointment(payload).pipe(

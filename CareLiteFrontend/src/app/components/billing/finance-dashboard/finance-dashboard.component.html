@@ -1,0 +1,155 @@
+<button [routerLink]="'/dashboard'" class="back-btn">back</button>
+ <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Finance Dashboard</h1>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label class="filter-label" for="patientName">Patient Name</label>
+                <input 
+                    type="text" 
+                    id="patientName"
+                    class="filter-input"
+                    placeholder="Search patient..."
+                    [formControl]="filterForm.controls['patientName']">
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label" for="doctorName">Doctor Name</label>
+                <input 
+                    type="text" 
+                    id="doctorName"
+                    class="filter-input"
+                    placeholder="Search doctor..."
+                    [formControl]="filterForm.controls['doctorName']">
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label" for="status">Status</label>
+                <select 
+                    id="status"
+                    class="filter-select"
+                    [formControl]="filterForm.controls['status']">
+                    <option value="All">All Status</option>
+                    <option value="Open">Open</option>
+                    <option value="Partial">Partial</option>
+                    <option value="Paid">Paid</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Outstanding Balances</h2>
+                <button 
+                    class="export-btn"
+                    (click)="exportCSV(filteredBills, 'outstanding_balances.csv')"
+                    aria-label="Export outstanding balances to CSV">
+                    Export CSV
+                </button>
+            </div>
+            
+            <div class="table-container">
+                @if (filteredBills && filteredBills.length > 0) {
+                    <table class="data-table" role="table" aria-label="Outstanding balances">
+                        <thead>
+                            <tr>
+                                <th scope="col">Bill ID</th>
+                                <th scope="col">Patient</th>
+                                <th scope="col">Doctor</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Pending Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (bill of filteredBills; track bill.billID) {
+                                <tr>
+                                    <td>{{ bill.billID }}</td>
+                                    <td [innerHTML]="bill.patientName|highlightPipe:filterForm.value.patientName??''"></td>
+                                    <td [innerHTML]="bill.doctorName|highlightPipe:filterForm.value.doctorName??''"></td>
+                                    <td>
+                                        <span class="status-badge" 
+                                              [class]="'status-' + bill.status.toLowerCase()">
+                                            {{ bill.status }}
+                                        </span>
+                                    </td>
+                                    <td class="amount">{{ bill.totalAmount | currency }}</td>
+                                    <td class="amount pending">{{ bill.pendingAmount | currency }}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                } @else {
+                    <div class="no-data">
+                        No outstanding balances found matching your criteria
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Daily Collections</h2>
+                <button 
+                    class="export-btn"
+                    (click)="exportCSV(dailyCollections, 'daily_collections.csv')"
+                    aria-label="Export daily collections to CSV">
+                    Export CSV
+                </button>
+            </div>
+
+            <div class="date-picker-container">
+                <label class="date-picker-label" for="collectionDate">
+                    Collection Date:
+                </label>
+                <input 
+                    type="date" 
+                    id="collectionDate"
+                    class="date-picker"
+                    [formControl]="filterForm.controls['collectionDate']">
+            </div>
+
+            <div class="daily-total">
+                <div class="daily-total-label" style="margin-bottom: 10px;">Total Collected</div>
+                <div class="daily-total-amount" style="margin-bottom: 10px;">{{ getDailyTotal() | currency }}</div>
+                <div class="daily-total-label">{{ filterForm.value.collectionDate | date:'fullDate' }}</div>
+            </div>
+            
+            <div class="table-container">
+                @if (dailyCollections && dailyCollections.length > 0) {
+                    <table class="data-table" role="table" aria-label="Daily collections">
+                        <thead>
+                            <tr>
+                                <th scope="col">Payment ID</th>
+                                <th scope="col">Bill ID</th>
+                                <th scope="col">Patient</th>
+                                <th scope="col">Doctor</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Payment Method</th>
+                                <th scope="col">Paid At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (payment of dailyCollections; track payment.paymentID) {
+                                <tr>
+                                    <td>{{ payment.paymentID }}</td>
+                                    <td>{{ payment.billID }}</td>
+                                    <td>{{ payment.patientName }}</td>
+                                    <td>{{ payment.doctorName }}</td>
+                                    <td class="amount positive">{{ payment.amount | currency }}</td>
+                                    <td>{{ payment.method }}</td>
+                                    <td>{{ payment.paidAt | date:'short' }}</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                } @else {
+                    <div class="no-data">
+                        No collections found for the selected date
+                    </div>
+                }
+            </div>
+        </div>
+    </div>

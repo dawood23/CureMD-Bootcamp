@@ -1,6 +1,6 @@
 export interface visitNotes{
     visitNoteID:number,
-    appointmenID:number,
+    appointmentID:number,
     content:string,
     createdAt:Date,
     updatedAt:Date,

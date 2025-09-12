@@ -1,0 +1,322 @@
+.calendar-wrapper {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  gap: 20px;
+
+  .provider-selector {
+    flex: 1;
+    max-width: 400px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+      }
+    }
+  }
+
+  .week-navigation {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .nav-btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s;
+
+      &:hover:not(:disabled) {
+        background: #0056b3;
+      }
+
+      &:disabled {
+        background: #6c757d;
+        cursor: not-allowed;
+      }
+    }
+
+    .week-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+
+      .current-week {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        min-width: 200px;
+      }
+
+      .today-btn {
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 0.85rem;
+
+        &:hover:not(:disabled) {
+          background: #218838;
+        }
+
+        &:disabled {
+          background: #6c757d;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+.no-provider-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  i {
+    font-size: 3rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+
+  h4 {
+    color: #495057;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #6c757d;
+    font-size: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+.calendar-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+
+      &.confirmed {
+        background-color: #28a745;
+      }
+
+      &.pending {
+        background-color: #ffc107;
+      }
+
+      &.available {
+        background-color: #17a2b8;
+      }
+
+      &.cancelled {
+        background-color: #dc3545;
+      }
+    }
+
+    span {
+      color: #495057;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Calendar view styling
+.cal-week-view {
+  background: white;
+  
+  .cal-day-headers {
+    background: #f8f9fa;
+    
+    .cal-header {
+      padding: 15px 8px;
+      text-align: center;
+      font-weight: 600;
+      color: #495057;
+      border-right: 1px solid #dee2e6;
+      
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+  
+  .cal-time-events {
+    border-right: 1px solid #dee2e6;
+    
+    .cal-hour-segment {
+      border-bottom: 1px solid #f1f3f4;
+      
+      &:hover {
+        background-color: #e3f2fd;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .cal-time-label-column {
+    border-right: 1px solid #dee2e6;
+    background: #f8f9fa;
+    
+    .cal-time {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: #6c757d;
+    }
+  }
+}
+
+.cal-event {
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  border: none;
+  
+  &.cal-available-slot {
+    background-color: #17a2b8 !important;
+    color: white !important;
+  }
+  
+  &.cal-appointment {
+    background-color: #28a745 !important;
+    color: white !important;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .calendar-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+
+    .provider-selector {
+      max-width: none;
+    }
+
+    .week-navigation {
+      justify-content: space-between;
+
+      .week-info {
+        order: -1;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .legend {
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-wrapper {
+    padding: 15px;
+  }
+
+  .calendar-controls {
+    padding: 15px;
+
+    .week-navigation {
+      flex-direction: column;
+      gap: 10px;
+
+      .nav-btn {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.board-btn {
+  background: transparent;
+  color: #3498db;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+  text-transform: uppercase;
+
+  &:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

@@ -40,8 +40,12 @@ export class VisitState {
 
   @Action(GetVisitById)
   getVisitById({ patchState }: StateContext<VisitStateModel>, { id }: GetVisitById) {
+    patchState({selectedVisit:null})
     return this.visitService.getVisitById(id).pipe(
-      tap(visit => patchState({ selectedVisit: visit }))
+      tap(visit => 
+            patchState({ selectedVisit: visit })
+        )
+
     );
   }
 

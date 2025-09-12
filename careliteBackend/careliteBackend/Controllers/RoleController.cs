@@ -1,5 +1,6 @@
 ﻿using careliteBackend.Models;
 using careliteBackend.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace careliteBackend.Controllers

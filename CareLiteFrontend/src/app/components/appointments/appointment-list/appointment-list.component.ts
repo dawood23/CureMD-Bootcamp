@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Appointment } from '../../../models/appointment';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -6,71 +6,88 @@ import { debounceTime } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { HighlightPipe } from '../../../pipes/highlight/highlight.pipe';
 
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+
 import { Store, Select } from '@ngxs/store';
 import { AppointmentState } from '../../../store/appointments/appointment.state';
 import { LoadAppointments, DeleteAppointment } from '../../../store/appointments/appointment.actions';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-appointment-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HighlightPipe, RouterLink],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    HighlightPipe,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
   templateUrl: './appointment-list.component.html',
   styleUrls: ['./appointment-list.component.scss']
 })
-export class AppointmentListComponent {
+export class AppointmentListComponent implements AfterViewInit {
   store = inject(Store);
   router = inject(Router);
-
+  role:string=""
+  authService=inject(AuthService)
   @Select(AppointmentState.appointments) appointments$!: Observable<Appointment[]>;
 
-  appointments: Appointment[] = [];
-  filteredAppointments: Appointment[] = [];
+  displayedColumns: string[] = [
+    'appointmentID',
+    'patientName',
+    'doctorName',
+    'startTime',
+    'durationMinutes',
+    'status',
+    'createdAt',
+    'actions'
+  ];
+  dataSource = new MatTableDataSource<Appointment>();
+
   searchControl = new FormControl('');
 
-  currentPage = 1;
-  pageSize = 5;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit() {
     this.store.dispatch(new LoadAppointments());
-
+    
+    this.role=this.authService.getUserRole()??""
+    
     this.appointments$.subscribe(appointments => {
-      this.appointments = appointments;
-      this.filteredAppointments = appointments;
+      this.dataSource.data = appointments;
     });
 
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
       .subscribe(query => {
-        const lowerQuery = query?.toLowerCase() || '';
-        this.filteredAppointments = this.appointments.filter(a =>
-          a.patientName.toLowerCase().includes(lowerQuery) ||
-          a.doctorName.toLowerCase().includes(lowerQuery) ||
-          a.status.toLowerCase().includes(lowerQuery)
-        );
-        this.currentPage = 1;
+        this.dataSource.filter = query?.trim().toLowerCase() || '';
       });
+
+    this.dataSource.filterPredicate = (data: Appointment, filter: string) => {
+      const str = filter.toLowerCase();
+      return (
+        data.patientName.toLowerCase().includes(str) ||
+        data.doctorName.toLowerCase().includes(str) ||
+        data.status.toLowerCase().includes(str)
+      );
+    };
   }
 
-  get paginatedAppointments(): Appointment[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    return this.filteredAppointments.slice(startIndex, startIndex + this.pageSize);
-  }
-
-  nextPage() {
-    if (this.currentPage * this.pageSize < this.filteredAppointments.length) {
-      this.currentPage++;
-    }
-  }
-
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-    }
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.filteredAppointments.length / this.pageSize);
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   redirect() {
@@ -88,18 +105,21 @@ export class AppointmentListComponent {
   deleteAppointment(id: number) {
     this.store.dispatch(new DeleteAppointment(id)).subscribe({
       next: () => {
-        this.appointments = this.appointments.filter(a => a.appointmentID !== id);
-        this.filteredAppointments = this.filteredAppointments.filter(a => a.appointmentID !== id);
+        this.dataSource.data = this.dataSource.data.filter(a => a.appointmentID !== id);
       },
       error: (e) => console.log(e)
     });
   }
 
-  goToVisitNotes(id:number){
-    this.router.navigate(['/visit-note'],{
-      queryParams:{
-        appID:id
-      }
+  goToVisitNotes(id: number) {
+    this.router.navigate(['/visit-note'], {
+      queryParams: { appID: id }
+    });
+  }
+
+  generateBill(id:number){
+    this.router.navigate(['/generate-bill'],{
+      queryParams:{appID:id}
     })
   }
 }

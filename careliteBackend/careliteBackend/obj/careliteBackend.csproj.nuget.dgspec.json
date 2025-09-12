@@ -46,6 +46,10 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.1, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[7.0.20, )"
@@ -61,6 +65,10 @@
             "Microsoft.IdentityModel.JsonWebTokens": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[48.5.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

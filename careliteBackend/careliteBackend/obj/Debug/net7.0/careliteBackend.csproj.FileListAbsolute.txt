@@ -117,12 +117,7 @@ C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\b
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
-C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
-C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Debug\net7.0\careliteBackend.csproj.AssemblyReference.cache
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Debug\net7.0\careliteBackend.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Debug\net7.0\careliteBackend.AssemblyInfoInputs.cache
@@ -144,3 +139,12 @@ C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\o
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Debug\net7.0\careliteBackend.pdb
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Debug\net7.0\careliteBackend.genruntimeconfig.cache
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Debug\net7.0\ref\careliteBackend.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\Stripe.net.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll

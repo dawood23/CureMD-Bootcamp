@@ -5,6 +5,11 @@ export class AddAppointment {
   static readonly type = '[Appointment] Add';
   constructor(public payload: any) {}
 }
+
+export class getAppointmentByID{
+  static readonly type='[Appointment] Load By Id'
+  constructor(public id:number){}
+}
 export class UpdateAppointment {
   static readonly type = '[Appointment] Update';
   constructor(public payload: any) {}

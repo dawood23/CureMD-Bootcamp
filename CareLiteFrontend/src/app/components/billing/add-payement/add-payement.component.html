@@ -1,0 +1,46 @@
+<button class="back-button" (click)="cancel()">← Back</button>
+
+<h2>Add Payment</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  @if (errorMessage) {
+    <div class="error-message">{{ errorMessage }}</div>
+  }
+  @if (successMessage) {
+    <div class="success-message">{{ successMessage }}</div>
+  }
+
+  <div>
+    <label>Bill ID:</label>
+    <input type="text" [value]="billID" disabled />
+  </div>
+
+  <div>
+    <label>Amount:</label>
+    <input type="number" formControlName="amount" />
+    @if (form.controls['amount'].touched && form.controls['amount'].invalid) {
+      <div class="error">Amount must be greater than 0.</div>
+    }
+  </div>
+
+  <div>
+    <label>Method:</label>
+    <select formControlName="method">
+      <option value="Cash">Cash</option>
+      <option value="Card">Card</option>
+    </select>
+  </div>
+
+  <div *ngIf="form.value.method === 'Card'">
+    <label>Card Number:</label>
+    <input type="text" [(ngModel)]="cardNumber" placeholder="4242 4242 4242 4242" />
+
+    <label>Expiry:</label>
+    <input type="text" [(ngModel)]="expiry" placeholder="MM/YY" />
+
+    <label>CVC:</label>
+    <input type="text" [(ngModel)]="cvc" placeholder="123" />
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Record Payment</button>
+</form>

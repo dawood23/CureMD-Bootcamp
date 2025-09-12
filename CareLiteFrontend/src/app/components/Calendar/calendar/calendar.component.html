@@ -1,0 +1,87 @@
+<div >
+  <button [routerLink]="'/dashboard'" class="board-btn">Dashboard</button>
+  <button [routerLink]="'/appointment-list'" class="board-btn">Appointments</button>
+</div>
+
+<div class="calendar-wrapper">
+  <div class="calendar-controls">
+    <div class="provider-selector">
+      <label for="doctorSelect">Select Provider:</label>
+      <select id="doctorSelect"
+              [value]="selectedDoctor?.doctorID || ''"
+              (change)="onDoctorChange($event)"
+              class="form-select">
+        <option value="">Select a provider...</option>
+        @for (doc of (doctors$ | async) ?? []; track doc.doctorID) {
+          <option [value]="doc.doctorID">
+            {{ doc.doctorName }} - {{ doc.specialization }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="week-navigation">
+      <button type="button" (click)="changeWeek(-7)" class="nav-btn" [disabled]="!selectedDoctor">
+        ← Previous
+      </button>
+
+      @if (selectedDoctor) {
+        <div class="week-info">
+          <span class="current-week">{{ getCurrentWeekRange() }}</span>
+          <button type="button" (click)="goToToday()" class="today-btn" [disabled]="isCurrentWeek()">
+            Today
+          </button>
+        </div>
+      }
+
+      <button type="button" (click)="changeWeek(7)" class="nav-btn" [disabled]="!selectedDoctor">
+        Next →
+      </button>
+    </div>
+  </div>
+
+  @if (!selectedDoctor) {
+    <div class="no-provider-state">
+      <i class="fas fa-user-md"></i>
+      <h4>Select a Provider</h4>
+      <p>Choose a provider from the dropdown above to view their weekly calendar.</p>
+    </div>
+  }
+
+  @if (selectedDoctor) {
+    <div class="calendar-container">
+      <mwl-calendar-week-view
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh$"
+        [dayStartHour]="dayStartHour"
+        [dayEndHour]="dayEndHour"
+        [hourSegments]="hourSegments"
+        [hourSegmentHeight]="hourSegmentHeight"
+        [weekStartsOn]="weekStartsOn"
+        (hourSegmentClicked)="markSlot($event.date)"
+        (eventClicked)="onEventClicked($event.event)"
+        [locale]="'en'">
+      </mwl-calendar-week-view>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-color confirmed"></div>
+        <span>Confirmed</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color pending"></div>
+        <span>Pending</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color available"></div>
+        <span>Available</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-color cancelled"></div>
+        <span>Cancelled</span>
+      </div>
+    </div>
+  }
+</div>

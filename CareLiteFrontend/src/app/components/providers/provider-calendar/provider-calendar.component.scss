@@ -1,4 +1,32 @@
 /* weekly-calendar.component.scss */
+.board-btn {
+  background: transparent;
+  color: #3498db;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+  text-transform: uppercase;
+
+  &:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
 .weekly-calendar-container {
   padding: 20px;
   max-width: 1400px;

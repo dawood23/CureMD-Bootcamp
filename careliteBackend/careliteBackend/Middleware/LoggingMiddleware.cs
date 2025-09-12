@@ -39,13 +39,25 @@ namespace careliteBackend.Middleware
                 using var connection = db.GetConnection();
                 await connection.OpenAsync();
 
+                var actionWord = context.Request.Method switch
+                {
+                    "POST" => "CREATE",
+                    "PUT" => "UPDATE",
+                    "DELETE" => "DELETE",
+                    "GET" => "READ",
+                    _ => context.Request.Method
+                };
+
+                var description =
+                    $"{actionWord} performed on {path} at {DateTime.UtcNow:O}"; 
+
                 var parameters = new Dictionary<string, object?>
                 {
                     { "@UserID", userId },
                     { "@Action", context.Request.Method },
                     { "@TableAffected", path ?? "Unknown" },
-                    { "@RecordID", DBNull.Value },
-                    { "@Status", context.Response.StatusCode < 400 ? "Success" : "Failed" }
+                    { "@Status", context.Response.StatusCode < 400 ? "Success" : "Failed" },
+                    { "@Description", description }
                 };
 
                 using var cmd = db.CreateCommand(connection, "stp_AddLog", parameters!);

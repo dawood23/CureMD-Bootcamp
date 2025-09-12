@@ -23,6 +23,11 @@ namespace careliteBackend.Services.AppointmentService
             return await _repo.GetAppointments();
         }
 
+        public async Task<AppointmentDto?> GetAppointmentByID(int id)
+        {
+            return await _repo.GetAppointmentByID(id);
+        }
+
         public async Task<int> Update(AppointmentRequest request)
         {
             return await _repo.UpdateAppointment(request);

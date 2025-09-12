@@ -41,7 +41,7 @@ export class EditAppointmentComponent implements OnInit {
     appointmentID: [0],
     patientID: [0],
     doctorID: [0, Validators.required],
-    startTime: ['', [Validators.required,appointmentValidator]],
+    startTime: ['', [Validators.required]],
     durationMinutes: [30, [Validators.required, Validators.min(1)]],
     status: ['Scheduled', Validators.required]
   });

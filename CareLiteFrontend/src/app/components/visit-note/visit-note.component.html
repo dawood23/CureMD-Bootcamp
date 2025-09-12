@@ -1,1 +1,41 @@
-<p>visit-note works!</p>
+<button [routerLink]="'/appointment-list'" class="back-button">Back</button>
+
+@if(visit) {
+  <div class="visit-details">
+    <h2>Visit Note</h2>
+    
+    <p><strong>Appointment ID:</strong> {{ visit.appointmentID }}</p>
+    <p><strong>Content:</strong> {{ visit.content }}</p>
+    <p><strong>Status:</strong> {{ visit.appointmentStatus }}</p>
+    
+    <p><strong>Patient:</strong> {{ visit.patientName }} </p>
+    <p><strong>Doctor:</strong> {{ visit.doctorName }} </p>
+    
+    <p><strong>Created At:</strong> {{ visit.createdAt | date:'medium' }}</p>
+    <p><strong>Last Updated:</strong> {{ visit.updatedAt | date:'medium' }}</p>
+
+    <button (click)="openPopup()">Edit Note</button>
+  </div>
+}
+@else {
+  <div>No notes for this visit yet</div>
+  @if(currAppointment?.status == "Completed") {
+    <button (click)="openPopup()">Add Note</button>
+  }
+  @else {
+    <div>Appointment must be completed to add a visit</div>
+  }
+}
+
+<!-- Popup -->
+@if(showPopup) {
+  <div class="popup-overlay">
+    <div class="popup">
+      <h3>{{ visit ? 'Edit Note' : 'Add Note' }}</h3>
+      <textarea [(ngModel)]="noteContent" rows="5" cols="40"></textarea>
+      <br />
+      <button (click)="saveNote()">{{ visit ? 'Update' : 'Save' }}</button>
+      <button (click)="closePopup()">Cancel</button>
+    </div>
+  </div>
+}

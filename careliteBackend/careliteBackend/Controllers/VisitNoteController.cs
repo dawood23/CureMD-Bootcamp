@@ -1,5 +1,6 @@
 ﻿using careliteBackend.DTOs;
 using careliteBackend.Services.VisitService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 
@@ -7,6 +8,7 @@ namespace VisitManager.API.Controllers
 {
     [ApiController]
     [Route("VisitNote")]
+    [Authorize]
     public class VisitsController : ControllerBase
     {
         private readonly IVisitService _service;
@@ -65,7 +67,6 @@ namespace VisitManager.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateVisit(int id, [FromBody] UpdateVisitRequest request)
         {
-            Console.WriteLine("Content in controller: ", request.content);
             if (id <= 0 || request == null)
                 return BadRequest(new { Success = false, Message = "Invalid request." });
 

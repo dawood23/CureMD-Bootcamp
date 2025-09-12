@@ -1,0 +1,73 @@
+<button mat-button class="back-button" (click)="goBack()" style="color:white" >← Back</button>
+
+<div class="bill-list-container">
+  <div class="header-row">
+    <h2>Bills</h2>
+  </div>
+
+  <mat-form-field appearance="outline" class="search-container">
+    <mat-label>Search bills</mat-label>
+    <input matInput [formControl]="searchControl" placeholder="Search by ID, patient, doctor, or status" />
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="billID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Bill ID</th>
+      <td mat-cell *matCellDef="let bill" [innerHTML]="bill.billID.toString() | highlightPipe:(searchControl.value ?? '')"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="appointmentID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Appointment ID</th>
+      <td mat-cell *matCellDef="let bill" [innerHTML]="bill.appointmentID.toString() | highlightPipe:(searchControl.value ?? '')"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="patientID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient ID</th>
+      <td mat-cell *matCellDef="let bill" [innerHTML]="bill.patientID.toString() | highlightPipe:(searchControl.value ?? '')"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="patientName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Patient</th>
+      <td mat-cell *matCellDef="let bill" [innerHTML]="bill.patientName | highlightPipe:(searchControl.value ?? '')"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="doctorName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Doctor</th>
+      <td mat-cell *matCellDef="let bill" [innerHTML]="bill.doctorName | highlightPipe:(searchControl.value ?? '')"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+      <td mat-cell *matCellDef="let bill" [innerHTML]="bill.status | highlightPipe:(searchControl.value ?? '')"></td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+      <td mat-cell *matCellDef="let bill">{{ bill.totalAmount | currency }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="pendingAmount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Pending</th>
+      <td mat-cell *matCellDef="let bill">{{ bill.pendingAmount | currency }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="generatedAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Generated At</th>
+      <td mat-cell *matCellDef="let bill">{{ bill.generatedAt | date:'medium' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let bill">
+        <button mat-stroked-button color="primary" class="edit-btn" (click)="addpayment(bill.billID)" [disabled]="bill.pendingAmount==0">Add Transaction</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [length]="dataSource.data.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]">
+  </mat-paginator>
+</div>

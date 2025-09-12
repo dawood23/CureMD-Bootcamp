@@ -7,6 +7,9 @@ C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\o
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\careliteBackend.pdb
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\Azure.Core.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\Azure.Identity.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\FluentValidation.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\FluentValidation.AspNetCore.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll

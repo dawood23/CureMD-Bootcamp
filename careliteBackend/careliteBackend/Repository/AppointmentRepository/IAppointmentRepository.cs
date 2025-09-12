@@ -6,6 +6,7 @@ namespace careliteBackend.Repository
     {
         Task<int> AddAppointment(AppointmentRequest request);
         Task<List<AppointmentDto>> GetAppointments();
+        Task<AppointmentDto?> GetAppointmentByID(int id);
         Task<int> UpdateAppointment(AppointmentRequest request);
         Task<int> DeleteAppointment(int id);
 

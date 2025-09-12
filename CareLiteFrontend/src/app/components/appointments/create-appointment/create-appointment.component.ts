@@ -93,4 +93,5 @@ export class CreateAppointmentComponent implements OnInit {
   cancel() {
     this.router.navigate(['/appointment-list']);
   }
+
 }

@@ -12,7 +12,6 @@ export class HighlightPipe implements PipeTransform {
     }
     const regex=new RegExp(search,'gi')
     
-    console.log(regex)
     return value.replace(regex,match=>`<mark>${match}</mark>`)
   }
 }

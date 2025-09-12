@@ -71,3 +71,6 @@ C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\o
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\careliteBackend.pdb
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\careliteBackend.genruntimeconfig.cache
 C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\obj\Release\net7.0\ref\careliteBackend.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Release\net7.0\FluentValidation.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Release\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\dawood.nadeem\Desktop\CureMD-Bootcamp\careliteBackend\careliteBackend\bin\Release\net7.0\FluentValidation.DependencyInjectionExtensions.dll

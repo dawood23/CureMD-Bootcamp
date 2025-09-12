@@ -2,6 +2,7 @@
 using careliteBackend.Models;
 using careliteBackend.Services.AppointmentService;
 using careliteBackend.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 
@@ -9,6 +10,7 @@ namespace careliteBackend.Controllers
 {
     [ApiController]
     [Route("appointments")]
+    [Authorize]
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _service;
@@ -22,7 +24,7 @@ namespace careliteBackend.Controllers
         public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest request)
         {
             if (request == null)
-                return BadRequest(new { Success = false, Message = "Invalid request payload." });
+                return BadRequest(new { Success = false, Message = ModelState });
 
             try
             {
@@ -48,6 +50,18 @@ namespace careliteBackend.Controllers
                 return NotFound(new { Success = false, Message = "No appointments found." });
 
             return Ok(new { Success = true, Data = result });
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAppointmentsByID(int id)
+        {
+            var result=await _service.GetAppointmentByID(id);
+
+            if (result == null)
+            {
+                return NotFound(new { Success = false, Message = $"No Appointment by id: {id} found" });
+            }
+
+            return Ok(new { Success = true,Data = result});
         }
 
         [HttpPut]

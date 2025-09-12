@@ -56,7 +56,6 @@ namespace careliteBackend.Repository.VisitRepository
 
         public async Task<int> UpdateVisit(int visitNoteId, string content)
         {
-            Console.WriteLine("Content in repository: ", content);
             using var conn = _db.GetConnection();
             using var cmd = _db.CreateCommand(conn, "stp_UpdateVisitNote", new Dictionary<string, object>
             {

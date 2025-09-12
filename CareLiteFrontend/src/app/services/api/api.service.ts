@@ -10,6 +10,9 @@ import { AppointmentRequest } from '../../models/appointmentRequest';
 import { doctor } from '../../models/doctor';
 import { CalendarAppointment } from '../../models/calendar-models';
 import { CreateVisitRequeset, UpdateVisitRequest, visitNotes } from '../../models/visitNotes';
+import { Bill } from '../../models/bill';
+import { PaymentRequest } from '../../models/payment-request';
+import { Payment } from '../../models/payments';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +50,9 @@ export class ApiService {
       return this.http.get<{success:boolean,data:Appointment[]}>(`${URL.API_BASE}/appointments`).pipe(map(response=>response.data));
   }
   
+  getAppointmentByID(id:number):Observable<Appointment>{
+    return this.http.get<{success:boolean,data:Appointment}>(`${URL.API_BASE}/appointments/${id}`).pipe(map(response=>response.data))
+  }
   AddAppointment(appointment:AppointmentRequest):Observable<any>{
     return this.http.post(`${URL.API_BASE}/appointments/create`,appointment)
   }
@@ -72,11 +78,11 @@ export class ApiService {
   }
   //VisitNotes
   getVisits(): Observable<visitNotes[]> {
-    return this.http.get<visitNotes[]>(`${URL.API_BASE}/VisitNote`);
+    return this.http.get<{success:boolean,data:visitNotes[]}>(`${URL.API_BASE}/VisitNote`).pipe(map(response=>response.data));
   }
 
   getVisitById(id: number): Observable<visitNotes> {
-    return this.http.get<visitNotes>(`${URL.API_BASE}/VisitNote/${id}`);
+    return this.http.get<{successs:boolean,data:visitNotes}>(`${URL.API_BASE}/VisitNote/${id}`).pipe(map(response=>response.data));
   }
 
   updateVisit(id: number, request: UpdateVisitRequest): Observable<any> {
@@ -90,5 +96,21 @@ export class ApiService {
   deleteVisit(id: number): Observable<any> {
     return this.http.delete(`${URL.API_BASE}/VisitNote/${id}`);
   }
+  
+  //Billing
+  generateBill(id:number):Observable<any>{
+    return this.http.post(`${URL.API_BASE}/billing/generate/${id}`,{})
+  }
 
+  getBills(): Observable<Bill[]> {
+    return this.http.get<Bill[]>(`${URL.API_BASE}/billing`);
+  }
+
+   recordPayment(request: PaymentRequest): Observable<any> {
+    return this.http.post<any>(`${URL.API_BASE}/billing/record`, request);
+  }
+
+  getPayment():Observable<Payment>{
+    return this.http.get<Payment>(`${URL.API_BASE}/billing/payments`)
+  }
 }

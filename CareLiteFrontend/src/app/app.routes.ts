@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './guards/Auth/auth.guard';
 import { GuestGuard } from './guards/guest/guest.guard';
-import { VisitNoteComponent } from './components/visit-note/visit-note.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'
@@ -33,14 +32,31 @@ export const routes: Routes = [
     path: 'appointments/edit/:id',
     loadComponent: () =>
       import('./components/appointments/edit-appointment/edit-appointment.component')
-        .then(m => m.EditAppointmentComponent)
+        .then(m => m.EditAppointmentComponent),
+        canActivate:[AuthGuard]
 },
 {path:'provider-calendar',loadComponent:()=>
-  import('./components/providers/provider-calendar/provider-calendar.component').then(m=>m.ProviderCalendarComponent)
+  import('./components/providers/provider-calendar/provider-calendar.component').then(m=>m.ProviderCalendarComponent),
+  canActivate:[AuthGuard]
 },
 {path:'visit-note',loadComponent:()=>
-  import('./components/visit-note/visit-note.component').then(m=>VisitNoteComponent)
+  import('./components/visit-note/visit-note.component').then(m=>m.VisitNoteComponent),canActivate:[AuthGuard]
+},
+{
+  path:'calendar',loadComponent:()=>import('./components/Calendar/calendar/calendar.component').then(m=>m.CalendarComponent),canActivate:[AuthGuard]
+},
+{
+  path:'generate-bill',loadComponent:()=>import('./components/billing/generate-bill/generate-bill.component').then(m=>m.GenerateBillComponent),canActivate:[AuthGuard]
+},
+{
+  path:'bill-list',loadComponent:()=>import('./components/billing/bill-list/bill-list.component').then(m=>m.BillListComponent),canActivate:[AuthGuard]
 }
-  ,
+,
+{
+  path:'add-payment',loadComponent:()=>import('./components/billing/add-payement/add-payement.component').then(m=>m.AddPayementComponent),canActivate:[AuthGuard]
+}
+  ,{
+  path:'finance-dashboard',loadComponent:()=>import('./components/billing/finance-dashboard/finance-dashboard.component').then(m=>m.FinanceDashboardComponent),canActivate:[AuthGuard]
+},
   {path:'**',redirectTo:'login'}
 ];

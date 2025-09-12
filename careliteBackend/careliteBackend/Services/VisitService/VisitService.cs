@@ -28,7 +28,6 @@ namespace careliteBackend.Services.VisitService
 
         public async Task<int> UpdateVisit(int visitNoteId, UpdateVisitRequest request)
         {
-            Console.WriteLine("Content in service: ", request.content);
             return await _repo.UpdateVisit(visitNoteId, request.content);
         }
 
