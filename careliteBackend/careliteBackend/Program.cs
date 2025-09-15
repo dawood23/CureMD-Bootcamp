@@ -43,6 +43,14 @@ builder.Services
         };
     });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
+    options.AddPolicy("RequireStaffOrAdmin", policy => policy.RequireRole("Staff", "Admin"));
+    options.AddPolicy("RequireClinicianOrAdmin", policy => policy.RequireRole("Clinician", "Admin"));
+    options.AddPolicy("RequireReceptionistOrAdmin", policy => policy.RequireRole("Admin","Receptionist"));
+});
+
 builder.Services.Dependency_Injection();
 
 var app = builder.Build();

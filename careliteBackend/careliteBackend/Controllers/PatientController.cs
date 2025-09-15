@@ -104,5 +104,31 @@ namespace careliteBackend.Controllers
                 return StatusCode(500, new { Message = "Error occurred while deleting patient", Details = ex.Message });
             }
         }
+
+        [HttpGet("paged")]
+        public async Task<IActionResult> GetPaged(
+             [FromQuery] int pageNumber = 1,
+             [FromQuery] int pageSize = 10,
+             [FromQuery] string search = "")
+        {
+            try
+            {
+                var (patients, totalCount) = await _service.GetPatientsPaged(pageNumber, pageSize, search);
+
+                return Ok(new
+                {
+                    Data = patients,
+                    TotalCount = totalCount,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Error occurred while fetching paginated patients", Details = ex.Message });
+            }
+        }
+
+
     }
 }

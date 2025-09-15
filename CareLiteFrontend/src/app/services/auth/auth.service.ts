@@ -33,7 +33,13 @@ export class AuthService {
 
 
 signup(credentials: User) {
-  return this.http.post<User>(`${URL.API_BASE}/auth/create`, credentials)
+  return this.http.post<LoginResponse>(`${URL.API_BASE}/auth/create`, credentials).pipe(
+    tap(response=>{
+       if (response.success && response.token) {
+            this.setToken(response.token);
+          }
+    })
+  )
 }
 
 

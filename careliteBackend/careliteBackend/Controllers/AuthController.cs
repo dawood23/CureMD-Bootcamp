@@ -52,6 +52,7 @@ namespace careliteBackend.Controllers
 
             try
             {
+                 var passBeforeHash= user.PasswordHash;
                 var newUserId = await _authService.CreateUser(user);
 
                 if (newUserId < 1)
@@ -63,7 +64,7 @@ namespace careliteBackend.Controllers
                     });
                 }
 
-                var loginResult = await _authService.Authenticate(user.Username, user.PasswordHash);
+                var loginResult = await _authService.Authenticate(user.Username, passBeforeHash);
                 return Ok(loginResult);
             }
             catch (Exception ex)

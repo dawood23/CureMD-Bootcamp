@@ -1,14 +1,15 @@
 ﻿using careliteBackend.DTOs;
 using careliteBackend.Models;
 using careliteBackend.Services.BillService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Stripe;
 
 namespace careliteBackend.Controllers
 {
     [ApiController]
     [Route("billing")]
+    [Authorize]
     public class BillingController : ControllerBase
     {
         private readonly IBillService _billService;

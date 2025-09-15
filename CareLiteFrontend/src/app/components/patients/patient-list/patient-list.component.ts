@@ -5,10 +5,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { Router } from '@angular/router';
 import { HighlightPipe } from '../../../pipes/highlight/highlight.pipe';
-import { Select, Store } from '@ngxs/store';
-import { PatientState } from '../../../store/patients/patient.state';
-import { LoadPatients } from '../../../store/patients/patient.actions';
-import { Observable } from 'rxjs';
+import { ApiService } from '../../../services/api/api.service';
 
 @Component({
   selector: 'app-patient-list',
@@ -18,58 +15,52 @@ import { Observable } from 'rxjs';
   styleUrl: './patient-list.component.scss'
 })
 export class PatientListComponent {
-  store = inject(Store);
+  private api = inject(ApiService);
   router = inject(Router);
 
-  @Select(PatientState.patients) patients$!: Observable<Patient[]>;
-
   patients: Patient[] = [];
-  filteredPatients: Patient[] = [];
   searchControl = new FormControl('');
 
   currentPage = 1;
   pageSize = 5;
+  totalCount = 0;
 
   ngOnInit() {
-    this.store.dispatch(new LoadPatients());
-
-    this.patients$.subscribe(patients => {
-      this.patients = patients;
-      this.filteredPatients = patients;
-    });
+    this.loadPatients();
 
     this.searchControl.valueChanges
       .pipe(debounceTime(300))
-      .subscribe(query => {
-        const lowerQuery = query?.toLowerCase() || '';
-        this.filteredPatients = this.patients.filter(p =>
-          (p.firstName + ' ' + p.lastName).toLowerCase().includes(lowerQuery) ||
-          (p.email?.toLowerCase() ?? '').includes(lowerQuery) ||
-          (p.phone ?? '').toLowerCase().includes(lowerQuery)
-        );
+      .subscribe(() => {
         this.currentPage = 1;
+        this.loadPatients();
       });
   }
 
-  get paginatedPatients(): Patient[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    return this.filteredPatients.slice(startIndex, startIndex + this.pageSize);
+  loadPatients() {
+    const query = this.searchControl.value || '';
+    this.api.getPatientsPaged(this.currentPage, this.pageSize, query)
+      .subscribe((res: { data: Patient[], totalCount: number }) => {
+        this.patients = res.data;
+        this.totalCount = res.totalCount;
+      });
   }
 
   nextPage() {
-    if (this.currentPage * this.pageSize < this.filteredPatients.length) {
+    if (this.currentPage * this.pageSize < this.totalCount) {
       this.currentPage++;
+      this.loadPatients();
     }
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.filteredPatients.length / this.pageSize);
   }
 
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
+      this.loadPatients();
     }
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalCount / this.pageSize);
   }
 
   redirect() {

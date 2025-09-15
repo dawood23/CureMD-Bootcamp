@@ -91,6 +91,37 @@ namespace careliteBackend.Repository.PatientRepository
             return await cmd.ExecuteNonQueryAsync();
         }
 
+        public async Task<(List<Patient> Patients, int TotalCount)> GetPatientsPaged(int pageNumber, int pageSize, string search)
+        {
+            var patients = new List<Patient>();
+            int totalCount = 0;
+
+            using var conn = _db.GetConnection();
+            using var cmd = _db.CreateCommand(conn, "stp_GetPatientsPaged", new Dictionary<string, object>
+    {
+        {"@PageNumber", pageNumber},
+        {"@PageSize", pageSize},
+        {"@Search", search ?? string.Empty}
+    });
+
+            await conn.OpenAsync();
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                patients.Add(MapPatient(reader));
+            }
+
+            if (await reader.NextResultAsync() && await reader.ReadAsync())
+            {
+                totalCount = reader.GetInt32(reader.GetOrdinal("TotalCount"));
+            }
+
+            return (patients, totalCount);
+        }
+
+
+
         private Patient MapPatient(IDataReader reader)
         {
             return new Patient

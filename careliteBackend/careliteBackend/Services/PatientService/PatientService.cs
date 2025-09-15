@@ -13,5 +13,12 @@ namespace careliteBackend.Services.PatientService
         public Task<List<Patient>> GetAllPatients() => _repo.GetAllPatients();
         public Task<int> UpdatePatient(Patient patient) => _repo.UpdatePatient(patient);
         public Task<int> DeletePatient(int patientId) => _repo.DeletePatient(patientId);
+
+        public async Task<(List<Patient>, int)> GetPatientsPaged(int pageNumber, int pageSize, string search)
+        {
+            return await _repo.GetPatientsPaged(pageNumber, pageSize, search);
+        }
+
+
     }
 }

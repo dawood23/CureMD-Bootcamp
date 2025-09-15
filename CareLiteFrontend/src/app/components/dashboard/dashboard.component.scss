@@ -1,0 +1,360 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #334155;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            opacity: 0.3;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dashboard-subtitle {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .navigation-grid {
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            background: white;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: #1e293b;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            min-height: 140px;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-button:hover::before {
+            left: 100%;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #3b82f6;
+        }
+
+        .nav-button:active {
+            transform: translateY(-2px);
+            transition: transform 0.1s ease;
+        }
+
+        /* Individual button styles with unique colors */
+        .nav-button.patients {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-color: #3b82f6;
+        }
+
+        .nav-button.patients:hover {
+            background: linear-gradient(135deg, #bfdbfe, #93c5fd);
+            color: #1e40af;
+        }
+
+        .nav-button.appointments {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-color: #10b981;
+        }
+
+        .nav-button.appointments:hover {
+            background: linear-gradient(135deg, #a7f3d0, #6ee7b7);
+            color: #047857;
+        }
+
+        .nav-button.calendar {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-color: #f59e0b;
+        }
+
+        .nav-button.calendar:hover {
+            background: linear-gradient(135deg, #fde68a, #fcd34d);
+            color: #92400e;
+        }
+
+        .nav-button.bills {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            border-color: #8b5cf6;
+        }
+
+        .nav-button.bills:hover {
+            background: linear-gradient(135deg, #ddd6fe, #c4b5fd);
+            color: #6d28d9;
+        }
+
+        .nav-button.finance {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            border-color: #ec4899;
+        }
+
+        .nav-button.finance:hover {
+            background: linear-gradient(135deg, #fbcfe8, #f9a8d4);
+            color: #be185d;
+        }
+
+        .nav-button.logout {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            border-color: #ef4444;
+            grid-column: 1 / -1;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .nav-button.logout:hover {
+            background: linear-gradient(135deg, #fecaca, #fca5a5);
+            color: #dc2626;
+        }
+
+        /* Icon styles */
+        .nav-button::after {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-button.patients::after {
+            content: '👥';
+        }
+
+        .nav-button.appointments::after {
+            content: '📅';
+        }
+
+        .nav-button.calendar::after {
+            content: '🗓️';
+        }
+
+        .nav-button.bills::after {
+            content: '📄';
+        }
+
+        .nav-button.finance::after {
+            content: '💰';
+        }
+
+        .nav-button.logout::after {
+            content: '🚪';
+        }
+
+        .nav-text {
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        /* Focus states for accessibility */
+        .nav-button:focus {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+
+        /* Loading state */
+        .nav-button.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .nav-button.loading::after {
+            content: '⏳';
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .dashboard-title {
+                font-size: 2rem;
+            }
+
+            .dashboard-subtitle {
+                font-size: 1rem;
+            }
+
+            .navigation-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+
+            .nav-button {
+                padding: 1.5rem;
+                min-height: 120px;
+                font-size: 1rem;
+            }
+
+            .nav-button::after {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header {
+                padding: 1.5rem;
+            }
+
+            .navigation-grid {
+                padding: 1.5rem;
+            }
+
+            .nav-button {
+                padding: 1rem;
+                min-height: 100px;
+                font-size: 0.875rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .dashboard-container {
+                background: rgba(30, 41, 59, 0.95);
+            }
+
+            .navigation-grid {
+                background: #1e293b;
+            }
+
+            .nav-button {
+                color: #e2e8f0;
+                background: linear-gradient(135deg, #334155, #475569);
+                border-color: #475569;
+            }
+
+            .nav-button:hover {
+                color: #f8fafc;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .dashboard-container {
+                box-shadow: none;
+                background: white;
+            }
+
+            .nav-button {
+                break-inside: avoid;
+            }
+        }
+
+        /* Animation delays for staggered effect */
+        .nav-button:nth-child(1) { animation-delay: 0.1s; }
+        .nav-button:nth-child(2) { animation-delay: 0.2s; }
+        .nav-button:nth-child(3) { animation-delay: 0.3s; }
+        .nav-button:nth-child(4) { animation-delay: 0.4s; }
+        .nav-button:nth-child(5) { animation-delay: 0.5s; }
+        .nav-button:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-button {
+            animation: slideInUp 0.6s ease-out both;
+        }
+
+        /* Additional utility classes */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }

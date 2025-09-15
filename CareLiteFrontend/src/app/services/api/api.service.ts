@@ -45,6 +45,13 @@ export class ApiService {
     return this.http.delete(`${URL.API_BASE}/patients/delete/${id}`);
   }
 
+  getPatientsPaged(pageNumber: number, pageSize: number, search: string = '') {
+  return this.http.get<{ data: Patient[], totalCount: number }>(
+    `${URL.API_BASE}/patients/paged?pageNumber=${pageNumber}&pageSize=${pageSize}&search=${encodeURIComponent(search)}`
+  );
+}
+
+
   //Appointments
   getAppointments():Observable<Appointment[]>{
       return this.http.get<{success:boolean,data:Appointment[]}>(`${URL.API_BASE}/appointments`).pipe(map(response=>response.data));

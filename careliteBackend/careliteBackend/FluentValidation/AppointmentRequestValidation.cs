@@ -15,6 +15,12 @@ namespace careliteBackend.FluentValidation
             RuleFor(x => x.PatientID).NotEmpty();
 
             RuleFor(x=>x.DoctorID).NotEmpty();
+
+            RuleFor(x => x.Status)
+                .NotEmpty().WithMessage("Status is required.")
+                .Must(s => new[] { "Scheduled", "Completed", "Cancelled" }.Contains(s))
+                .WithMessage("Status must be Scheduled, Completed, or Cancelled.");
+
         }
 
         private bool BeWithinBusinessHours(DateTime startTime)

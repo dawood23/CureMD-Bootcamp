@@ -11,7 +11,7 @@
   </div>
 
   <div class="patient-cards">
-    @for (patient of paginatedPatients; track patient.patientID) {
+    @for (patient of patients; track patient.patientID) {
       <div class="patient-card">
         <div class="patient-header">
           <h3 [innerHTML]="(patient.firstName + ' ' + patient.lastName) | highlightPipe:(searchControl.value?? '')"></h3>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="patient-details">
-          <div class="detail-row"><span class="label">Contact:</span><span class="value" >{{ patient.phone || 'Not provided' }}</span></div>
+          <div class="detail-row"><span class="label">Contact:</span><span class="value">{{ patient.phone || 'Not provided' }}</span></div>
           <div class="detail-row"><span class="label">Email:</span><span class="value" [innerHTML]="(patient.email || 'Not provided') | highlightPipe:(searchControl.value??'')"></span></div>
           <div class="detail-row"><span class="label">Date of Birth:</span><span class="value">{{ patient.dob ? (patient.dob | date: 'mediumDate') : 'Not provided' }}</span></div>
           <div class="detail-row"><span class="label">Gender:</span><span class="value">{{ patient.gender || 'Not provided' }}</span></div>
@@ -30,18 +30,17 @@
     }
   </div>
 
-  @if (!filteredPatients.length) {
+  @if (!patients.length) {
     <div class="empty-state">
       <p>No patients found</p>
     </div>
   }
 
   <div class="pagination">
-  @if (filteredPatients.length > pageSize) {
-    <button (click)="prevPage()" [disabled]="currentPage === 1" class="prev-btn">Previous</button>
-    <span>Page {{ currentPage }} of {{ totalPages }}</span>
-    <button (click)="nextPage()" [disabled]="currentPage * pageSize >= filteredPatients.length" class="next-btn">Next</button>
-  }
-</div>
-
+    @if (totalCount > pageSize) {
+      <button (click)="prevPage()" [disabled]="currentPage === 1" class="prev-btn">Previous</button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="currentPage * pageSize >= totalCount" class="next-btn">Next</button>
+    }
+  </div>
 </div>

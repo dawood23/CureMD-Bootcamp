@@ -1,6 +1,38 @@
-<button [routerLink]="'/patient-list'">Patients</button>
-<button [routerLink]="'/appointment-list'" >Appointments</button>
-<button [routerLink]="'/provider-calendar'">Provider Calendar</button>
-<button [routerLink]="'/bill-list'">Bill List</button>
-<button [routerLink]="'/finance-dashboard'">Finance Dashboard</button>
-<button (click)="logout()">Logout</button>
+<div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">CareLite</h1>
+            <p class="dashboard-subtitle">Appointment Management Dashboard</p>
+        </div>
+
+        <div class="navigation-grid">
+            <button [routerLink]="'/patient-list'" class="nav-button patients">
+                <span class="nav-text">Patients</span>
+                <span class="sr-only">Manage patient records and information</span>
+            </button>
+
+            <button [routerLink]="'/appointment-list'" class="nav-button appointments">
+                <span class="nav-text">Appointments</span>
+                <span class="sr-only">View and schedule patient appointments</span>
+            </button>
+
+            <button [routerLink]="'/provider-calendar'" class="nav-button calendar">
+                <span class="nav-text">Provider Calendar</span>
+                <span class="sr-only">View provider schedules and availability</span>
+            </button>
+
+            <button [routerLink]="'/bill-list'" class="nav-button bills">
+                <span class="nav-text">Bill List (Add Transactions)</span>
+                <span class="sr-only">Manage billing and invoices</span>
+            </button>
+
+            <button [routerLink]="'/finance-dashboard'" class="nav-button finance">
+                <span class="nav-text">Finance Dashboard</span>
+                <span class="sr-only">View financial reports and analytics</span>
+            </button>
+
+            <button (click)="logout()" class="nav-button logout">
+                <span class="nav-text">Logout</span>
+                <span class="sr-only">Sign out of the application</span>
+            </button>
+        </div>
+    </div>

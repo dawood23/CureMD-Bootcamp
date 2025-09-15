@@ -1,6 +1,7 @@
 ﻿using careliteBackend.DBHelper;
 using careliteBackend.DTOs;
 using careliteBackend.FluentValidation;
+using careliteBackend.Models;
 using careliteBackend.Repository;
 using careliteBackend.Repository.BillRepository;
 using careliteBackend.Repository.PatientRepository;
@@ -40,6 +41,11 @@ namespace careliteBackend.Infrastructure
             services.AddScoped<IBillService,Billservice>();
 
             services.AddScoped<IValidator<AppointmentRequest>, AppointmentRequestValidation>();
+            services.AddScoped<IValidator<Bill>, BillValidator>();
+            services.AddScoped<IValidator<PaymentRequest>,PaymentRequestValidation>();
+            services.AddScoped<IValidator<CreateVisitRequest>, VisitNoteRequestValidation>();
+            services.AddScoped<IValidator<UpdateVisitRequest>, UpdateVisitRequestValidator>();
+            services.AddScoped<IValidator<User>, UserValidator>();
 
            return services;
         }

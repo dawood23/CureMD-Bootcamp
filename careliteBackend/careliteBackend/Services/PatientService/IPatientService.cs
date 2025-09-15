@@ -9,5 +9,7 @@ namespace careliteBackend.Services.PatientService
         Task<List<Patient>> GetAllPatients();
         Task<int> UpdatePatient(Patient patient);
         Task<int> DeletePatient(int patientId);
+
+        Task<(List<Patient> Patients, int TotalCount)> GetPatientsPaged(int pageNumber, int pageSize,string search);
     }
 }
