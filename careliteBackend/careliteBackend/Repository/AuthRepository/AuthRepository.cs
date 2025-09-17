@@ -2,6 +2,7 @@
 using careliteBackend.Models;
 using careliteBackend.Repository;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace careliteBackend.Repository
 {
@@ -47,6 +48,23 @@ namespace careliteBackend.Repository
             await connection.OpenAsync();
             var result = await cmd.ExecuteScalarAsync();
             return Convert.ToInt32(result);
+        }
+
+        public async Task<User?> GetById(int userid)
+        {
+            using var connection = _db.GetConnection();
+            using var cmd = _db.CreateCommand(connection, "stp_GetUserById", new Dictionary<string, object>
+        {
+            {"@UserID", userid}
+        });
+            await connection.OpenAsync();
+            using var reader = await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                return MapUser(reader);
+            }
+            else return null;
+
         }
 
 

@@ -21,7 +21,8 @@ namespace careliteBackend.Repository.PatientRepository
                 {"@Gender", patient.Gender},
                 {"@Phone", patient.Phone},
                 {"@Email", patient.Email},
-                {"@Address", patient.Address}
+                {"@Address", patient.Address},
+                {"@CNIC",patient.cnic }
             });
 
             await conn.OpenAsync();
@@ -134,7 +135,8 @@ namespace careliteBackend.Repository.PatientRepository
                 Phone = reader.IsDBNull(reader.GetOrdinal("Phone")) ? null : reader.GetString(reader.GetOrdinal("Phone")),
                 Email = reader.IsDBNull(reader.GetOrdinal("Email")) ? null : reader.GetString(reader.GetOrdinal("Email")),
                 Address = reader.IsDBNull(reader.GetOrdinal("Address")) ? null : reader.GetString(reader.GetOrdinal("Address")),
-                CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt"))
+                CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
+     
             };
         }
 

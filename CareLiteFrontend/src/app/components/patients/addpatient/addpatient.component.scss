@@ -29,6 +29,21 @@
     background-color: #2a6b8f;
   }
 
+  .error-box {
+  background-color: #ffe0e0;
+  border: 1px solid #ff5c5c;
+  color: #a00000;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+}
+
+.error {
+  color: #d00000;
+  font-size: 12px;
+}
+
+
   form {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -48,17 +48,24 @@ namespace careliteBackend.Middleware
                     _ => context.Request.Method
                 };
 
+                var status = context.Response.StatusCode switch
+                {
+                    429 => "Too Many Requests",
+                    >= 400 => "Failed",
+                    _ => "Success"
+                };
+
                 var description =
-                    $"{actionWord} performed on {path} at {DateTime.UtcNow:O}"; 
+                    $"{actionWord} performed on {path} at {DateTime.UtcNow:O}";
 
                 var parameters = new Dictionary<string, object?>
-                {
-                    { "@UserID", userId },
-                    { "@Action", context.Request.Method },
-                    { "@TableAffected", path ?? "Unknown" },
-                    { "@Status", context.Response.StatusCode < 400 ? "Success" : "Failed" },
-                    { "@Description", description }
-                };
+        {
+            { "@UserID", userId },
+            { "@Action", context.Request.Method },
+            { "@TableAffected", path ?? "Unknown" },
+            { "@Status", status },
+            { "@Description", description }
+        };
 
                 using var cmd = db.CreateCommand(connection, "stp_AddLog", parameters!);
                 await cmd.ExecuteNonQueryAsync();
@@ -70,6 +77,7 @@ namespace careliteBackend.Middleware
                 Console.WriteLine($"Logging failed: {ex.Message}");
             }
         }
+
 
         private int GetUserIdFromClaims(ClaimsPrincipal user)
         {

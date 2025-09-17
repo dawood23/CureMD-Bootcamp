@@ -3,23 +3,27 @@
             <h1 class="dashboard-title">CareLite</h1>
             <p class="dashboard-subtitle">Appointment Management Dashboard</p>
         </div>
-
+    
+      
         <div class="navigation-grid">
+        @if(role=="Staff" || role=="Admin"){
             <button [routerLink]="'/patient-list'" class="nav-button patients">
                 <span class="nav-text">Patients</span>
                 <span class="sr-only">Manage patient records and information</span>
             </button>
-
+        }
             <button [routerLink]="'/appointment-list'" class="nav-button appointments">
                 <span class="nav-text">Appointments</span>
                 <span class="sr-only">View and schedule patient appointments</span>
             </button>
+
 
             <button [routerLink]="'/provider-calendar'" class="nav-button calendar">
                 <span class="nav-text">Provider Calendar</span>
                 <span class="sr-only">View provider schedules and availability</span>
             </button>
 
+              @if(role=="Staff" || role=="Admin"){
             <button [routerLink]="'/bill-list'" class="nav-button bills">
                 <span class="nav-text">Bill List (Add Transactions)</span>
                 <span class="sr-only">Manage billing and invoices</span>
@@ -29,7 +33,7 @@
                 <span class="nav-text">Finance Dashboard</span>
                 <span class="sr-only">View financial reports and analytics</span>
             </button>
-
+        }
             <button (click)="logout()" class="nav-button logout">
                 <span class="nav-text">Logout</span>
                 <span class="sr-only">Sign out of the application</span>

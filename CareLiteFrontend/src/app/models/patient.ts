@@ -7,5 +7,6 @@ export interface Patient {
   phone?: string | null;
   email?: string | null;
   address?: string | null;
+  cnic?:string|null;
   createdAt: Date;
 }

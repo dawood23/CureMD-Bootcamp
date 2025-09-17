@@ -7,5 +7,7 @@ namespace careliteBackend.Services.Interfaces
     {
         Task<AuthResult> Authenticate(string username,string password);
         Task<int> CreateUser(User user);
+
+        Task<AuthResult> RefreshToken(string refreshToken);
     }
 }

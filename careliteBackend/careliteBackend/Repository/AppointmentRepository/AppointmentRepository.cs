@@ -91,7 +91,7 @@ namespace careliteBackend.Repository
         }
 
 
-        public async Task<int> UpdateAppointment(AppointmentRequest request)
+        public async Task<int> UpdateAppointment(UpdateAppointmentDto request)
         {
             await using var conn = _db.GetConnection();
             await conn.OpenAsync();

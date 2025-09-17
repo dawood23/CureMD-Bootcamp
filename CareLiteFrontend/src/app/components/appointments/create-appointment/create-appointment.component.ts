@@ -83,10 +83,20 @@ export class CreateAppointmentComponent implements OnInit {
         setTimeout(() => this.router.navigate(['/appointment-list']), 1500);
       },
       error: (err) => {
-        this.successMessage = null;
-        this.errorMessage =
-          err.error?.message || 'An error occurred while creating the appointment.';
+      this.successMessage = null;
+
+      if (err.error?.errors) {
+        const validationErrors = Object.values(err.error.errors)
+          .flat()
+          .join(' ');
+        this.errorMessage = validationErrors;
+      } else if (err.error?.message) {
+        this.errorMessage = err.error.message;
+      } else {
+        this.errorMessage = 'An error occurred while creating the appointment.';
       }
+    }
+
     });
   }
 

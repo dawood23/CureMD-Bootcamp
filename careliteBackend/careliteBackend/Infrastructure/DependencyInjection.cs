@@ -46,6 +46,8 @@ namespace careliteBackend.Infrastructure
             services.AddScoped<IValidator<CreateVisitRequest>, VisitNoteRequestValidation>();
             services.AddScoped<IValidator<UpdateVisitRequest>, UpdateVisitRequestValidator>();
             services.AddScoped<IValidator<User>, UserValidator>();
+            services.AddScoped<IValidator<UpdateAppointmentDto>,UpdateAppointmentValidator>();
+            services.AddScoped<IValidator<Patient>,PatientValidator>();
 
            return services;
         }

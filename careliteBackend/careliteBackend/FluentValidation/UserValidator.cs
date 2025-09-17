@@ -9,9 +9,7 @@ namespace careliteBackend.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(x => x.UserID)
-                .GreaterThan(0).WithMessage("UserID must be greater than 0.");
-
+           
             RuleFor(x => x.Username)
                 .NotEmpty().WithMessage("Username is required.")
                 .MaximumLength(100).WithMessage("Username cannot exceed 100 characters.")

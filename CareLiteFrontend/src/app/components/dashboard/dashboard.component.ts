@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -9,10 +9,14 @@ import { AuthService } from '../../services/auth/auth.service';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
-  
+export class DashboardComponent implements OnInit{
+  role:any
   authService=inject(AuthService)
   
+  ngOnInit(): void {
+      this.role=this.authService.getUserRole()
+  }
+
   logout(){
     this.authService.logout();
   }

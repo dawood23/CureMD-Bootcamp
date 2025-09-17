@@ -6,11 +6,18 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using careliteBackend.FluentValidation;
+using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(fv =>
+    {
+        fv.RegisterValidatorsFromAssemblyContaining<AppointmentRequestValidation>();
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -39,7 +46,8 @@ builder.Services
             ValidAudience = jwtSettings["Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(jwtSettings["Key"])
-            )
+            ),
+            ClockSkew=TimeSpan.Zero
         };
     });
 
@@ -50,6 +58,31 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireClinicianOrAdmin", policy => policy.RequireRole("Clinician", "Admin"));
     options.AddPolicy("RequireReceptionistOrAdmin", policy => policy.RequireRole("Admin","Receptionist"));
 });
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.AddFixedWindowLimiter("SensitiveActions", limiterOptions =>
+    {
+        limiterOptions.PermitLimit = 5;
+        limiterOptions.Window = TimeSpan.FromMinutes(1);
+        limiterOptions.QueueProcessingOrder = System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst;
+        limiterOptions.QueueLimit = 2;
+    });
+
+    options.OnRejected = async (context, token) =>
+    {
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        context.HttpContext.Response.ContentType = "application/json";
+
+        await context.HttpContext.Response.WriteAsJsonAsync(new
+        {
+            Success = false,
+            Message = "Too many requests. Please try again later."
+        }, cancellationToken: token);
+    };
+});
+
+
 
 builder.Services.Dependency_Injection();
 
@@ -65,7 +98,9 @@ app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();  
-app.UseAuthorization(); 
+app.UseAuthorization();
+
+app.UseRateLimiter();
 
 app.UseMiddleware<LoggingMiddleware>();
 

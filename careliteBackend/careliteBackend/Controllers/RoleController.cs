@@ -2,6 +2,7 @@
 using careliteBackend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace careliteBackend.Controllers
 {
@@ -15,6 +16,7 @@ namespace careliteBackend.Controllers
             _roleService = roleService;
         }
 
+        [EnableRateLimiting("SensitiveActions")]
         [HttpPost("create")]
         public async Task<IActionResult> CreateRole([FromBody] Role role)
         {

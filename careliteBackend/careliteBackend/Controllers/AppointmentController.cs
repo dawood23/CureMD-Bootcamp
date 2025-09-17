@@ -4,6 +4,7 @@ using careliteBackend.Services.AppointmentService;
 using careliteBackend.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Data.SqlClient;
 
 namespace careliteBackend.Controllers
@@ -11,6 +12,7 @@ namespace careliteBackend.Controllers
     [ApiController]
     [Route("appointments")]
     [Authorize]
+  
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _service;
@@ -20,12 +22,18 @@ namespace careliteBackend.Controllers
             _service = service;
         }
 
+        [Authorize(Policy = "RequireStaffOrAdmin")]
+        [EnableRateLimiting("SensitiveActions")]
         [HttpPost("create")]
         public async Task<IActionResult> CreateAppointment([FromBody] AppointmentRequest request)
         {
             if (request == null)
                 return BadRequest(new { Success = false, Message = ModelState });
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 var id = await _service.Create(request);
@@ -64,8 +72,9 @@ namespace careliteBackend.Controllers
             return Ok(new { Success = true,Data = result});
         }
 
+        [Authorize(Policy = "RequireStaffOrAdmin")]
         [HttpPut]
-        public async Task<IActionResult> UpdateAppointment([FromBody] AppointmentRequest request)
+        public async Task<IActionResult> UpdateAppointment([FromBody] UpdateAppointmentDto request)
         {
             if (request == null)
                 return BadRequest(new { Success = false, Message = "Invalid request payload." });
@@ -85,6 +94,7 @@ namespace careliteBackend.Controllers
             }
         }
 
+        [Authorize(Policy = "RequireStaffOrAdmin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppointment(int id)
         {

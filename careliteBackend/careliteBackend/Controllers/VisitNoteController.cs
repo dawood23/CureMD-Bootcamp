@@ -2,13 +2,14 @@
 using careliteBackend.Services.VisitService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Data.SqlClient;
 
 namespace VisitManager.API.Controllers
 {
     [ApiController]
     [Route("VisitNote")]
-    [Authorize]
+    [Authorize(Policy= "RequireClinicianOrAdmin")]
     public class VisitsController : ControllerBase
     {
         private readonly IVisitService _service;
@@ -43,6 +44,7 @@ namespace VisitManager.API.Controllers
             return Ok(new { Success = true, Data = result });
         }
 
+        [EnableRateLimiting("SensitiveActions")]
         [HttpPost]
         public async Task<IActionResult> CreateVisit([FromBody] CreateVisitRequest request)
         {
@@ -85,6 +87,7 @@ namespace VisitManager.API.Controllers
             }
         }
 
+        [EnableRateLimiting("SensitiveActions")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVisit(int id)
         {

@@ -7,7 +7,8 @@ import { LoginRequest } from '../../models/loginRequest';
 import { LoginResponse } from '../../models/loginResponse';
 import { URL } from '../../Environment/env';
 import { User } from '../../models/user';
-import { switchMap } from 'rxjs';
+import { throwError } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,30 +22,46 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${URL.API_BASE}/auth/login`, credentials)
+    return this.http.post<any>(`${URL.API_BASE}/auth/login`, credentials)
       .pipe(
         tap(response => {
-          if (response.success && response.token) {
-            this.setToken(response.token);
-          }
+            this.setToken(response.token!);
+            this.setRefreshToken(response.refreshToken);
         })
       );
   }
 
+  signup(credentials: User) {
+    return this.http.post<any>(`${URL.API_BASE}/auth/create`, credentials).pipe(
+      tap(response => {
+          this.setToken(response.token);
+          this.setRefreshToken(response.refreshToken);
+      })
+    );
+  }
 
-signup(credentials: User) {
-  return this.http.post<LoginResponse>(`${URL.API_BASE}/auth/create`, credentials).pipe(
-    tap(response=>{
-       if (response.success && response.token) {
-            this.setToken(response.token);
-          }
-    })
-  )
-}
+  refreshToken(): Observable<any> {
+    const refresh = this.getRefreshToken();
+    if (!refresh) {
+      this.logout();
+      return throwError(() => new Error('No refresh token'));
+    }
 
+    return this.http.post<any>(`${URL.API_BASE}/auth/refresh`, { refreshToken: refresh }).pipe(
+      tap(response => {
+        if (response.token && response.refreshToken) {
+          this.setToken(response.token);
+          this.setRefreshToken(response.refreshToken);
+        } else {
+          this.logout();
+        }
+      })
+    );
+  }
 
   logout(): void {
     this.clearToken();
+    this.clearRefreshToken();
     this.router.navigate(['/login']);
   }
 
@@ -67,6 +84,25 @@ signup(credentials: User) {
       localStorage.removeItem('jwtToken');
     }
     this.tokenSubject.next(null);
+  }
+
+  private setRefreshToken(token: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('refreshToken', token);
+    }
+  }
+
+  getRefreshToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('refreshToken');
+    }
+    return null;
+  }
+
+  private clearRefreshToken(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('refreshToken');
+    }
   }
 
   getUserRole(): string | null {

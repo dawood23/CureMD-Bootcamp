@@ -3,13 +3,14 @@ using careliteBackend.Models;
 using careliteBackend.Services.BillService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Data.SqlClient;
 
 namespace careliteBackend.Controllers
 {
     [ApiController]
     [Route("billing")]
-    [Authorize]
+    [Authorize(Policy = "RequireStaffOrAdmin")]
     public class BillingController : ControllerBase
     {
         private readonly IBillService _billService;
@@ -57,6 +58,7 @@ namespace careliteBackend.Controllers
 
         }
 
+        [EnableRateLimiting("SensitiveActions")]
         [HttpPost("record")]
         public async Task<IActionResult> RecordPayment([FromBody] PaymentRequest request)
         {

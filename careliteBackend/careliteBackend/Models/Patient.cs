@@ -11,5 +11,7 @@
         public string? Email { get; set; }
         public string? Address { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        public string cnic { get; set; } = string.Empty;
     }
 }

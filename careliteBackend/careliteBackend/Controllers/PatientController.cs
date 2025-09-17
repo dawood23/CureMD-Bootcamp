@@ -2,17 +2,19 @@
 using careliteBackend.Services.PatientService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace careliteBackend.Controllers
 {
     [ApiController]
     [Route("patients")]
-    [Authorize]
+    [Authorize(Policy = "RequireStaffOrAdmin")]
     public class PatientsController : ControllerBase
     {
         private readonly IPatientService _service;
         public PatientsController(IPatientService service) => _service = service;
 
+        [EnableRateLimiting("SensitiveActions")]
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] Patient patient)
         {

@@ -1,16 +1,21 @@
 <div class="patient-container">
-   
-  <button class="back-button" (click)="goBack()">
-  ← Back
-</button>
-
+  <button class="back-button" (click)="goBack()">← Back</button>
 
   <h2>Create Patient</h2>
+
+  @if (errorMessage) {
+    <div class="error-box">
+      <strong>{{ errorMessage }}</strong>
+      @if (errorDetails) {
+        <p>{{ errorDetails }}</p>
+      }
+    </div>
+  }
 
   <form [formGroup]="form">
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" formControlName="firstName" appLetterOnly/>
+      <input type="text" formControlName="firstName" appLetterOnly />
       @if (formControl.firstName.touched && formControl.firstName.invalid) {
         <small class="error">First name is required</small>
       }
@@ -18,7 +23,7 @@
 
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" formControlName="lastName" appLetterOnly/>
+      <input type="text" formControlName="lastName" appLetterOnly />
       @if (formControl.lastName.touched && formControl.lastName.invalid) {
         <small class="error">Last name is required</small>
       }
@@ -26,7 +31,7 @@
 
     <div class="form-group">
       <label>Date of Birth</label>
-      <input type="date" formControlName="dob" [max]="maxdate"/>
+      <input type="date" formControlName="dob" [max]="maxdate" />
     </div>
 
     <div class="form-group">
@@ -40,9 +45,9 @@
 
     <div class="form-group">
       <label>Phone</label>
-      <input type="tel" formControlName="phone" appDigitOnly/>
+      <input type="tel" formControlName="phone" appDigitOnly />
       @if (formControl.phone.touched && formControl.phone.invalid) {
-        <small class="error">Phone is required</small>
+        <small class="error">Enter a valid phone number</small>
       }
     </div>
 
@@ -57,10 +62,20 @@
     </div>
 
     <div class="form-group">
+      <label>CNIC</label>
+      <input type="text" formControlName="cnic" appDigitOnly/>
+      @if (formControl.cnic.touched && formControl.cnic.invalid) {
+        <small class="error">CNIC must be 13 digits</small>
+      }
+    </div>
+
+    <div class="form-group">
       <label>Address</label>
       <textarea formControlName="address"></textarea>
     </div>
 
-    <button type="button" (click)="submit()" [disabled]="form.invalid">Create Patient</button>
+    <button type="button" (click)="submit()" [disabled]="form.invalid">
+      Create Patient
+    </button>
   </form>
 </div>

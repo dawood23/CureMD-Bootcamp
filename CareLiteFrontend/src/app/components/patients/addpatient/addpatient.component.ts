@@ -21,6 +21,9 @@ export class AddpatientComponent {
 
   maxdate = new Date().toISOString().split('T')[0];
 
+  errorMessage: string | null = null;
+  errorDetails: string | null = null;
+
   form = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -28,6 +31,7 @@ export class AddpatientComponent {
     gender: [''],
     phone: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
     email: ['', [Validators.email]],
+    cnic: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
     address: ['']
   });
 
@@ -35,7 +39,8 @@ export class AddpatientComponent {
 
   submit() {
     if (this.form.invalid) {
-      alert('Please fill all required fields');
+      this.errorMessage = 'Please fill all required fields';
+      this.errorDetails = null;
       return;
     }
 
@@ -48,16 +53,20 @@ export class AddpatientComponent {
       phone: this.form.value.phone!,
       email: this.form.value.email!,
       address: this.form.value.address!,
-      createdAt: new Date()
+      createdAt: new Date(),
+      cnic: this.form.value.cnic
     };
 
     this.store.dispatch(new AddPatient(patient)).subscribe({
       next: () => {
+        this.errorMessage = null;
+        this.errorDetails = null;
         alert('Patient created successfully');
         this.router.navigate(['/patient-list']);
       },
       error: (err) => {
-        alert(err.error?.message || 'Error creating patient');
+        this.errorMessage = err.error?.message || 'Error occurred while creating patient';
+        this.errorDetails = err.error?.details || null;
       }
     });
   }

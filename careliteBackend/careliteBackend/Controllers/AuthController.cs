@@ -1,7 +1,6 @@
 ﻿using careliteBackend.Models;
 using careliteBackend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace careliteBackend.Controllers
 {
@@ -21,11 +20,7 @@ namespace careliteBackend.Controllers
         {
             if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
             {
-                return BadRequest(new
-                {
-                    Success = false,
-                    Message = "Username and password are required"
-                });
+                return BadRequest(new { Success = false, Message = "Username and password are required" });
             }
 
             var result = await _authService.Authenticate(request.Username, request.Password);
@@ -43,44 +38,55 @@ namespace careliteBackend.Controllers
         {
             if (string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.PasswordHash))
             {
-                return BadRequest(new
-                {
-                    Success = false,
-                    Message = "Username and password are required"
-                });
+                return BadRequest(new { Success = false, Message = "Username and password are required" });
             }
 
             try
             {
-                 var passBeforeHash= user.PasswordHash;
+                var passBeforeHash = user.PasswordHash;
                 var newUserId = await _authService.CreateUser(user);
 
                 if (newUserId < 1)
                 {
-                    return BadRequest(new
-                    {
-                        Success = false,
-                        Message = "Failed to create user"
-                    });
+                    return BadRequest(new { Success = false, Message = "Failed to create user" });
                 }
 
                 var loginResult = await _authService.Authenticate(user.Username, passBeforeHash);
                 return Ok(loginResult);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest(new
-                {
-                    Success = false,
-                    Message = "Username/Email Already Exists or Invalid Entries" ?? "Internal Server Error"
-                });
+                return BadRequest(new { Success = false, Message = "Username/Email Already Exists or Invalid Entries" });
             }
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.RefreshToken))
+            {
+                return BadRequest(new { Success = false, Message = "Refresh token is required" });
+            }
+
+            var result = await _authService.RefreshToken(request.RefreshToken);
+
+            if (!result.Success)
+            {
+                return Unauthorized(result);
+            }
+
+            return Ok(result);
         }
 
         public class LoginRequest
         {
             public string Username { get; set; } = string.Empty;
             public string Password { get; set; } = string.Empty;
+        }
+
+        public class RefreshRequest
+        {
+            public string RefreshToken { get; set; } = string.Empty;
         }
     }
 }
