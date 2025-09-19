@@ -7,7 +7,11 @@ namespace careliteBackend.Repository.BillRepository
         Task<Bill?> GenerateBill(int appointmentId);
 
         Task<List<Bill>?> GetBills();
+
+        Task<Bill?> GetBillByID(int id);
         Task<PaymentResult> RecordPayment(PaymentRequest paymentRequest);
+
+        Task<PaymentDto?> GetPaymentByID(int paymentID);
 
         Task<List<PaymentDto>> GetPayments();
     }

@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[8.14.0, )"
             },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[112.1.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -73,6 +77,10 @@
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "mailgun_csharp": {
+              "target": "Package",
+              "version": "[0.9.0, )"
             }
           },
           "imports": [

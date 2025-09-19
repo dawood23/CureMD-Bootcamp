@@ -8,6 +8,11 @@ namespace careliteBackend.Services.BillService
         Task<List<Bill>?> GenerateBillList();
 
         Task<List<PaymentDto>> GetPayments();
+
+        Task<Bill?> GetBillByID(int id);
+
+        Task<PaymentDto?> GetPaymentById(int paymentID);
+
         Task<PaymentResult> RecordPayment(PaymentRequest request);
     }
 }

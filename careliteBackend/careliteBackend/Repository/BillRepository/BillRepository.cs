@@ -81,6 +81,55 @@ namespace careliteBackend.Repository.BillRepository
             throw new InvalidOperationException("Stored procedure did not return expected result.");
         }
 
+        public async Task<Bill?> GetBillByID(int id)
+        {
+            await using var conn = _db.GetConnection();
+            await conn.OpenAsync();
+
+            await using var cmd = _db.CreateCommand(conn, "stp_GetBillByID", new Dictionary<string, object>
+            {
+                {"@BillID", id}
+            });
+            await using var reader = await cmd.ExecuteReaderAsync();
+
+            if (await reader.ReadAsync())
+                return MapBill(reader);
+
+            return null;
+
+        }
+
+        public async Task<PaymentDto?> GetPaymentByID(int paymentID)
+        {
+            await using var conn = _db.GetConnection();
+            await conn.OpenAsync();
+
+            await using var cmd = _db.CreateCommand(conn, "stp_GetPaymentByID", new Dictionary<string, object>
+            {
+                {"@PaymentID", paymentID}
+            });
+            await using var reader = await cmd.ExecuteReaderAsync();
+
+            if (await reader.ReadAsync())
+                return new PaymentDto
+                {
+                    PaymentID = reader.GetInt32("PaymentID"),
+                    BillID = reader.GetInt32("BillID"),
+                    AppointmentID = reader.GetInt32("AppointmentID"),
+                    DoctorID = reader.GetInt32("DoctorID"),
+                    DoctorName = reader.GetString("DoctorName"),
+                    PatientID = reader.GetInt32("PatientID"),
+                    PatientName = reader.GetString("PatientName"),
+                    Amount = reader.GetDecimal("Amount"),
+                    Method = reader.GetString("Method"),
+                    PaidAt = reader.GetDateTime("PaidAt"),
+                    RecordedBy = reader.GetInt32("RecordedBy")
+                };
+
+            return null;
+
+        }
+
         public async Task<List<PaymentDto>> GetPayments()
         {
             var payments = new List<PaymentDto>();

@@ -2,6 +2,7 @@
 using careliteBackend.Models;
 using careliteBackend.Services.AppointmentService;
 using careliteBackend.Services.Interfaces;
+using careliteBackend.Services.NotificationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -16,10 +17,12 @@ namespace careliteBackend.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _service;
+        private readonly INotificationService _notificationService;
 
-        public AppointmentController(IAppointmentService service)
+        public AppointmentController(IAppointmentService service,INotificationService notificationService)
         {
             _service = service;
+            _notificationService = notificationService;
         }
 
         [Authorize(Policy = "RequireStaffOrAdmin")]
@@ -41,6 +44,7 @@ namespace careliteBackend.Controllers
                 if (id <= 0)
                     return Conflict(new { Success = false, Message = "Unable to create appointment." });
 
+                await _notificationService.AppointmentNotification(id)!;
                 return Ok(new { Success = true, AppointmentID = id });
             }
             catch (SqlException ex)

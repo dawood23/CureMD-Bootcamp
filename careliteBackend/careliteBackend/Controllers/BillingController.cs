@@ -1,6 +1,7 @@
 ﻿using careliteBackend.DTOs;
 using careliteBackend.Models;
 using careliteBackend.Services.BillService;
+using careliteBackend.Services.NotificationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
@@ -14,10 +15,12 @@ namespace careliteBackend.Controllers
     public class BillingController : ControllerBase
     {
         private readonly IBillService _billService;
+        private readonly INotificationService _notificationService;
 
-        public BillingController(IBillService billService)
+        public BillingController(IBillService billService,INotificationService notificationService)
         {
             _billService = billService;
+            _notificationService = notificationService;
         }
 
         [HttpPost("generate/{appointmentId}")]
@@ -68,6 +71,9 @@ namespace careliteBackend.Controllers
             try
             {
                 var result = await _billService.RecordPayment(request);
+
+                await _notificationService.TransactionNotification(result.PaymentID)!;
+
                 return Ok(new { Success = true, Data = result });
             }
             catch (ArgumentException ex)

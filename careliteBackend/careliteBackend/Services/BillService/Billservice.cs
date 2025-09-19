@@ -25,6 +25,16 @@ namespace careliteBackend.Services.BillService
         {
             return await _billRepository.GetPayments();
         }
+
+        public async Task<Bill?> GetBillByID(int id)
+        {
+            return await _billRepository.GetBillByID(id);
+        }
+
+        public async Task<PaymentDto?> GetPaymentById(int paymentID)
+        {
+            return await _billRepository.GetPaymentByID(paymentID);
+        }
         public async Task<PaymentResult> RecordPayment(PaymentRequest request)
         {
             if (request.Amount <= 0)

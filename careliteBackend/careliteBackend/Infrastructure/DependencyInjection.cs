@@ -12,6 +12,7 @@ using careliteBackend.Services.AppointmentService;
 using careliteBackend.Services.BillService;
 using careliteBackend.Services.DoctorService;
 using careliteBackend.Services.Interfaces;
+using careliteBackend.Services.NotificationService;
 using careliteBackend.Services.PatientService;
 using careliteBackend.Services.VisitService;
 using FluentValidation;
@@ -39,6 +40,7 @@ namespace careliteBackend.Infrastructure
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IVisitService, VisitService>();
             services.AddScoped<IBillService,Billservice>();
+            services.AddScoped<INotificationService, NotificationService>();
 
             services.AddScoped<IValidator<AppointmentRequest>, AppointmentRequestValidation>();
             services.AddScoped<IValidator<Bill>, BillValidator>();
