@@ -87,6 +87,8 @@ BEGIN
     );
 END
 
+select * from Users
+
 
 ------------------------------------------------------------
 -- 6) VisitNotes Table
@@ -96,16 +98,14 @@ BEGIN
     CREATE TABLE VisitNotes (
         VisitNoteID int PRIMARY KEY IDENTITY(1,1),
         AppointmentID int UNIQUE NOT NULL,
-        DoctorID int NOT NULL,
         Content varchar(max),
         CreatedAt datetime DEFAULT GETDATE(),
         UpdatedAt datetime DEFAULT GETDATE(),
         FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID),
-        FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
     );
 END
 
-
+select * from logs
 ------------------------------------------------------------
 -- 7) Bills Table
 ------------------------------------------------------------
@@ -161,7 +161,26 @@ BEGIN
     );
 END
 
+
+
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name = 'DoctorRates')
+BEGIN
+    CREATE TABLE DoctorRates (
+        RateID int PRIMARY KEY IDENTITY(1,1),
+        DoctorID int NOT NULL,
+        RatePerMinute decimal(10,2) NOT NULL,
+        EffectiveFrom date DEFAULT GETDATE(),
+        FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+    );
+END
+
+
+
+
 select * from Users
+
+
+
 update Users set PasswordHash='JAvlGPq9JyTdtvBO6x2llnRI1+gxwIyPqCKAn3THIKk=' where UserID=1
 
 select * from logs

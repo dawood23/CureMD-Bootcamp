@@ -114,3 +114,14 @@ INSERT INTO Logs (UserID, Action, TableAffected, RecordID, Status) VALUES
 (2, 'INSERT', 'Payments', 1, 'Success'),
 (3, 'UPDATE', 'Appointments', 5, 'Success'),
 (1, 'DELETE', 'Users', 999, 'Failed');
+
+
+
+INSERT INTO DoctorRates (DoctorID, RatePerMinute, EffectiveFrom)
+SELECT DoctorID, 10.00, GETDATE()  
+FROM Doctors WHERE DoctorName = 'Dr. Ahmed';
+
+INSERT INTO DoctorRates (DoctorID, RatePerMinute, EffectiveFrom)
+SELECT DoctorID, 12.50, GETDATE() 
+FROM Doctors WHERE DoctorName = 'Dr. Sara';
+

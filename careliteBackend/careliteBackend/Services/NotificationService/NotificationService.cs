@@ -1,6 +1,4 @@
-﻿using careliteBackend.DTOs;
-using careliteBackend.Repository;
-using careliteBackend.Services.AppointmentService;
+﻿using careliteBackend.Services.AppointmentService;
 using careliteBackend.Services.BillService;
 using careliteBackend.Services.PatientService;
 using System.Net.Mail;
