@@ -1,11 +1,4 @@
-# CureMD-Bootcamp
-Bootcamp Content of CureMD
-Got it bro 👍 — so it’s **your personal learning repo** from the CureMD Bootcamp, not an official training repo.
-Here’s a more **casual, personal, and authentic README** version that fits that purpose perfectly 👇
-
----
-
-# 🧠 CureMD Bootcamp – My Learning Journey
+#  CureMD Bootcamp
 
 Welcome to my **CureMD Bootcamp** repository!
 This repo is a collection of everything I learned, practiced, and built during my time at the CureMD Bootcamp — from basic assignments to small projects, experiments, and notes.
