@@ -10,10 +10,11 @@ This repo contains a mix of:
 
 * 🧩 **Assignments & Exercises** – practice problems and tasks from the bootcamp
 * 🏗️ **Mini Projects** – hands-on implementations (like Patient Visit Manager, Web API projects, Angular apps, etc.)
+*    **Main Project** – CareLite
 * 🧰 **Backend Code** – mostly in **C# (.NET)** and **SQL**
 * 🎨 **Frontend Work** – some **Angular**, **HTML**, **CSS**, **JavaScript**
 * 📚 **Lecture Notes & Slides** – theory + reference materials (SOLID principles, design patterns, etc.)
-
+* **Deployment work** - IIS Hosting and Docker.
 Basically, everything I worked on while learning full-stack development.
 
 ---
@@ -23,22 +24,6 @@ Basically, everything I worked on while learning full-stack development.
 * **Languages:** C#, TypeScript, JavaScript, HTML, CSS, SQL
 * **Frameworks:** .NET, Angular
 * **Tools:** Visual Studio, VS Code, Git, SQL Server
-
----
-
-## ⚙️ How to Run Stuff
-
-Most projects are self-contained. To try them out:
-
-1. Clone the repo
-
-   ```bash
-   git clone https://github.com/dawood23/CureMD-Bootcamp.git
-   cd CureMD-Bootcamp
-   ```
-2. Open the project folder you want (like `Web API Assignment` or `Patient Visit Manager`)
-3. Follow instructions inside (usually involves running via Visual Studio or Angular CLI)
-4. If a database is needed, check the `sql/` folder
 
 ---
 
